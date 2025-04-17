@@ -1,0 +1,7 @@
+{
+  "name": "tvapp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
