@@ -1,0 +1,93 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav [mode]="'side'" [opened]="!isCollapsed" [fixedInViewport]="true" class="dark-theme">
+    <div class="logo-container">
+      <img src="assets/logo.png" alt="Move Logo" class="logo">
+    </div>
+    
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active">
+        <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+        <span matListItemTitle>{{item.label}}</span>
+      </a>
+      <a mat-list-item (click)="logout()" class="logout-btn">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle>Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="dark-theme">
+    <div class="content" [class.content-collapsed]="isCollapsed">
+      <!-- Top Bar -->
+      <div class="top-bar">
+        <button mat-icon-button (click)="toggleSidenav()">
+          <mat-icon>{{ isCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
+        </button>
+        <div class="search-bar">
+          <mat-icon>search</mat-icon>
+          <input type="text" [(ngModel)]="searchQuery" (input)="onSearch($event)" placeholder="Search for workouts...">
+        </div>
+      </div>
+
+      <!-- Stats Container -->
+      <div class="stats-container">
+        <div class="stats-header">
+          <h2>Today's Progress</h2>
+          <mat-icon>expand_more</mat-icon>
+        </div>
+
+        <div class="stats-grid">
+          <!-- Minutes Stats -->
+          <div class="stat-card">
+            <div class="stat-number">{{todayStats.minutesCompleted}}</div>
+            <div class="stat-label">Minutes completed</div>
+          </div>
+
+          <!-- Videos Stats -->
+          <div class="stat-card">
+            <div class="stat-number">{{todayStats.videosCompleted}}</div>
+            <div class="stat-label">Videos completed</div>
+          </div>
+
+          <!-- Progress Circles -->
+          <div class="progress-container">
+            <div class="progress-circle">
+              <div class="circle-label">
+                <div class="circle-title">{{weeklyStats.thisWeek.daysCompleted}}/{{weeklyStats.thisWeek.totalDays}} Days</div>
+                <div class="circle-subtitle">{{weeklyStats.thisWeek.minutesCompleted}} Minutes Completed</div>
+              </div>
+              <div class="circle-text">This Week</div>
+            </div>
+            <div class="progress-circle">
+              <div class="circle-label">
+                <div class="circle-title">{{weeklyStats.lastWeek.daysCompleted}}/{{weeklyStats.lastWeek.totalDays}} Days</div>
+                <div class="circle-subtitle">{{weeklyStats.lastWeek.minutesCompleted}} Minutes Completed</div>
+              </div>
+              <div class="circle-text">Last Week</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Videos Section -->
+      <div class="videos-section">
+        <div class="section-header">
+          <h2>Top Videos</h2>
+          <button mat-button color="accent">View All</button>
+        </div>
+        
+        <div class="video-grid">
+          <mat-card class="video-card" *ngFor="let video of categories[0]?.videos" (click)="navigateToVideo(video)">
+            <img mat-card-image [src]="video.thumbnail" [alt]="video.title">
+            <mat-card-content>
+              <h3>{{video.title}}</h3>
+              <p>{{video.duration}} mins</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
