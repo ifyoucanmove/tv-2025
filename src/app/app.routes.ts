@@ -20,13 +20,31 @@ export const routes: Routes = [
     path: 'signin',
     loadComponent: () => import('./pages/signin/signin.component').then(m => m.SigninComponent)
   },
-  {
+ /*  {
     path: 'home',
     loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
     canActivate: [() => authGuard()]
-  },
+  }, */
   {
     path: '**',
     redirectTo: 'home'
+  },
+  {
+    path: 'workouts',
+    loadComponent: () => import('./pages/workouts/workouts.page').then( m => m.WorkoutsPage)
+  },
+  {
+    path: '',
+    loadComponent: () => import('./pages/main/main.page').then( m => m.MainPage),
+    children: [
+      {
+        path: 'home',
+        loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+      }
+    ]
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
   }
 ];

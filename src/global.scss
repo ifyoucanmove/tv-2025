@@ -35,3 +35,23 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+
+// Variables
+
+:root {
+    --background-primary: #141414;
+    --background-secondary: #1f1f1f;
+    --background-elevated: #2a2a2a;
+    --accent-primary: #00ffa3;
+    --accent-secondary: #00e5ff;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --border-radius: 8px;
+}
+
+:host {
+    display: block;
+    background: var(--background-primary);
+    min-height: 100vh;
+  }

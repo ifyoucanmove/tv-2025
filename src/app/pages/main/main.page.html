@@ -1,0 +1,35 @@
+<ion-content [fullscreen]="true">
+
+<mat-sidenav-container class="sidenav-container">
+  <!-- Sidebar -->
+  <mat-sidenav #sidenav [mode]="'side'" [opened]="true"
+    [fixedInViewport]="true" class="dark-theme" [class.expanded]="!isCollapsed"
+    (mouseenter)="isCollapsed = false" (mouseleave)="isCollapsed = true">
+    <app-header></app-header>
+    
+    <mat-nav-list>
+      <a mat-list-item *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active"
+        [class.focused]="focusedItem === item" (focus)="focusedItem = item" (blur)="focusedItem = null">
+        <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+        <span matListItemTitle [class.visible]="!isCollapsed">{{item.label}}</span>
+      </a>
+      <a mat-list-item (click)="logout()" class="logout-btn"
+        [class.focused]="focusedItem?.label === 'logout'"
+        (focus)="focusedItem = {icon: 'logout', label: 'logout'}" (blur)="focusedItem = null">
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle [class.visible]="!isCollapsed">Logout</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content -->
+  <mat-sidenav-content class="dark-theme" style="margin-left: 0px;">
+    <div class="content" [class.content-collapsed]="isCollapsed">
+      <button mat-icon-button (click)="toggleSidenav()" style="z-index: 99;">
+        <mat-icon>{{ isCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
+      </button>
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</ion-content>

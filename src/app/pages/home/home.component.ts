@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
@@ -10,6 +10,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ContentService, Category } from '../../services/content.service';
 import { AuthService } from '../../services/auth.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { 
+  IonCard, 
+  IonCardHeader, 
+  IonCardTitle, 
+  IonCardSubtitle, 
+  IonCardContent,
+  IonicModule
+} from '@ionic/angular';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -25,8 +35,11 @@ import { AuthService } from '../../services/auth.service';
     MatIconModule,
     MatToolbarModule,
     MatButtonModule,
-    MatCardModule
-  ]
+    MatCardModule,
+    HttpClientModule,
+    IonicModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent implements OnInit {
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -35,6 +48,8 @@ export class HomeComponent implements OnInit {
   focusedItem: any = null;
   focusedVideo: any = null;
   searchQuery = '';
+  currentVideoIndex = 0;
+  videoContainer: HTMLElement | null = null;
 
   // Stats
   todayStats = {
@@ -62,16 +77,38 @@ export class HomeComponent implements OnInit {
     { icon: 'person', label: 'Profile', route: '/profile' },
     { icon: 'settings', label: 'Settings', route: '/settings' }
   ];
-
+  programs: any[] = [];
   constructor(
     private contentService: ContentService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
+
+   @HostListener('window:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    console.log(event);
+    if (event.key === 'ArrowRight') {
+      this.slideNext();
+    } else if (event.key === 'ArrowLeft') {
+      this.slidePrevious();
+    }
+  } 
 
   ngOnInit(): void {
     this.loadCategories();
     this.loadUserStats();
+    this.loadPrograms();
+    // Initialize video container reference after view init
+    setTimeout(() => {
+      this.videoContainer = document.querySelector('.video-grid');
+    }, 0);
+  }
+
+  loadPrograms(){
+    this.http.get('assets/json/list.json').subscribe((data: any) => {
+      this.programs = data;
+    });
   }
 
   loadCategories(): void {
@@ -120,12 +157,13 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/video', video.id]);
   }
 
-  focusNextItem(event: KeyboardEvent, currentItem: any): void {
+ /*  focusNextItem(event: KeyboardEvent, currentItem: any): void {
     event.preventDefault();
     const items = [...this.menuItems, { icon: 'logout', label: 'logout', route: '' }];
     const currentIndex = items.findIndex(item => item === this.focusedItem);
     const nextIndex = (currentIndex + 1) % items.length;
     this.focusedItem = items[nextIndex];
+    console.log(this.focusedItem);
     this.focusElement(this.focusedItem);
   }
 
@@ -135,6 +173,7 @@ export class HomeComponent implements OnInit {
     const currentIndex = items.findIndex(item => item === this.focusedItem);
     const prevIndex = currentIndex <= 0 ? items.length - 1 : currentIndex - 1;
     this.focusedItem = items[prevIndex];
+    console.log(this.focusedItem);
     this.focusElement(this.focusedItem);
   }
 
@@ -162,43 +201,47 @@ export class HomeComponent implements OnInit {
   }
 
   private focusElement(element: any): void {
+    console.log(element);
     if (element) {
       const elementRef = document.querySelector(`[data-label="${element.label}"]`);
       if (elementRef) {
         (elementRef as HTMLElement).focus();
       }
     }
-  }
+  } */
 
-  handleKeydown(event: KeyboardEvent, item: any): void {
-    switch (event.key) {
-      case 'ArrowDown':
-        this.focusNextItem(event, item);
-        break;
-      case 'ArrowUp':
-        this.focusPreviousItem(event, item);
-        break;
-      case 'Enter':
-        if (item.label === 'logout') {
-          this.logout();
-        } else {
-          this.navigateTo(item.route);
-        }
-        break;
+  slideNext(): void {
+    if (this.videoContainer && this.currentVideoIndex < this.programs.length - 1) {
+      this.currentVideoIndex++;
+      this.scrollToVideo();
     }
   }
 
-  handleVideoKeydown(event: KeyboardEvent, video: any): void {
-    switch (event.key) {
-      case 'ArrowRight':
-        this.focusNextVideo(event);
-        break;
-      case 'ArrowLeft':
-        this.focusPreviousVideo(event);
-        break;
-      case 'ArrowUp':
-        this.focusMenu();
-        break;
+  slidePrevious(): void {
+    if (this.videoContainer && this.currentVideoIndex > 0) {
+      this.currentVideoIndex--;
+      this.scrollToVideo();
     }
+  }
+
+  private scrollToVideo(): void {
+    if (this.videoContainer) {
+      const videoCard = this.videoContainer.children[this.currentVideoIndex] as HTMLElement;
+      if (videoCard) {
+        const scrollAmount = this.currentVideoIndex * videoCard.offsetWidth;
+        this.videoContainer.scrollTo({
+          left: scrollAmount,
+          behavior: 'smooth'
+        });
+        // Add focus class
+        this.removeFocusFromAllVideos();
+        videoCard.classList.add('focused');
+      }
+    }
+  }
+
+  private removeFocusFromAllVideos(): void {
+    const videoCards = document.querySelectorAll('.video-card');
+    videoCards.forEach(card => card.classList.remove('focused'));
   }
 }

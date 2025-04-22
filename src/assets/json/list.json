@@ -1,0 +1,38 @@
+[
+    {    "id": "1",
+        "title":"Stacked By Summer - Class Edition",
+        "duration":"40 Mins",
+        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+    },
+    {"id": "2",
+        "title":"Move & Tone",
+        "duration":"40 Mins",
+        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Move%26Tone.png"
+    },
+    {"id": "3",
+        "title":"Move & Dance Program",
+        "duration":"40 Mins",
+        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Move%26Dance.png"
+    },
+    {"id": "4",
+        "title":"Kick & Step",
+        "duration":"40 Mins",
+        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Kick%26Step.png"
+    },
+    {"id": "5",
+        "title":"Fit Over Fifty",
+        "duration":"40 Mins",
+        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Fit_over_Fifty2/Thumbnails/Fit_Tb.png"
+    },
+    {"id": "6",
+        "title":"Roll The Dice",
+        "duration":"40 Mins",
+        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Roll_Dice_Series/Roll_The_Dice.png"
+    }
+]

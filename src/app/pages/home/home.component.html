@@ -1,18 +1,29 @@
 <mat-sidenav-container class="sidenav-container">
   <!-- Sidebar -->
-  <mat-sidenav #sidenav [mode]="'side'" [opened]="!isCollapsed" [fixedInViewport]="true" class="dark-theme">
+  <mat-sidenav #sidenav [mode]="'side'" [opened]="!isCollapsed" [fixedInViewport]="true" class="dark-theme" [class.expanded]="focusedItem">
     <div class="logo-container">
-      <img src="assets/logo.png" alt="Move Logo" class="logo">
+      <img src="../../../assets/images/logo.webp" alt="Move Logo" class="logo">
     </div>
     
     <mat-nav-list>
-      <a mat-list-item *ngFor="let item of menuItems" [routerLink]="item.route" routerLinkActive="active">
+      <a mat-list-item 
+         *ngFor="let item of menuItems" 
+         [routerLink]="item.route" 
+         routerLinkActive="active"
+         [class.focused]="focusedItem === item"
+         (focus)="focusedItem = item"
+         (blur)="focusedItem = null">
         <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
-        <span matListItemTitle>{{item.label}}</span>
+        <span matListItemTitle [class.visible]="focusedItem">{{item.label}}</span>
       </a>
-      <a mat-list-item (click)="logout()" class="logout-btn">
+      <a mat-list-item 
+         (click)="logout()" 
+         class="logout-btn"
+         [class.focused]="focusedItem?.label === 'logout'"
+         (focus)="focusedItem = {icon: 'logout', label: 'logout'}"
+         (blur)="focusedItem = null">
         <mat-icon matListItemIcon>logout</mat-icon>
-        <span matListItemTitle>Logout</span>
+        <span matListItemTitle [class.visible]="focusedItem">Logout</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>
@@ -72,7 +83,7 @@
       </div>
 
       <!-- Videos Section -->
-      <div class="videos-section">
+  <!--     <div class="videos-section">
         <div class="section-header">
           <h2>Top Videos</h2>
           <button mat-button color="accent">View All</button>
@@ -83,11 +94,33 @@
             <img mat-card-image [src]="video.thumbnail" [alt]="video.title">
             <mat-card-content>
               <h3>{{video.title}}</h3>
-              <p>{{video.duration}} mins</p>
+              <p>{{video.duration}}</p>
             </mat-card-content>
           </mat-card>
         </div>
-      </div>
+      </div> -->
+
+        <!-- Videos Section -->
+        <div class="videos-section">
+          <div class="section-header">
+            <h2>Top Videos</h2>
+            <button mat-button color="accent">View All</button>
+          </div>
+          
+          <div class="video-grid">
+            <ion-card class="video-card" *ngFor="let video of categories[0]?.videos" 
+            (click)="navigateToVideo(video)">
+              <ion-card-header>
+                <ion-card-title>{{video.title}}</ion-card-title>
+                <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
+              </ion-card-header>
+            
+              <ion-card-content>
+                Here's a small text description for the card content. Nothing more, nothing less.
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </div>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

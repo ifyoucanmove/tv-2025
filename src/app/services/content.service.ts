@@ -44,6 +44,30 @@ export class ContentService {
       description: 'Keep pushing through your transformation',
       duration: '60 mins',
       category: 'Challenge'
+    },
+    {
+      id: '4',
+      title: '90 Day Challenge - Day 35',
+      thumbnail: 'assets/thumbnails/90day-35.jpg',
+      description: 'Keep pushing through your transformation',
+      duration: '60 mins',
+      category: 'Challenge'
+    },
+    {
+      id: '5',
+      title: '90 Day Challenge - Day 35',
+      thumbnail: 'assets/thumbnails/90day-35.jpg',
+      description: 'Keep pushing through your transformation',
+      duration: '60 mins',
+      category: 'Challenge'
+    },
+    {
+      id: '6',
+      title: '90 Day Challenge - Day 35',
+      thumbnail: 'assets/thumbnails/90day-35.jpg',
+      description: 'Keep pushing through your transformation',
+      duration: '60 mins',
+      category: 'Challenge'
     }
   ];
 
@@ -61,6 +85,21 @@ export class ContentService {
     {
       id: '3',
       name: 'New Releases',
+      videos: this.mockVideos.slice(1)
+    },
+    {
+      id: '4',
+      name: 'New Releases 2',
+      videos: this.mockVideos.slice(1)
+    },
+    {
+      id: '5',
+      name: 'New Releases 5',
+      videos: this.mockVideos.slice(1)
+    },
+    {
+      id: '6',
+      name: 'New Releases 6',
       videos: this.mockVideos.slice(1)
     }
   ];
