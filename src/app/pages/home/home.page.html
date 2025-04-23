@@ -1,13 +1,103 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-grid>
+  <ion-row>
+    <ion-col size="5">
+      <ion-row class="h-100">
+        <ion-col size="12">
+          <ion-card class="stats-card">
+            <h1>Today</h1>
+            <h6>Minutes completed</h6>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="stats-card">
+            <h1>146</h1>
+            <h6>Minutes completed</h6>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card class="stats-card">
+            <h1>7</h1>
+            <h6>Videos completed</h6>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+    <ion-col size="7">
+      <ion-row>
+        <ion-col size="12">
+          <ion-card class="stats-card weekly-stats">
+            <div class="stats-container">
+              <!-- This Week Stats -->
+              <div class="progress-card">
+                <div class="progress-circle" [style]="getProgressStyle(weeklyStats.thisWeek.daysCompleted, weeklyStats.thisWeek.totalDays)">
+                  <div class="inner-circle">
+                    <div class="content">
+                      <h2>{{weeklyStats.thisWeek.daysCompleted}}/{{weeklyStats.thisWeek.totalDays}} Days</h2>
+                      <p>{{weeklyStats.thisWeek.minutesCompleted}} Minutes Completed</p>
+                    </div>
+                  </div>
+                </div>
+                <h3>This Week</h3>
+                <p class="date-range">Mar 2 - Mar 8</p>
+              </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+              <!-- Last Week Stats -->
+              <div class="progress-card">
+                <div class="progress-circle" [style]="getProgressStyle(weeklyStats.lastWeek.daysCompleted, weeklyStats.lastWeek.totalDays)">
+                  <div class="inner-circle">
+                    <div class="content">
+                      <h2>{{weeklyStats.lastWeek.daysCompleted}}/{{weeklyStats.lastWeek.totalDays}} Days</h2>
+                      <p>{{weeklyStats.lastWeek.minutesCompleted}} Minutes Completed</p>
+                    </div>
+                  </div>
+                </div>
+                <h3>Last Week</h3>
+                <p class="date-range">Apr 05 - Apr 12</p>
+              </div>
+            </div>
+            <div class="recently-completed">
+              <button class="btn btn-primary-custom" tabindex="0">
+                Recently Completed
+              </button>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <!-- video section -->
+  <ion-row>
+    <ion-col size="12">
+      <app-video-section
+        [videos]="programs"
+        [title]="'Top Videos'"
+        (viewAllClick)="onViewAllVideo()"
+        (videoClick)="onVideoClick($event)">
+      </app-video-section>
+    </ion-col>
+  </ion-row>
+
+    <!-- Challenge section -->
+    <ion-row>
+      <ion-col size="12">
+        <app-video-section
+          [videos]="programs"
+          [title]="'Top Challenges'"
+          (viewAllClick)="onViewAllChallenges()"
+          (videoClick)="onCardChallenges($event)">
+        </app-video-section>
+      </ion-col>
+    </ion-row>
+     <!-- Challenge section -->
+     <ion-row>
+      <ion-col size="12">
+        <app-video-section
+          [videos]="programs"
+          [title]="'Top Fitness Videos'"
+          (viewAllClick)="onViewAllFitness()"
+          (videoClick)="onCardFitness($event)">
+        </app-video-section>
+      </ion-col>
+    </ion-row>
+</ion-grid>

@@ -9,6 +9,11 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+/* Angular Material */
+@use '@angular/material' as mat;
+@include mat.core();
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -36,9 +41,6 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
 
-
-// Variables
-
 :root {
     --background-primary: #141414;
     --background-secondary: #1f1f1f;
@@ -54,4 +56,51 @@
     display: block;
     background: var(--background-primary);
     min-height: 100vh;
+  }
+  ion-content{
+    --background: var(--background-primary) !important;
+  }
+.text-primary-custom{
+  background-image: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;   
+}
+.text-secondary-custom{
+  color: var(--text-secondary) !important;
+}
+  .btn-primary-custom{
+    background-image: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    border-radius: 8px;
+    padding: 3px 20px;
+    font-size: 14px;
+    border: 2px solid var(--accent-primary);
+  }
+  .btn-primary-custom:focus{
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    color: transparent;
+    border-radius: 8px;
+    padding: 3px 20px;
+    font-size: 14px;
+    border: 2px solid var(--accent-primary);
+    color: white !important;
+  }
+  .btn-secondary-custom{
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: 14px;
+    border: none;
+    color: white !important;
+  }
+  .btn-secondary-custom:focus{
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: 14px;
+    border: 1px solid var(--text-primary);
+    color: white !important;
   }

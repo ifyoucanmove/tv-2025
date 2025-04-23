@@ -6,7 +6,7 @@
   // Sidebar Styles
   mat-sidenav {
     width: 80px;
-    background: var(--background-secondary);
+    background: var(--background-primary);
     border: none;
     transition: all 0.3s ease;
     
@@ -40,7 +40,7 @@
           }
         }
         
-        &.focused {
+        &:focus {
           background: rgba(255, 255, 255, 0.15);
         }
         
@@ -76,7 +76,7 @@
 
   // Content Area
 .content {
-    padding: 24px 32px;
+    padding: 15px 15px;
     background: var(--background-primary);
     min-height: 100vh;
     transition: margin-left 0.3s ease;

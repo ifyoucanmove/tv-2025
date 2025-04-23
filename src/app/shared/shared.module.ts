@@ -8,11 +8,46 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
+import { IonCard,IonButton, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
+
+
 @NgModule({
     declarations: [],
-    
-    imports: [IonContent,RouterModule,  IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
-    exports: [IonContent,RouterModule,  
-        IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule],
+
+    imports: [IonContent, 
+        IonHeader, 
+        IonTitle, 
+        IonToolbar, 
+        IonHeader,
+        IonButton,
+         IonCol, 
+         IonGrid, 
+         IonRow,
+         IonCard,
+         IonCardContent,
+         IonCardHeader,
+         IonCardSubtitle,
+         IonCardTitle,
+        RouterModule, 
+        CommonModule, 
+        FormsModule],
+    exports: [IonContent, 
+        IonHeader, 
+        IonTitle, 
+        IonToolbar, 
+        IonHeader,
+        IonButton,
+         IonCol, 
+         IonGrid, 
+         IonRow,
+         IonCard,
+         IonCardContent,
+         IonCardHeader,
+         IonCardSubtitle,
+         IonCardTitle,
+        RouterModule, 
+        CommonModule, 
+        FormsModule],
 })
-export class SharedModule {}
+export class SharedModule { }

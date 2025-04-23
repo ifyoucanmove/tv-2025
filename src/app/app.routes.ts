@@ -1,37 +1,14 @@
 import { Routes } from '@angular/router';
-import { inject } from '@angular/core';
-import { AuthService } from './services/auth.service';
 
-const authGuard = () => {
-  const authService = inject(AuthService);
-  if (authService.isAuthenticated()) {
-    return true;
-  }
-  return { path: '/signin' };
-};
-
-export const routes: Routes = [
+export const routes: Routes =[
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
   },
   {
-    path: 'signin',
-    loadComponent: () => import('./pages/signin/signin.component').then(m => m.SigninComponent)
-  },
- /*  {
-    path: 'home',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
-    canActivate: [() => authGuard()]
-  }, */
-  {
     path: '**',
     redirectTo: 'home'
-  },
-  {
-    path: 'workouts',
-    loadComponent: () => import('./pages/workouts/workouts.page').then( m => m.WorkoutsPage)
   },
   {
     path: '',
@@ -46,5 +23,10 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./pages/home/home.page').then( m => m.HomePage)
+  },
+  {
+    path: 'confirm',
+    loadComponent: () => import('./shared/modals/confirm/confirm.page').then( m => m.ConfirmPage)
   }
 ];
+
