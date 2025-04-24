@@ -2,12 +2,15 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
+import { Router } from '@angular/router';
+import {  ModalController } from '@ionic/angular/standalone';
+import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [HttpClientModule, SharedModule, VideoSectionComponent],
+  imports: [HttpClientModule, SharedModule,VideoPlayerComponent, VideoSectionComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePage {
@@ -25,7 +28,8 @@ export class HomePage {
   };
   programs: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private modalController: ModalController,
+    private router: Router) { }
 
   ngOnInit() {
     this.loadPrograms();
@@ -54,26 +58,40 @@ export class HomePage {
     console.log('View all clicked');
   }
 
-  onVideoClick(video: any): void {
-    // Handle video click
-    console.log('Video clicked:', video);
+  async onVideoClick(video: any) {
+    try {
+      const modal = await this.modalController.create({
+        component: VideoPlayerComponent,
+        componentProps: {
+          video: video
+        },
+        cssClass: 'video-player-modal',
+        showBackdrop: true,
+        backdropDismiss: true
+      });
+
+      await modal.present();
+    } catch (error) {
+      console.error('Error opening video modal:', error);
+    }
   }
   onViewAllChallenges(): void {
-    // Handle view all click
-    console.log('onViewAllChallenges');
+    this.router.navigate(['/challenge-list']);
   }
 
   onCardChallenges(video: any): void {
-    // Handle video click
-    console.log('onCardChallenges', video);
+    this.router.navigate(['/challenge-detail']);
   }
   onViewAllFitness(): void {
-    // Handle view all click
-    console.log('onViewAllFitness');
+    this.router.navigate(['/fitness-list']);
+
   }
 
   onCardFitness(video: any): void {
-    // Handle video click
-    console.log('onCardFitness', video);
+    this.router.navigate(['/fitness-detail']);
+  }
+  recentlyCompleted(): void {
+    console.log('recentlyCompleted');
+    alert('recentlyCompleted');
   }
 }
