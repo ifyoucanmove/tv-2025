@@ -1,6 +1,7 @@
 .videos-section {
   margin-top: 30px;
-  
+  z-index: 9;
+  position: relative;
   .section-header {
     display: flex;
     justify-content: space-between;

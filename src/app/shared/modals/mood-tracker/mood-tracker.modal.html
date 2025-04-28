@@ -1,0 +1,97 @@
+<div class="modal-content p-3" style="overflow-y: scroll;
+    height: 600px;">
+  <div class="modal-header d-flex justify-content-between">
+    <h5 class="modal-title text-white mt-0">Workout Mood & Energy Tracker</h5>
+<!--     <ion-icon name="close-circle-outline" style="font-size: 30px;" tabindex="0" (click)="close()"></ion-icon>
+ -->
+  </div>
+  
+  <div class="modal-body">
+    <form [formGroup]="workoutForm">
+       <ion-grid>
+        <ion-row>
+        <ion-col size="6">
+      <!-- Before Workout Section -->
+      <div class="mb-2">
+        <h6 class="mb-3 text-white ">Before Workout</h6>
+        
+        <!-- Energy Level Selection -->
+        <label class="form-label text-white">Energy Level (1-5)</label>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <ng-container *ngFor="let level of energyLevels;let i =index;">
+            <div class="card energy-card" tabindex="0"   [id]="'energyLevels' + i" 
+                 [class.selected]="workoutForm.get('beforeEnergy')?.value === level"
+                 (click)="selectEnergyLevel('beforeEnergy', level)">
+              <div class="card-body text-center">
+                <h5 class="text-white">{{level}}</h5>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Mood Selection -->
+        <label class="form-label text-white">Mood</label>
+        <div class="d-flex flex-wrap gap-3 mb-3">
+          <ng-container *ngFor="let mood of moods">
+            <div class="mood-emoji" tabindex="0"
+                 [class.selected]="workoutForm.get('beforeMood')?.value === mood.value"
+                 (click)="selectMood('beforeMood', mood.value)">
+              <span style="font-size: 2rem;" class="text-white">{{mood.emoji}}</span>
+              <span class="mood-label text-white">{{mood.label}}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      </ion-col>
+      <ion-col size="6" style="border-left: 1px solid gray;">
+      <!-- After Workout Section -->
+      <div class="mb-2 ms-2">
+        <h6 class="mb-3 text-white">After Workout</h6>
+        
+        <!-- Energy Level Selection -->
+        <label class="form-label text-white">Energy Level (1-5)</label>
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <ng-container *ngFor="let level of energyLevels">
+            <div class="card energy-card" tabindex="0"
+                 [class.selected]="workoutForm.get('afterEnergy')?.value === level"
+                 (click)="selectEnergyLevel('afterEnergy', level)">
+              <div class="card-body text-center">
+                <h5 class="text-white">{{level}}</h5>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+
+        <!-- Mood Selection -->
+        <label class="form-label text-white">Mood</label>
+        <div class="d-flex flex-wrap gap-3 mb-3">
+          <ng-container *ngFor="let mood of moods">
+            <div class="mood-emoji" tabindex="0"
+                 [class.selected]="workoutForm.get('afterMood')?.value === mood.value"
+                 (click)="selectMood('afterMood', mood.value)">
+              <span style="font-size: 2rem;" class="text-white">{{mood.emoji}}</span>
+              <span class="mood-label text-white">{{mood.label}}</span>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+</ion-col>
+
+    </ion-row>
+    </ion-grid>
+    </form>
+  </div>
+
+  <div class="modal-footer" >
+   
+    <button class="btn btn-secondary-custom" (click)="onSubmit()">
+      Save
+    </button>
+    <button class="btn btn-secondary-custom mx-2" (click)="update()">
+      Update
+    </button>
+     <button class="btn btn-secondary-custom" (click)="close()" >
+      Cancel
+    </button> 
+  </div>
+</div>

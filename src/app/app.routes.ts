@@ -10,6 +10,11 @@ export const routes: Routes =[
     path: '**',
     redirectTo: 'home'
   }, */
+ 
+  {
+    path: 'sign-in',
+    loadComponent: () => import('./pages/sign-in/sign-in.page').then( m => m.SignInPage)
+  },
   {
     path: '',
     loadComponent: () => import('./pages/main/main.page').then( m => m.MainPage),
@@ -21,6 +26,10 @@ export const routes: Routes =[
       {
         path: 'challenge-detail',
         loadComponent: () => import('./pages/challenge-detail/challenge-detail.page').then( m => m.ChallengeDetailPage)
+      },
+      {
+        path: 'challenge-video-details/:id',
+        loadComponent: () => import('./pages/challenge-video-details/challenge-video-details.page').then( m => m.ChallengeVideoDetailsPage)
       },
       {
         path: 'fitness-detail',
@@ -35,10 +44,6 @@ export const routes: Routes =[
         loadComponent: () => import('./pages/challenge-list/challenge-list.page').then( m => m.ChallengeListPage)
       }
     ]
-  },
-  {
-    path: 'sign-in',
-    loadComponent: () => import('./pages/sign-in/sign-in.page').then( m => m.SignInPage)
   }
   
 ];

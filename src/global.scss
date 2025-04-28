@@ -69,6 +69,29 @@
 .text-secondary-custom{
   color: var(--text-secondary) !important;
 }
+.btn-icon-primary{
+  background-color: transparent;
+    border-radius: 8px;
+    padding: 5px 20px;
+    font-size: 14px;
+    border: 2px solid white;
+    color: white !important;
+    ion-icon{
+      color: white !important;
+      padding-right: 5px;
+    }
+}
+.btn-icon-primary:focus{
+ background-color: white;
+  border-radius: 8px;
+  padding: 5px 20px;
+  font-size: 14px;
+  border: 0px solid var(--accent-primary);
+  color: black !important;
+  ion-icon{
+    color: black !important;
+  }
+}
   .btn-primary-custom{
     background-image: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
     -webkit-background-clip: text;
@@ -120,6 +143,20 @@
   }
 }
 
+.mood-tracker-modal {
+  --height: 100%;
+  --width: 90vw;
+  --border-radius: 0;
+  --backdrop-opacity: 0.8;
+
+  &::part(content) {
+    background: var(--background-secondary);
+  }
+
+  &::part(backdrop) {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
 .p-title{
   text-align: center;
   color: white;

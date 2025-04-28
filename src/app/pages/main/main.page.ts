@@ -55,7 +55,7 @@ export class MainPage implements OnInit {
 
   logout(): void {
    // this.authService.logout();
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/sign-in']);
   }
   
   toggleSidenav(): void {
@@ -82,7 +82,14 @@ export class MainPage implements OnInit {
         } else {
           this.mainContent.nativeElement.focus();
         }
-      }
+      } 
+        const currentUrl = this.router.url;
+        if(currentUrl.includes('home')){
+          let ele = document.getElementById('videocard0');
+          if(ele){
+            ele.focus();
+          }
+        }
     }
   }
   checkEnterFocus(): void {

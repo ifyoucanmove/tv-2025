@@ -6,7 +6,7 @@
   
   <div class="video-grid" [id]="title" (focus)="checkEnterFocus()"  >
     <ion-card class="video-card" *ngFor="let video of videos; let i = index" 
-      (focus)="onCardFocus(i)"
+      (focus)="onCardFocus(i)"  [id]="'videocard' + i" 
       (blur)="onCardBlur()"
       [tabindex]="0"
       (click)="onVideoClick(video)">

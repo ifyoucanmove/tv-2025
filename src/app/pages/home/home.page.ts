@@ -59,21 +59,7 @@ export class HomePage {
   }
 
   async onVideoClick(video: any) {
-    try {
-      const modal = await this.modalController.create({
-        component: VideoPlayerComponent,
-        componentProps: {
-          video: video
-        },
-        cssClass: 'video-player-modal',
-        showBackdrop: true,
-        backdropDismiss: true
-      });
-
-      await modal.present();
-    } catch (error) {
-      console.error('Error opening video modal:', error);
-    }
+    this.router.navigate(['/challenge-video-details/',video.id]);
   }
   onViewAllChallenges(): void {
     this.router.navigate(['/challenge-list']);

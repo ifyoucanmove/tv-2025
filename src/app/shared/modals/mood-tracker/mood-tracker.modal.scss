@@ -1,0 +1,52 @@
+.energy-card {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 10px;
+    border: none;
+  }
+  
+  .energy-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+  }
+  
+  .energy-card.selected {
+    background-color: #2a2a2a;
+    color: white;
+  }
+  
+  .mood-emoji {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  
+  .mood-emoji:hover {
+    background-color: #2a2a2a;
+  }
+  
+  .mood-emoji.selected {
+    background-color: #2a2a2a;
+  }
+  
+  .mood-label {
+    font-size: 0.8rem;
+    margin-top: 5px;
+  }
+  
+  .card-body{
+   // padding: 1rem!important;
+   background-color: #2c2626;
+    width: 60px;
+      height: 60px;
+      h5{
+        margin: 0px !important;
+      }
+  }
