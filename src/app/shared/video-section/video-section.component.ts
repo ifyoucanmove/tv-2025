@@ -13,6 +13,7 @@ import { ConfirmPage } from '../modals/confirm/confirm.page';
 })
 export class VideoSectionComponent {
   @Input() title: string = 'Top Videos';
+  @Input() tabindex: number = 0;
   @Input() videos: any[] = [];
   @Input() showViewAll: boolean = true;
   @Output() viewAllClick = new EventEmitter<void>();

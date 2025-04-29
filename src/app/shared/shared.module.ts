@@ -8,7 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { IonCol, IonGrid, IonRow } from '@ionic/angular/standalone';
-import { IonCard,IonButton,IonButtons,IonBackButton,IonIcon, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
+import { IonCard,IonText,IonButton,IonButtons,IonBackButton,IonIcon, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/angular/standalone';
 import { IonItem, IonLabel,IonImg, IonList, IonInput } from '@ionic/angular/standalone';
 
 @NgModule({
@@ -35,6 +35,7 @@ import { IonItem, IonLabel,IonImg, IonList, IonInput } from '@ionic/angular/stan
          IonBackButton,
          IonIcon,
          IonImg,
+         IonText,
         RouterModule, 
         ReactiveFormsModule,
         CommonModule, 
@@ -60,6 +61,7 @@ import { IonItem, IonLabel,IonImg, IonList, IonInput } from '@ionic/angular/stan
          IonBackButton,
          IonIcon,
          IonImg,
+         IonText,
         RouterModule, 
         ReactiveFormsModule,
         CommonModule, 

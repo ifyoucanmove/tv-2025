@@ -72,6 +72,7 @@
       <app-video-section
         [videos]="programs"
         [title]="'Top Videos'"
+        [tabindex]="1"
         (viewAllClick)="onViewAllVideo()"
         (videoClick)="onVideoClick($event)">
       </app-video-section>
@@ -84,6 +85,7 @@
         <app-video-section
           [videos]="programs"
           [title]="'Top Challenges'"
+          [tabindex]="2"
           (viewAllClick)="onViewAllChallenges()"
           (videoClick)="onCardChallenges($event)">
         </app-video-section>
@@ -95,6 +97,7 @@
         <app-video-section
           [videos]="programs"
           [title]="'Top Fitness Videos'"
+          [tabindex]="3"
           (viewAllClick)="onViewAllFitness()"
           (videoClick)="onCardFitness($event)">
         </app-video-section>

@@ -8,7 +8,7 @@
     <ion-card class="video-card" *ngFor="let video of videos; let i = index" 
       (focus)="onCardFocus(i)"  [id]="'videocard' + i" 
       (blur)="onCardBlur()"
-      [tabindex]="0"
+      [tabindex]="tabindex"
       (click)="onVideoClick(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
@@ -16,7 +16,7 @@
         <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
-    <ion-card class="video-card d-flex justify-content-center align-items-center" tabindex="0" 
+    <ion-card class="video-card d-flex justify-content-center align-items-center"  [tabindex]="tabindex" 
     (focus)="onCardFocus(videos.length +1)"
       (blur)="onCardBlur()"
     (click)="onViewAllClick()">

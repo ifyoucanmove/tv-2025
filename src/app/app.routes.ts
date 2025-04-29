@@ -42,6 +42,10 @@ export const routes: Routes =[
       {
         path: 'challenge-list',
         loadComponent: () => import('./pages/challenge-list/challenge-list.page').then( m => m.ChallengeListPage)
+      },
+      {
+        path: 'update-profile',
+        loadComponent: () => import('./pages/update-profile/update-profile.page').then( m => m.UpdateProfilePage)
       }
     ]
   }
