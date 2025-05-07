@@ -46,6 +46,22 @@ export const routes: Routes =[
       {
         path: 'update-profile',
         loadComponent: () => import('./pages/update-profile/update-profile.page').then( m => m.UpdateProfilePage)
+      },
+      {
+        path: 'recipe-category',
+        loadComponent: () => import('./pages/recipe-list/recipe-list.page').then( m => m.RecipeListPage)
+      },
+      {
+        path: 'recipes',
+        loadComponent: () => import('./pages/recipe-category-list/recipe-category-list.page').then( m => m.RecipeCategoryListPage)
+      },
+      {
+        path: 'single-recipe/:id',
+        loadComponent: () => import('./pages/single-recipe/single-recipe.page').then( m => m.SingleRecipePage)
+      },
+      {
+        path: 'favorites',
+        loadComponent: () => import('./pages/favorite/favorite.page').then( m => m.FavoritePage)
       }
     ]
   }

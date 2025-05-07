@@ -41,6 +41,7 @@ export class MainPage implements OnInit {
     { icon: 'home', label: 'Home', route: '/home' },
     { icon: 'search', label: 'Search', route: '/search' },
     { icon: 'favorite', label: 'Favorites', route: '/favorites' },
+    { icon: 'fastfood', label: 'Recipe', route: '/recipe-category' },
     { icon: 'person', label: 'Profile', route: '/update-profile' },
     { icon: 'settings', label: 'Settings', route: '/settings' }
   ];
