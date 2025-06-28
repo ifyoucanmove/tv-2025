@@ -1,0 +1,131 @@
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: var(--background-primary);
+  background-image: url("../../../assets/images/membershipicon.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.sign-in-card {
+  display: flex;
+  background: #1f1f1fe0;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-width: 900px;
+  width: 100%;
+}
+
+.qr-section {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+
+  .qr-container {
+    text-align: center;
+
+    .qr-text {
+      color: var(--text-secondary);
+      font-size: 16px;
+      margin: 0;
+    }
+  }
+}
+
+.form-section {
+  flex: 1;
+  padding: 30px;
+
+  .title {
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    font-size: 28px;
+  }
+
+  .custom-input {
+    --background: transparent;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --highlight-color-focused: var(--accent-primary);
+    margin-bottom: 20px;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+
+    ion-icon {
+      color: var(--text-secondary);
+      font-size: 20px;
+    }
+
+    .custom-input-field {
+      --color: var(--text-primary);
+      --placeholder-color: var(--text-secondary);
+    }
+
+    .password-toggle {
+      cursor: pointer;
+      color: var(--text-secondary);
+
+      &:hover {
+        color: var(--accent-primary);
+      }
+    }
+  }
+
+  .sign-in-button {
+    --background: linear-gradient(
+      to right,
+      var(--accent-primary),
+      var(--accent-secondary)
+    );
+    --background-activated: linear-gradient(
+      to right,
+      var(--accent-secondary),
+      var(--accent-primary)
+    );
+    --color: var(--text-primary);
+    margin-top: 30px;
+    height: 48px;
+    font-weight: 600;
+    text-transform: none;
+  }
+
+  .forgot-password {
+    text-align: center;
+    margin-top: 20px;
+
+    .forgot-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+
+      &:hover {
+        color: var(--accent-primary);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .sign-in-card {
+    flex-direction: column;
+  }
+
+  .qr-section {
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+  }
+
+  .form-section {
+    padding: 20px;
+  }
+}

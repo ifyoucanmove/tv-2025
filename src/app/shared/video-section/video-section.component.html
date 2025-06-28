@@ -5,8 +5,9 @@
   </div>
   
   <div class="video-grid" [id]="title" (focus)="checkEnterFocus()"  >
-    <ion-card class="video-card" *ngFor="let video of videos; let i = index" 
-      (focus)="onCardFocus(i)"  [id]="'videocard' + i" 
+    @for (video of videos; track $index) {
+    <ion-card class="video-card"
+      (focus)="onCardFocus($index)"  [id]="'videocard' + $index" 
       (blur)="onCardBlur()"
       [tabindex]="tabindex"
       (click)="onVideoClick(video)">
@@ -15,7 +16,7 @@
         <ion-card-title>{{video.title}}</ion-card-title>
         <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
       </ion-card-header>
-    </ion-card>
+    </ion-card>}
     <ion-card class="video-card d-flex justify-content-center align-items-center"  [tabindex]="tabindex" 
     (focus)="onCardFocus(videos.length +1)"
       (blur)="onCardBlur()"

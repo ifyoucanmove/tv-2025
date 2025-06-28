@@ -9,11 +9,6 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
-/* Angular Material */
-@use '@angular/material' as mat;
-@include mat.core();
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
-
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -39,172 +34,139 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+@import "@ionic/angular/css/palettes/dark.system.css";
 
 :root {
-    --background-primary: #141414;
-    --background-secondary: #1f1f1f;
-    --background-elevated: #2a2a2a;
-    --accent-primary: #00ffa3;
-    --accent-secondary: #00e5ff;
-    --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.7);
-    --border-radius: 8px;
+  --background-primary: #141414;
+  --background-secondary: #1f1f1f;
+  --background-elevated: #2a2a2a;
+  --accent-primary: #00ffa3;
+  --accent-secondary: #00e5ff;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --border-radius: 8px;
 }
 
 :host {
-    display: block;
-    background: var(--background-primary);
-    min-height: 100vh;
-  }
-  ion-content{
-    --background: var(--background-primary) !important;
-  }
-.text-primary-custom{
-  background-image: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+  display: block;
+  background: var(--background-primary);
+  min-height: 100vh;
+}
+.ion-page {
+  background: var(--background-primary);
+}
+
+.text-primary-custom {
+  background-image: linear-gradient(
+    to right,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;   
+  color: transparent;
 }
-.text-secondary-custom{
+.text-secondary-custom {
   color: var(--text-secondary) !important;
 }
-.btn-icon-primary{
+.btn-icon-primary {
   background-color: transparent;
-    border-radius: 8px;
-    padding: 5px 20px;
-    font-size: 14px;
-    border: 2px solid white;
+  border-radius: 8px;
+  padding: 5px 20px;
+  font-size: 14px;
+  border: 2px solid white;
+  color: white !important;
+  ion-icon {
     color: white !important;
-    ion-icon{
-      color: white !important;
-      padding-right: 5px;
-    }
+    padding-right: 5px;
+  }
 }
-.btn-icon-primary:focus{
- background-color: white;
+.btn-icon-primary:focus {
+  background-color: white;
   border-radius: 8px;
   padding: 5px 20px;
   font-size: 14px;
   border: 0px solid var(--accent-primary);
   color: black !important;
-  ion-icon{
+  ion-icon {
     color: black !important;
   }
 }
-  .btn-primary-custom{
-    background-image: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    border-radius: 8px;
-    padding: 3px 20px;
-    font-size: 14px;
-    border: 2px solid var(--accent-primary);
-  }
-  .btn-primary-custom:focus{
-    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-    color: transparent;
-    border-radius: 8px;
-    padding: 3px 20px;
-    font-size: 14px;
-    border: 2px solid var(--accent-primary);
-    color: white !important;
-  }
-  .btn-secondary-custom{
-    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-    border-radius: 8px;
-    padding: 3px 8px;
-    font-size: 14px;
-    border: none;
-    color: white !important;
-  }
-  .btn-secondary-custom:focus{
-    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-    border-radius: 8px;
-    padding: 3px 8px;
-    font-size: 14px;
-    border: 1px solid var(--text-primary);
-    color: white !important;
-  }
-
-.video-player-modal {
-  --height: 100%;
-  --width: 100%;
-  --border-radius: 0;
-  --backdrop-opacity: 0.8;
-
-  &::part(content) {
-    background: transparent;
-  }
-
-  &::part(backdrop) {
-    background: rgba(0, 0, 0, 0.9);
-  }
-}
-
-.mood-tracker-modal {
-  --height: 100%;
-  --width: 90vw;
-  --border-radius: 0;
-  --backdrop-opacity: 0.8;
-
-  &::part(content) {
-    background: var(--background-secondary);
-  }
-
-  &::part(backdrop) {
-    background: rgba(0, 0, 0, 0.9);
-  }
-}
-.p-title{
-  text-align: center;
-  color: white;
-  margin-top: 0px;
-}
-
-/* custom video */
-.custom-card {
-  margin: 0px;
-  background: var(--background-secondary);
+.btn-primary-custom {
+  background-image: linear-gradient(
+    to right,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
   border-radius: 8px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  position: relative;
-  
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-  }
-  
-  &:focus {
-    transform: scale(1.05);
-    box-shadow: 0 0 0 2px var(--accent-primary), 0 8px 16px rgba(0, 0, 0, 0.3);
-    z-index: 1;
-  }
-  
-  img {
-    width: 100%;
-    object-fit: cover;
-  }
+  padding: 3px 20px;
+  font-size: 14px;
+  border: 2px solid var(--accent-primary);
+}
+.btn-primary-custom:focus {
+  background: linear-gradient(
+    to right,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  color: transparent;
+  border-radius: 8px;
+  padding: 3px 20px;
+  font-size: 14px;
+  border: 2px solid var(--accent-primary);
+  color: white !important;
+}
+.btn-secondary-custom {
+  background: linear-gradient(
+    to right,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  border-radius: 8px;
+  padding: 3px 8px;
+  font-size: 14px;
+  border: none;
+  color: white !important;
+}
+.btn-secondary-custom:focus {
+  background: linear-gradient(
+    to right,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  border-radius: 8px;
+  padding: 3px 8px;
+  font-size: 14px;
+  border: 1px solid var(--text-primary);
+  color: white !important;
+}
 
-  ion-card-header {
-    padding: 12px;
-    
-    ion-card-title {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+/* loader */
 
-    ion-card-subtitle {
-      color: var(--text-secondary);
-      font-size: 12px;
-    }
-  }
-} 
+.spinner-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.24); /* Adjust opacity as needed */
+}
+
+.spinner-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
