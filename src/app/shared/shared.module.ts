@@ -30,10 +30,20 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
+  checkmarkCircleOutline,
+  checkmarkDoneCircleOutline,
+  contract,
+  expand,
   eyeOffOutline,
   eyeOutline,
+  heart,
+  heartOutline,
   lockClosedOutline,
   mailOutline,
+  pauseCircle,
+  playCircle,
+  volumeHigh,
+  volumeMute,
 } from 'ionicons/icons';
 
 // Add the icons you want to use
@@ -42,6 +52,16 @@ addIcons({
   lockClosedOutline,
   eyeOutline,
   eyeOffOutline,
+  playCircle,
+  pauseCircle,
+  volumeHigh,
+  volumeMute,
+  expand,
+  contract,
+  checkmarkCircleOutline,
+  heart,
+  heartOutline,
+  checkmarkDoneCircleOutline,
 });
 @NgModule({
   declarations: [],

@@ -1,0 +1,38 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {
+  IonContent,
+  IonHeader,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular/standalone';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ApiService } from 'src/app/services/api.service';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-recipe-categories',
+  templateUrl: './recipe-categories.page.html',
+  styleUrls: ['./recipe-categories.page.scss'],
+  standalone: true,
+  imports: [SharedModule],
+})
+export class RecipeCategoriesPage implements OnInit {
+  recipeList: any[] = [];
+  constructor(private apiService: ApiService, private router: Router) {}
+
+  ngOnInit() {
+    this.loadRecipe();
+  }
+
+  loadRecipe() {
+    this.apiService.getRecipeCategory().subscribe((data: any) => {
+      this.recipeList = data;
+    });
+  }
+
+  navigateToRecipe(title: string) {
+    this.router.navigate(['/recipes'], { queryParams: { category: title } });
+  }
+}

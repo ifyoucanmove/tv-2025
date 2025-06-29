@@ -1,0 +1,44 @@
+[
+    {   "id":"1",
+        "title":"Straight Leg Ab Kick With Bands",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/STRAIGHT+LEG+AB+KICK+WITH+BANDS+INTERMEDIATE.gif",
+        "reps":"2",
+        "sets":"3",
+        "rest":"2 seconds"
+    },
+    { "id":"2",
+        "title":"Straight Leg Ab Kick With Bands",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/STRAIGHT+LEG+AB+KICK+WITH+BANDS+INTERMEDIATE.gif",
+        "reps":"2",
+        "sets":"3",
+        "rest":"2 seconds"
+    },
+    { "id":"3",
+        "title":"Rainbow Crunch With Bands",
+        "image":"https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/RAINBOW+CRUNCH+WITH+BANDS+INTERMEDIATE.gif",
+        "reps":"2",
+        "sets":"3",
+        "rest":"2 seconds"
+    },
+     {   "id":"4",
+    "title":"Straight Leg Ab Kick With Bands",
+    "image":"https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/STRAIGHT+LEG+AB+KICK+WITH+BANDS+INTERMEDIATE.gif",
+    "reps":"2",
+    "sets":"3",
+    "rest":"2 seconds"
+},
+{ "id":"5",
+    "title":"Straight Leg Ab Kick With Bands",
+    "image":"https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/STRAIGHT+LEG+AB+KICK+WITH+BANDS+INTERMEDIATE.gif",
+    "reps":"2",
+    "sets":"3",
+    "rest":"2 seconds"
+},
+{ "id":"6",
+    "title":"Rainbow Crunch With Bands",
+    "image":"https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/RAINBOW+CRUNCH+WITH+BANDS+INTERMEDIATE.gif",
+    "reps":"2",
+    "sets":"3",
+    "rest":"2 seconds"
+}
+ ]

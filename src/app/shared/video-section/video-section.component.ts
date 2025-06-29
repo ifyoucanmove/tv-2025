@@ -19,14 +19,10 @@ import { VideoPlayerComponent } from '../video-player/video-player.component';
 })
 export class VideoSectionComponent implements OnInit {
   // Input signals
-  /*  videos = input<any>([]);
+  videos = input<any>([]);
   title = input<string>('Videos');
   tabindex = input<number>(0);
-  showViewAll = input<boolean>(true); */
-  @Input() title: string = 'Top Videos';
-  @Input() tabindex: number = 0;
-  @Input() videos: any[] = [];
-  @Input() showViewAll: boolean = true;
+  showViewAll = input<boolean>(true);
   // Output signals
   viewAllClick = output<void>();
   videoClick = output<any>();
@@ -48,7 +44,9 @@ export class VideoSectionComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       //  this.videoContainer = document.querySelector('.video-grid');
-      this.videoContainer = document.getElementById(this.title) as HTMLElement;
+      this.videoContainer = document.getElementById(
+        this.title()
+      ) as HTMLElement;
     }, 0);
   }
   checkEnterFocus(): void {

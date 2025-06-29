@@ -1,0 +1,35 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Favorites</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+     @for (item of favoriteList; track $index) {
+    <ion-col size="3">
+      @if(item.type !== 'combo'){
+      <ion-card class="custom-card"  id="favorite-card-{{$index}}"
+      [tabindex]="0">
+      <img [src]="item.image" alt="video image">
+      <ion-card-header>
+        <ion-card-title>{{item.title}}</ion-card-title>
+        <ion-card-subtitle>{{item.duration}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    }
+    @if(item.type == 'combo'){
+      <ion-card class="custom-card"  id="favorite-card-{{$index}}"
+      [tabindex]="0">
+      <ion-card-header>
+        <ion-card-title>{{item.title}}</ion-card-title>
+        <div class="d-flex justify-content-between">
+        <ion-card-subtitle>{{item.duration}}</ion-card-subtitle>
+        <span class="text-danger">{{item.type}}</span>
+        </div>
+      </ion-card-header>
+    </ion-card>
+    }
+    </ion-col>
+  }
+    </ion-row>
+  </ion-grid>

@@ -1,0 +1,15 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Recipe Category</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+     @for (recipe of recipeList; track $index) {
+    <ion-col size="3" >
+      <ion-card (click)="navigateToRecipe(recipe.title)" id="recipe-card-{{$index}}">
+       <ion-img [src]="recipe.image"></ion-img>
+      </ion-card>
+    </ion-col>}
+  </ion-row>
+</ion-grid>>

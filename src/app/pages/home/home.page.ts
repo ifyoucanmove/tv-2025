@@ -35,9 +35,6 @@ export class HomePage implements OnInit {
   fitness: any[] = [];
   challenges: any[] = [];
 
-  //  programs = signal<any[]>([]);
-  //  topVideosTitle = signal<string>('Top Videos');
-  // tabIndex = signal<number>(1);
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -47,7 +44,6 @@ export class HomePage implements OnInit {
   ngOnInit(): void {
     this.apiService.getProgrammList().subscribe((res: any) => {
       this.programs = res;
-      console.log(this.programs, 'pp');
     });
 
     this.apiService.getChallengeList().subscribe((res: any) => {

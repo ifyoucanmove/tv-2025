@@ -1,3 +1,40 @@
-<p>
-  video-player works!
-</p>
+<div class="video-player-container" (mousemove)="onMouseMove()">
+  <video #videoElement
+         class="video-element"
+         [src]="video.video"
+         [poster]="video.image"
+         (click)="togglePlay()">
+  </video>
+
+  <div class="controls-overlay" [class.hidden]="!showControls">
+    <div class="progress-container" (click)="onProgressBarClick($event)">
+      <div class="progress-bar" [style.width.%]="currentTime" #progressBar></div>
+    </div>
+
+    <div class="controls-container" #controlsContainer>
+      <div class="main-controls">
+        <button class="control-button" (click)="togglePlay()" id="play-btn-player">
+          <ion-icon [name]="isPlaying ? 'pause-circle' : 'play-circle'" size="large"></ion-icon>
+        </button>
+
+        <div class="time-display">
+          {{formatTime(currentTime)}} / {{formatTime(duration)}}
+        </div>
+
+      <!--   <div class="volume-control">
+          <button class="control-button" (click)="toggleMute()">
+            <ion-icon [name]="isMuted ? 'volume-mute' : 'volume-high'" size="large"></ion-icon>
+          </button>
+          <div class="volume-slider" (click)="onVolumeSliderClick($event)">
+            <div class="volume-progress" [style.width.%]="volume * 100"></div>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="video-info">
+        <h3>{{video?.title}}</h3>
+        <p>{{video?.description}}</p>
+      </div>
+    </div>
+  </div>
+</div> 

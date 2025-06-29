@@ -1,0 +1,47 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Challenge Detail</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <app-video-section
+        [videos]="challenges"
+        [title]="'Week 1'"
+        (viewAllClick)="onViewAllChallenges()"
+        (videoClick)="onVideoClick($event)">
+      </app-video-section>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <app-video-section
+        [videos]="challenges"
+        [title]="'Week 2'"
+        (viewAllClick)="onViewAllChallenges()"
+        (videoClick)="onVideoClick($event)">
+      </app-video-section>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <app-video-section
+        [videos]="challenges"
+        [title]="'Week 3'"
+        (viewAllClick)="onViewAllChallenges()"
+        (videoClick)="onVideoClick($event)">
+      </app-video-section>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <app-video-section
+        [videos]="challenges"
+        [title]="'Week 4'"
+        (viewAllClick)="onViewAllChallenges()"
+        (videoClick)="onVideoClick($event)">
+      </app-video-section>
+    </ion-col>
+  </ion-row>
+</ion-grid>

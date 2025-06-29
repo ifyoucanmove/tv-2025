@@ -1,13 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>main</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">main</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+
+  <mat-sidenav-container class="sidenav-container">
+    <!-- Sidebar -->
+    <mat-sidenav #sidenav [mode]="'side'" [opened]="true"
+      [fixedInViewport]="true" class="dark-theme" [class.expanded]="!isCollapsed"
+      (mouseenter)="checkEnterFocus()" (mouseleave)="isCollapsed = true">
+      <app-header [isCollapsed]="isCollapsed"></app-header> 
+      
+      <mat-nav-list>
+        @for (item of menuItems; track $index) {
+        <a mat-list-item  [routerLink]="item.route" routerLinkActive="active"
+          (keydown)="onSideNavKeyDown($event)"
+          (focus)="checkEnterFocus()"
+          tabindex="0">
+          <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+          <span matListItemTitle [class.visible]="!isCollapsed">{{item.label}}</span>
+        </a>}
+        <a mat-list-item (click)="logout()" class="logout-btn"
+          [class.focused]="focusedItem?.label === 'logout'"
+          (keydown)="onSideNavKeyDown($event)" tabindex="0">
+          <mat-icon matListItemIcon>logout</mat-icon>
+          <span matListItemTitle [class.visible]="!isCollapsed">Logout</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <!-- Main Content -->
+    <mat-sidenav-content class="dark-theme" style="margin-left: 0px;">
+      <div class="content" [class.content-collapsed]="isCollapsed" tabindex="-1" #mainContent>
+      <!--   <button mat-icon-button (click)="toggleSidenav()" style="z-index: 99;">
+          <mat-icon>{{ isCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
+        </button> -->
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  </ion-content>
+  

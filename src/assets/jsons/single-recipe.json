@@ -1,0 +1,16 @@
+[
+    {   "id":"1",
+        "title":"Green Pea, Potato &  Goat’s Cheese Frittata &  Goat’s Cheese Frittata",
+        "image":"https://ifyoucanmove.com/assets/images/live/recipe/5ingredient.webp",
+        "description":"Lunch",
+        "ingredients":["4 baby potatoes, thinly sliced"],
+        "directions":["Heat a 7.8-inch (20cm) ovenproof non-stick frying pan over medium heat, greased with the olive oil. Cook the sliced potato 5-6 minutes on each side or until lightly golden and tender. Transfer to a plate and set aside"]
+    },
+    { "id":"2",
+        "title":"Protein Pancakes",
+        "image":"https://ifyoucanmove.com/assets/images/live/recipe/5ingredient.webp",
+        "description":"Breakfast",
+        "ingredients":["1 cup (225g) cottage cheese","1 cup (80g) rolled oats"],
+        "directions":["Place all ingredients into a blender or food processor and blitz together until smooth"]
+    }
+ ]

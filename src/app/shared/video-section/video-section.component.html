@@ -1,15 +1,15 @@
 <div class="videos-section"   >
   <div class="section-header">
-    <h2>{{title}}</h2>
+    <h2>{{title()}}</h2>
   
   </div>
   
-  <div class="video-grid" [id]="title" (focus)="checkEnterFocus()"  >
-    @for (video of videos; track $index) {
+  <div class="video-grid" [id]="title()" (focus)="checkEnterFocus()"  >
+    @for (video of videos(); track $index) {
     <ion-card class="video-card"
       (focus)="onCardFocus($index)"  [id]="'videocard' + $index" 
       (blur)="onCardBlur()"
-      [tabindex]="tabindex"
+      [tabindex]="tabindex()"
       (click)="onVideoClick(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>

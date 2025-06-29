@@ -1,0 +1,38 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="6">
+      <h1 class="text-white text-start p-0">{{title}}</h1>
+    </ion-col>
+    <ion-col size="6">  
+      <button class="btn-icon-primary"  tabindex="0">
+        <ion-icon name="heart-outline"></ion-icon>
+        <span>Add to Favorites</span>
+      </button>
+    <!--   <button class="btn-icon-primary"  tabindex="0">
+        <ion-icon name="heart"></ion-icon>
+        <span>Added to Favorites</span>
+      </button> -->
+      <button class="btn-icon-primary ms-2" routerLink="/play-combo"  tabindex="0">
+        <span>Start Combo</span>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    @for (item of comboDetailsList; track $index) {
+    <ion-col size="3" >
+   
+     <ion-card class="custom-card"  id="combo-details-card-{{$index}}"
+      [tabindex]="0">
+      <img [src]="item.image" alt="image">
+      <ion-card-header>
+        <ion-card-title>{{item.title}}</ion-card-title>
+        <div class="d-flex justify-content-between">
+        <ion-card-subtitle>{{item.reps}} reps</ion-card-subtitle>
+        <span class="text-danger fs-12">{{item.rest}}</span>
+        </div>
+      </ion-card-header>
+    </ion-card>
+    
+    </ion-col>}
+    </ion-row>
+  </ion-grid>

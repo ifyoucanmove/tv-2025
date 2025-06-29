@@ -1,20 +1,182 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent } from '@ionic/angular/standalone';
+import { Router, RouterModule } from '@angular/router';
+import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { AuthService } from '../../services/auth.service';
+import { HeaderPage } from 'src/app/shared/header/header.page';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    IonContent,
+    RouterModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatCardModule,
+    CommonModule,
+    FormsModule,
+    HeaderPage,
+  ],
 })
 export class MainPage implements OnInit {
+  isCollapsed = false;
+  focusedItem: any = null;
+  @ViewChild('sidenav') sidenav!: MatSidenav;
+  @ViewChild('mainContent') mainContent!: ElementRef;
 
-  constructor() { }
+  menuItems = [
+    { icon: 'home', label: 'Home', route: '/home' },
+    { icon: 'search', label: 'Search', route: '/search' },
+    { icon: 'favorite', label: 'Favorites', route: '/favorites' },
+    { icon: 'fastfood', label: 'Recipe', route: '/recipe-category' },
+    { icon: 'donut_small', label: 'Byo Combo', route: '/byo-combo' },
+    { icon: 'person', label: 'Profile', route: '/update-profile' },
+    { icon: 'settings', label: 'Settings', route: '/settings' },
+  ];
 
-  ngOnInit() {
+  focusingMap: any = {
+    home: { route: 'home', elements: ['videocard0'] },
+    search: { route: 'search', elements: ['search-input'] },
+    favorites: { route: 'favourite', elements: ['favorite-card-0'] },
+    'recipe-category': {
+      route: 'recipe-category',
+      elements: ['recipe-card-0'],
+    },
+    'recipe-list': { route: 'recipes', elements: ['recipe-list-0'] },
+    'single-recipe': { route: 'single-recipe', elements: ['recipe-single-0'] },
+    'byo-combo': { route: 'byo-combo', elements: ['byo-card-0'] },
+    'user-made-combo': {
+      route: 'user-made-combo',
+      elements: ['user-made-card-0'],
+    },
+    'combo-details': {
+      route: 'combo-details',
+      elements: ['combo-details-card-0'],
+    },
+    'update-profile': {
+      route: 'update-profile',
+      elements: ['update-profile-input'],
+    },
+    settings: { route: 'settings', elements: ['settings-input'] },
+  };
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {}
+
+  logout(): void {
+    // this.authService.logout();
+    this.router.navigate(['/sign-in']);
   }
 
+  toggleSidenav(): void {
+    this.isCollapsed = !this.isCollapsed;
+    if (this.sidenav) {
+      if (this.isCollapsed) {
+        this.sidenav.close();
+      } else {
+        this.sidenav.open();
+      }
+    }
+  }
+
+  onSideNavKeyDown(event: KeyboardEvent): void {
+    if (event.key === 'ArrowRight') {
+      this.isCollapsed = true;
+      event.preventDefault();
+      // Focus the main content area
+      if (this.mainContent) {
+        const firstFocusableElement =
+          this.mainContent.nativeElement.querySelector(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+          );
+        if (firstFocusableElement) {
+          firstFocusableElement.focus();
+        } else {
+          this.mainContent.nativeElement.focus();
+        }
+      }
+      const currentUrl = this.router.url;
+      if (currentUrl.includes(this.focusingMap['home'].route)) {
+        let ele = document.getElementById(this.focusingMap['home'].elements[0]);
+        if (ele) {
+          ele.focus();
+        }
+      }
+      if (currentUrl.includes(this.focusingMap['recipe-category'].route)) {
+        let ele = document.getElementById(
+          this.focusingMap['recipe-category'].elements[0]
+        );
+        if (ele) {
+          ele.focus();
+        }
+      }
+      if (currentUrl.includes(this.focusingMap['recipe-list'].route)) {
+        let ele = document.getElementById(
+          this.focusingMap['recipe-list'].elements[0]
+        );
+        if (ele) {
+          ele.focus();
+        }
+      }
+      if (currentUrl.includes(this.focusingMap['single-recipe'].route)) {
+        let ele = document.getElementById(
+          this.focusingMap['single-recipe'].elements[0]
+        );
+        if (ele) {
+          ele.focus();
+        }
+      }
+      if (currentUrl.includes(this.focusingMap['favorites'].route)) {
+        let ele = document.getElementById(
+          this.focusingMap['favorites'].elements[0]
+        );
+        if (ele) {
+          ele.focus();
+        }
+      }
+      if (currentUrl.includes(this.focusingMap['byo-combo'].route)) {
+        let ele = document.getElementById(
+          this.focusingMap['byo-combo'].elements[0]
+        );
+        if (ele) {
+          ele.focus();
+        }
+      }
+      if (currentUrl.includes(this.focusingMap['user-made-combo'].route)) {
+        let ele = document.getElementById(
+          this.focusingMap['user-made-combo'].elements[0]
+        );
+        if (ele) {
+          ele.focus();
+        }
+      }
+      if (currentUrl.includes(this.focusingMap['combo-details'].route)) {
+        let ele = document.getElementById(
+          this.focusingMap['combo-details'].elements[0]
+        );
+        if (ele) {
+          ele.focus();
+        }
+      }
+    }
+  }
+  checkEnterFocus(): void {
+    if (this.isCollapsed) {
+      this.isCollapsed = false;
+    }
+  }
 }

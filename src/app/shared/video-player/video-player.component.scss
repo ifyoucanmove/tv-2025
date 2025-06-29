@@ -1,0 +1,126 @@
+.video-player-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  overflow: hidden;
+
+  .video-element {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .controls-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    padding: 20px;
+    transition: opacity 0.3s ease;
+
+    &.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+
+  .progress-container {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: height 0.2s ease;
+
+    &:hover {
+      height: 8px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--accent-primary);
+      transition: width 0.1s linear;
+    }
+  }
+
+  .controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .main-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .control-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    ion-icon {
+      font-size: 32px;
+      color: white;
+    }
+  }
+
+  .time-display {
+    color: white;
+    font-size: 14px;
+    min-width: 100px;
+  }
+
+  .volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .volume-slider {
+      width: 100px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 2px;
+      cursor: pointer;
+      position: relative;
+
+      .volume-progress {
+        height: 100%;
+        background: var(--accent-primary);
+        border-radius: 2px;
+      }
+    }
+  }
+
+  .video-info {
+    color: white;
+    margin-top: 10px;
+
+    h3 {
+      font-size: 18px;
+      margin: 0 0 5px 0;
+    }
+
+    p {
+      font-size: 14px;
+      margin: 0;
+      opacity: 0.8;
+    }
+  }
+}
