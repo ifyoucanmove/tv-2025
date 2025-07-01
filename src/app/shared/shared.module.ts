@@ -32,16 +32,19 @@ import { addIcons } from 'ionicons';
 import {
   checkmarkCircleOutline,
   checkmarkDoneCircleOutline,
+  close,
   contract,
   expand,
   eyeOffOutline,
   eyeOutline,
+  happy,
   heart,
   heartOutline,
   lockClosedOutline,
   mailOutline,
   pauseCircle,
   playCircle,
+  sad,
   volumeHigh,
   volumeMute,
 } from 'ionicons/icons';
@@ -62,6 +65,9 @@ addIcons({
   heart,
   heartOutline,
   checkmarkDoneCircleOutline,
+  sad,
+  happy,
+  close,
 });
 @NgModule({
   declarations: [],

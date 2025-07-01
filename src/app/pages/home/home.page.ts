@@ -1,11 +1,5 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-} from '@ionic/angular/standalone';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -95,7 +89,12 @@ export class HomePage implements OnInit {
   }
 
   onCardFitness(video: any): void {
-    this.router.navigate(['/fitness-detail']);
+    this.router.navigate(['/fitness-detail/'], {
+      queryParams: {
+        id: video.id,
+        day: video.days[0].day,
+      },
+    });
   }
   onViewAllWorkouts(): void {
     this.router.navigate(['/workout-list']);

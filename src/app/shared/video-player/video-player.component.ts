@@ -18,8 +18,8 @@ import { SharedModule } from '../shared.module';
   imports: [CommonModule, SharedModule],
 })
 export class VideoPlayerComponent implements OnInit {
-  @Input() video: any;
-  // video = input<any>({});
+  //@Input() video: any;
+  video: any = input<any>({});
   @ViewChild('videoElement') videoElement!: ElementRef;
   @ViewChild('progressBar') progressBar!: ElementRef;
   @ViewChild('controlsContainer') controlsContainer!: ElementRef;

@@ -4,7 +4,7 @@ import { authGuard } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'signin',
     pathMatch: 'full',
   },
   {
@@ -104,6 +104,41 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/byo/user-made-combo/user-made-combo.page').then(
             (m) => m.UserMadeComboPage
+          ),
+      },
+      {
+        path: 'program/:id',
+        loadComponent: () =>
+          import('./pages/fitness/fitness-day-list/fitness-day-list.page').then(
+            (m) => m.FitnessDayListPage
+          ),
+      },
+      {
+        path: 'fitness-detail',
+        loadComponent: () =>
+          import('./pages/fitness/fitness-detail/fitness-detail.page').then(
+            (m) => m.FitnessDetailPage
+          ),
+      },
+      {
+        path: 'fitness-list',
+        loadComponent: () =>
+          import('./pages/fitness/fitness-list/fitness-list.page').then(
+            (m) => m.FitnessListPage
+          ),
+      },
+      {
+        path: 'update-profile',
+        loadComponent: () =>
+          import('./pages/update-profile/update-profile.page').then(
+            (m) => m.UpdateProfilePage
+          ),
+      },
+      {
+        path: 'workout-list',
+        loadComponent: () =>
+          import('./pages/workouts/workout-list/workout-list.page').then(
+            (m) => m.WorkoutListPage
           ),
       },
     ],

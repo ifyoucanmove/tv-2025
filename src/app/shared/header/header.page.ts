@@ -1,12 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular/standalone';
+import { Component, input, Input, OnInit } from '@angular/core';
 import { SharedModule } from '../shared.module';
 
 @Component({
@@ -17,7 +9,7 @@ import { SharedModule } from '../shared.module';
   imports: [SharedModule],
 })
 export class HeaderPage implements OnInit {
-  @Input() isCollapsed: boolean = false;
+  isCollapsed = input<boolean>(false);
   constructor() {}
 
   ngOnInit() {}

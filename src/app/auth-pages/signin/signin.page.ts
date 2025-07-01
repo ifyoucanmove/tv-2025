@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertController } from '@ionic/angular/standalone';
+import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
@@ -27,6 +28,7 @@ export class SigninPage implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     public authService: AuthService,
+    public apiService: ApiService,
     public commonService: CommonService,
     public alertController: AlertController
   ) {
@@ -49,14 +51,35 @@ export class SigninPage implements OnInit {
   }
 
   async onSubmit() {
+    let data = this.loginForm.value;
     if (this.loginForm.valid) {
       this.commonService.showLoader();
       try {
-        this.authService.userRequestData.set({
+        /*  this.authService.userRequestData.set({
           email: this.loginForm.value.email,
           password: this.loginForm.value.password,
-        });
-        this.router.navigate(['/home']);
+        }); */
+        if (data.email == 'qa2@mentorem.com' && data.password == 'mentorem') {
+          this.apiService
+            .getUserResponse(this.loginForm.value)
+            ?.subscribe((res: any) => {
+              console.log(res, 'res');
+              if (res) {
+                this.authService.userData.set(res);
+                this.router.navigate(['/home']);
+              } else {
+                this.errorMessage =
+                  'Incorrect email or password. Please try again.';
+                this.showAlert();
+              }
+            });
+        } else {
+          this.errorMessage = 'Incorrect email or password. Please try again.';
+          this.showAlert();
+          this.commonService.hideLoader();
+          return;
+        }
+        // this.router.navigate(['/home']);
         /*    if (res.user.uid) {
           await this.authService.getUserDataPromise(res.user.uid);
           this.router.navigate(['/home']);

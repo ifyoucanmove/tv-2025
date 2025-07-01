@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
-import { ModalController } from '@ionic/angular/standalone';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { ModalController } from '@ionic/angular/standalone';
+import { ApiService } from 'src/app/services/api.service';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
-import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
 @Component({
-  selector: 'app-challenge-video-details',
-  templateUrl: './challenge-video-details.page.html',
-  styleUrls: ['./challenge-video-details.page.scss'],
+  selector: 'app-fitness-detail',
+  templateUrl: './fitness-detail.page.html',
+  styleUrls: ['./fitness-detail.page.scss'],
   standalone: true,
-  imports: [SharedModule, VideoSectionComponent],
+  imports: [SharedModule],
 })
-export class ChallengeVideoDetailsPage implements OnInit {
-  videoId: any;
-  videoData: any;
+export class FitnessDetailPage implements OnInit {
+  fitnessId: any;
+  day: any;
+  fitnessData: any;
   programs: any[] = [];
   constructor(
     private route: ActivatedRoute,
@@ -25,14 +25,14 @@ export class ChallengeVideoDetailsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params: any) => {
-      this.videoId = params.id;
+    this.route.queryParams.subscribe((params: any) => {
+      this.fitnessId = params.id;
+      this.day = params.day;
       this.loadVideo();
     });
   }
   ngAfterViewInit(): void {
     setTimeout(() => {
-      console.log('ngAfterViewInit');
       let ele = document.getElementById('play-btn');
       if (ele) {
         ele.focus();
@@ -51,10 +51,15 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   loadVideo() {
-    this.apiService.getProgrammList().subscribe((data: any) => {
+    this.apiService.getFitnessList().subscribe((data: any) => {
       this.programs = data;
-      this.videoData = data.find((item: any) => item.id === this.videoId);
-      console.log(this.videoData);
+      this.fitnessData = this.programs.find(
+        (item: any) => item.id === this.fitnessId
+      );
+      this.fitnessData = this.fitnessData.days.find(
+        (item: any) => item.day === this.day
+      );
+      console.log(this.fitnessData);
     });
   }
   async openMoodTracker() {

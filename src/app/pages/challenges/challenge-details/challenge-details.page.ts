@@ -1,12 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular/standalone';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';

@@ -1,0 +1,41 @@
+@if(fitnessData){
+  <div class="hero-background" [ngStyle]="{'background-image': 'url(' + fitnessData.image + ')'}"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-title">
+      <h1>{{ fitnessData.title }}</h1>
+     <!--  <div class="hero-description">
+        {{ fitnessData.description }}
+      </div> -->
+      <div class="hero-actions">
+        <button class="btn-icon-primary ion"  id="play-btn" tabindex="0" (click)="onVideoOpen(fitnessData)">
+          <ion-icon name="play" slot="start"></ion-icon>
+          <span>Play</span>
+        </button>
+      </div>
+      <div class="d-flex gap-2 mt-3 flex-wrap">
+         <button class="btn-icon-primary"  tabindex="0" (click)="openMoodTracker()">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span>Mark as Complete</span>
+        </button>
+        <button class="btn-icon-primary"  tabindex="0">
+          <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+          <span>Completed</span>
+        </button>
+        <button class="btn-icon-primary"  tabindex="0">
+          <ion-icon name="heart-outline"></ion-icon>
+          
+          <span>Add to Favorites</span>
+        </button>
+        <button class="btn-icon-primary"  tabindex="0">
+          <ion-icon name="heart"></ion-icon>
+          <span>Added to Favorites</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  }
+  
+
+  

@@ -39,4 +39,7 @@ export class ApiService {
   getUserMadeCombo() {
     return this.http.get('assets/jsons/user-made.json');
   }
+  getUserResponse(data: any) {
+    return this.http.get('assets/jsons/user-response.json');
+  }
 }

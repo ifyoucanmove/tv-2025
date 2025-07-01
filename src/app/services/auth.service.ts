@@ -30,6 +30,7 @@ export class AuthService {
   auth: Auth = inject(Auth);
   router: Router = inject(Router);
   userRequestData = signal<any>(null);
+  userData = signal<any>(null);
   constructor() {
     /*   authState(this.auth).subscribe(async (user) => {
       console.log(user, 'yser');

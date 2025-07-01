@@ -8,14 +8,13 @@ import {
   output,
 } from '@angular/core';
 import { SharedModule } from '../shared.module';
-import { VideoPlayerComponent } from '../video-player/video-player.component';
 
 @Component({
   selector: 'app-video-section',
   templateUrl: './video-section.component.html',
   styleUrls: ['./video-section.component.scss'],
   standalone: true,
-  imports: [CommonModule, SharedModule, VideoPlayerComponent],
+  imports: [CommonModule, SharedModule],
 })
 export class VideoSectionComponent implements OnInit {
   // Input signals

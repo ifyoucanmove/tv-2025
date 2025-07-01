@@ -1,0 +1,60 @@
+<ion-grid>
+    <ion-row>
+        <ion-col size="8" class="mx-auto">
+            <ion-card class="custom-card">
+                <ion-card-content>  
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="profile-img">
+                            <img src="assets/images/profile.jpg"  alt="profile">
+                          </div>
+                    </div>
+                    <ion-item>
+                        <ion-label>Full Name</ion-label>
+                        <ion-text>{{profileData.fullName}}</ion-text>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Email</ion-label>
+                        <ion-text>{{profileData.email}}</ion-text>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label>Phone</ion-label>
+                        <ion-text>{{profileData.phone}}</ion-text>
+                    </ion-item>
+                    
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+
+        <ion-col size="8" class="mx-auto">  
+            <h2 class="text-white">Subscription Billing</h2>
+            <ion-card class="custom-card">
+                <ion-card-header>
+                    <ion-card-title  style="height: auto;">
+                        YOUR MOVE SUBSCRIPTION HAS BEEN CANCELLED
+                    </ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <ul>
+                    <li>Cancellation will be effective at the end of you current billing period on 05/25/2024</li>
+                    <li>Restart Your subscription anytime. We will remember your favourites and viewing preferences.</li>
+                  </ul>
+                  <button class="btn btn-primary-custom">
+                    Cancel Subscription
+                </button>
+                <button class="btn btn-primary-custom mx-2">
+                    Restart Subscription
+                </button>
+                </ion-card-content>
+            </ion-card>
+
+            <div class="mt-5">
+              <p class="text-white">
+                Subscription Status: <span class="tag">Active</span> - set to cancel on 05/25/2024
+              </p>  
+              <p class="text-white">
+                Plan: <span class="tag">Basic</span>
+              </p>
+            </div>
+        </ion-col>
+    </ion-row>
+</ion-grid>
