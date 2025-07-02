@@ -15,6 +15,12 @@ export class ApiService {
   getChallengeList() {
     return this.http.get('assets/jsons/challenge.json');
   }
+  getCoolDownList() {
+    return this.http.get('assets/jsons/cool-down.json');
+  }
+  getWarmUpList() {
+    return this.http.get('assets/jsons/warm-up.json');
+  }
   getFitnessList() {
     return this.http.get('assets/jsons/fitness.json');
   }
@@ -39,7 +45,26 @@ export class ApiService {
   getUserMadeCombo() {
     return this.http.get('assets/jsons/user-made.json');
   }
+  getPreMadeCombo() {
+    return this.http.get('assets/jsons/pre-made.json');
+  }
+  getComboFeed() {
+    return this.http.get('assets/jsons/combo-feed.json');
+  }
+  getMyCombo() {
+    return this.http.get('assets/jsons/my-combo.json');
+  }
+  getComboFeedDetails() {
+    return this.http.get<any>('assets/jsons/combo-feed-details.json');
+  }
   getUserResponse(data: any) {
     return this.http.get('assets/jsons/user-response.json');
+  }
+
+  getPlayCombo() {
+    return this.http.get('assets/jsons/play-combo.json');
+  }
+  getFitnessDashboardDetails() {
+    return this.http.get('assets/jsons/fitness-dashboard-details.json');
   }
 }

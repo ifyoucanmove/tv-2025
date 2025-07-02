@@ -23,4 +23,7 @@ export class ChallengeListPage implements OnInit {
       this.challengeList = data;
     });
   }
+  onNavigate() {
+    this.router.navigate(['/challenge-detail']);
+  }
 }

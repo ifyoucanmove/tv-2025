@@ -1,4 +1,9 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -12,18 +17,25 @@ import { CommonService } from 'src/app/services/common.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { AlertController } from '@ionic/angular/standalone';
 import { ApiService } from 'src/app/services/api.service';
+import { QrCodeComponent } from 'ng-qrcode';
+import { Subscription } from 'rxjs';
+import { serverTimestamp } from '@angular/fire/firestore';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.page.html',
   styleUrls: ['./signin.page.scss'],
   standalone: true,
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  imports: [SharedModule, ReactiveFormsModule],
+  imports: [SharedModule, QrCodeComponent, ReactiveFormsModule],
 })
-export class SigninPage implements OnInit {
+export class SigninPage implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   showPassword: boolean = false;
   errorMessage!: string;
+
+  qrLink: any;
+  qrValue: any;
+  tokenSubscription: Subscription = new Subscription();
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -38,8 +50,48 @@ export class SigninPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.qrValue = this.generateRandomAlphanumeric();
+    this.qrLink = `https://ifyoucanmove.com/tvauth/${this.qrValue}?type=signin`;
+    this.addCodeTvAuth();
+    this.tokenSubscription = this.authService
+      .getTvAuthDataById(this.qrValue)
+      .subscribe((res) => {
+        console.log(res, 'getQrDataById');
+        if (res?.token) {
+          // this.loginWithToken(res.token);
+          this.commonService.showToast('Login with token', '');
+        }
+      });
+  }
 
+  async addCodeTvAuth() {
+    try {
+      let res = this.authService.addOrUpdateTvAuthQRCollection(this.qrValue, {
+        code: this.qrValue,
+        timestamp: serverTimestamp(),
+      });
+    } catch (err) {
+      console.log(err, 'err');
+    }
+  }
+  ngOnDestroy(): void {
+    this.tokenSubscription.unsubscribe();
+  }
+  generateRandomAlphanumeric() {
+    // Define the character set (0-9 and A-Z)
+    const characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    // Generate a random 6-character string
+    let result = '';
+    for (let i = 0; i < 6; i++) {
+      // Get a random index from the characters string
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      result += characters[randomIndex];
+    }
+
+    return result;
+  }
   togglePassword() {
     this.showPassword = !this.showPassword;
   }

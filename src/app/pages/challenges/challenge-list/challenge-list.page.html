@@ -7,7 +7,7 @@
   <ion-row>
      @for (video of challengeList; track $index) {
     <ion-col size="4" >
-      <ion-card class="custom-card"  
+      <ion-card class="custom-card"  (click)="onNavigate()"
       [tabindex]="0">
       <img [src]="video.image" alt="video image">
       <ion-card-header>

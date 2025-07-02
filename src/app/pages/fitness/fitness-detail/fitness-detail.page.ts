@@ -5,12 +5,13 @@ import { ModalController } from '@ionic/angular/standalone';
 import { ApiService } from 'src/app/services/api.service';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
+import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
 @Component({
   selector: 'app-fitness-detail',
   templateUrl: './fitness-detail.page.html',
   styleUrls: ['./fitness-detail.page.scss'],
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, VideoSectionComponent],
 })
 export class FitnessDetailPage implements OnInit {
   fitnessId: any;
@@ -100,6 +101,6 @@ export class FitnessDetailPage implements OnInit {
   }
 
   async onVideoClick(video: any) {
-    this.router.navigate(['/challenge-video-details/', video.id]);
+    this.router.navigate(['/program/', video.id]);
   }
 }

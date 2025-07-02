@@ -1,0 +1,47 @@
+<ion-grid>
+  <ion-row class="mb-3">
+    <ion-col size="6">
+      <div class="d-flex align-items-center ">
+         <h1 class="text-white text-start p-0 mt-0">{{comboDetails?.title}}</h1>
+        <ion-icon name="share-social-outline" (click)="share()" class="ms-3 text-white"></ion-icon>
+      </div>
+      <p class="text-white">
+        {{comboDetails?.description}}
+      </p>
+     
+   
+       <div class="d-flex align-items-center">
+         <p class="text-white me-3">{{comboDetails?.workouts}}<br>
+        {{comboDetails?.enrollments}}</p>  
+       <div class="d-flex align-items-center text-white">
+              <ion-avatar>
+                <img [src]="comboDetails?.image" />
+              </ion-avatar>
+               <ion-text class="ms-2">Combo Author {{comboDetails?.author}}</ion-text>
+            </div>
+            </div>
+
+    </ion-col>
+    <ion-col size="6">  
+      <button class="btn-icon-primary ms-2" routerLink="/play-combo"  tabindex="0">
+        <span>Play</span>
+      </button>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    @for (item of comboDetails?.list; track $index) {
+    <ion-col size="3" >
+     <ion-card class="custom-card"  id="combo-details-card-{{$index}}"
+      [tabindex]="0">
+      <img [src]="item.image" alt="image">
+      <ion-card-header>
+        <ion-card-title>{{item.title}}</ion-card-title>
+        <div class="d-flex justify-content-between">
+        <ion-card-subtitle>{{item.reps}} reps</ion-card-subtitle>
+        <span class="text-danger fs-12">{{item.rest}}</span>
+        </div>
+      </ion-card-header>
+    </ion-card>
+    </ion-col>}
+    </ion-row>
+  </ion-grid>

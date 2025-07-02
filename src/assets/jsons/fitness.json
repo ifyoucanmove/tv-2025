@@ -1,115 +1,126 @@
 [
-    {    "id": "1",
-        "title":"Stacked By Summer - Class Edition",
-        "duration":"40 Mins",
-        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
-        "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png",
-        "video":"https://s3.amazonaws.com/move_cloudfront/MOVE+Videos+2021/THE+100+ABs.mp4",
-        "days":[
-                {
-                    "id":"1",
-                    "day":"1",
-                    "title":"Day 1",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"2",
-                    "day":"2",
-                    "title":"Day 2",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"3",
-                    "day":"3",
-                    "title":"Day 3",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"4",
-                    "day":"4",
-                    "title":"Day 4",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"5",
-                    "day":"5",
-                    "title":"Day 5",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"6",
-                    "day":"6",
-                    "title":"Day 6",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"7",
-                    "day":"7",
-                    "title":"Day 7",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"8",
-                    "day":"8",
-                    "title":"Day 8",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"9",
-                    "day":"9",
-                    "title":"Day 9",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                },
-                {
-                    "id":"10",
-                    "day":"10",
-                    "title":"Day 10",
-                    "subtitle":"Kettlebell Circuits",
-                    "duration":"34m 59s",
-                    "desc":"Full body kettle bell circuit workout",
-                    "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
-                }
-            ]
-    },
-    {"id": "2",
-        "title":"Move & Tone",
-        "duration":"40 Mins",
-        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
-        "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Move%26Tone.png",
-        "video":"https://s3.amazonaws.com/move_cloudfront/MOVE+Videos+2021/THE+100+ABs.mp4"
-    },
-    {"id": "3",
-        "title":"Move & Dance Program",
-        "duration":"40 Mins",
-        "desc":"Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
-        "image":"https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Move%26Dance.png",
-        "video":"https://s3.amazonaws.com/move_cloudfront/MOVE+Videos+2021/THE+100+ABs.mp4"
-    }
+  {
+    "id": "1",
+    "title": "Stacked By Summer - Class Edition",
+    "duration": "40 Mins",
+    "desc": "Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+    "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png",
+    "video": "https://s3.amazonaws.com/move_cloudfront/MOVE+Videos+2021/THE+100+ABs.mp4",
+    "days": [
+      {
+        "id": "1",
+        "day": "1",
+        "title": "Day 1",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "2",
+        "day": "2",
+        "title": "Day 2",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "3",
+        "day": "3",
+        "title": "Day 3",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "4",
+        "day": "4",
+        "title": "Day 4",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "5",
+        "day": "5",
+        "title": "Day 5",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "6",
+        "day": "6",
+        "title": "Day 6",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "7",
+        "day": "7",
+        "title": "Day 7",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "8",
+        "day": "8",
+        "title": "Day 8",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "9",
+        "day": "9",
+        "title": "Day 9",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      },
+      {
+        "id": "10",
+        "day": "10",
+        "title": "Day 10",
+        "subtitle": "Kettlebell Circuits",
+        "duration": "34m 59s",
+        "desc": "Full body kettle bell circuit workout",
+        "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Cardio_Program_Thumb.png"
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Move & Tone",
+    "duration": "40 Mins",
+    "desc": "Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+    "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Move%26Tone.png",
+    "video": "https://s3.amazonaws.com/move_cloudfront/MOVE+Videos+2021/THE+100+ABs.mp4"
+  },
+  {
+    "id": "3",
+    "title": "Move & Dance Program",
+    "duration": "40 Mins",
+    "desc": "Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+    "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Move%26Dance.png",
+    "video": "https://s3.amazonaws.com/move_cloudfront/MOVE+Videos+2021/THE+100+ABs.mp4"
+  },
+  {
+    "id": "4",
+    "title": "Kick and Step Program",
+    "duration": "40 Mins",
+    "desc": "Summer is here and we're ready to stack! Join us for a fun-filled class where we'll be creating a beautiful stacked bracelet. This is a great project for beginners and experienced crafters alike. We'll be using a variety of beads and charms to create a unique and stylish bracelet. All materials will be provided, so you can just show up and have fun! We'll be meeting at the studio on Saturday, June 15th at 10:00 AM. Hope to see you there!",
+    "image": "https://s3.amazonaws.com/move_cloudfront/Program_thumbnails/Kick%26Step.png",
+    "video": "https://s3.amazonaws.com/move_cloudfront/MOVE+Videos+2021/THE+100+ABs.mp4"
+  }
 ]

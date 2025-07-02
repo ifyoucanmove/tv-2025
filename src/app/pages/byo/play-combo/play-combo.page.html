@@ -1,0 +1,134 @@
+<audio #bellAudio controls class="audio">
+  <source src="assets/bell.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+<audio #buzzerAudio controls class="audio">
+  <source src="assets/buzzer.mp3" type="audio/mpeg" />
+  Your browser does not support the audio element.
+</audio>
+
+<ion-grid>
+  <ion-row>
+    <ion-col size="12" style="min-height: 550px;" >
+      <div *ngIf="isComboDownloading || isResting" class="empty-div">
+        <div class="spinner-div" *ngIf="isComboDownloading">
+          <h1 class="text-h">Preparing your byo combo</h1>
+        </div>
+        <div class="time-div" *ngIf="isResting">
+          <h1 class="text-h">{{ restingText }}</h1>
+          <h1 class="number-h">{{ timeLeft }}</h1>
+        </div>
+      </div>
+      <div
+        class="empty-div"
+        *ngIf="!isComboDownloading && !isPlayingCombo && !isResting && !isPaused"
+      >
+        <div class="ready-div">
+          <h1 class="text-h">Combo is ready to play</h1>
+           <ion-button
+            class="primary-outline-button"
+            fill="outline"
+            tabindex="0"
+            id="playbtn"
+            (click)="playComboFromScratch()"
+            >Play Combo</ion-button
+          > 
+           <!-- <button class="btn-icon-primary" id="playbtn"
+            (click)="playComboFromScratch()"  tabindex="0">
+        <span>Play Combo</span>
+      </button> -->
+        </div>
+        <div class="d-flex">
+          <ion-button
+            *ngIf="comboDetails.durationMinutes"
+            class="primary-outline-button"
+            fill="outline"
+            (click)="onMarkCompleteClicked()"
+          >
+            <span *ngIf="!isCompleted">Complete</span>
+            <div *ngIf="isCompleted" class="d-flex align-items-center">
+              <ion-icon
+                name="checkmark-outline"
+                class="text-success"
+              ></ion-icon>
+              <span
+                >Completed
+                <span *ngIf="getWatchCount() > 1"
+                  >({{ getWatchCount() }})</span
+                ></span
+              >
+            </div>
+          </ion-button>
+          <div class="mx-2  d-flex align-items-center">
+            <ion-icon name="happy-outline" tabindex="0" style="font-size: 25px;"
+            *ngIf="checkMoodIconVisible()"
+            (click)="openMoodList()"></ion-icon>
+            </div>
+        </div>
+      </div>
+      <div class="empty-div" *ngIf="isPaused">
+        <div class="ready-div">
+          <h1 class="text-h">Combo is paused</h1>
+          <ion-button
+            class="primary-outline-button"
+            tabindex="0"
+            id="playAgainbtn"
+            fill="outline"
+            (click)="playCombo()"
+            >Play
+          </ion-button>
+        </div>
+      </div>
+      <div
+        class="image-div"
+        *ngIf="isPlayingCombo && !isResting && !isPaused"
+      >
+        <div class="play-head-view">
+          <h6 class="my-0" *ngIf="comboDetails.isRepeating">
+            Combo reps {{comboLeft + 1}} of {{comboDetails.repeatCount ||
+            1}}
+          </h6>
+         
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <h5 class="mb-0 mt-1 text-white">
+            {{ combo.title ? combo.title : combo.postDetails.title }}
+          </h5>
+          <div class="d-flex align-items-center">
+            <h6 class="time mt-1 text-white me-2" *ngIf="timeOrReps === 'time'">
+              Time Left : {{ timeLeft }}
+            </h6>
+            <h6 class="time mt-1 text-white me-2" *ngIf="timeOrReps === 'reps'">
+              Reps Left : {{ timeLeft }}
+            </h6>
+          <!--   <ion-button
+            class="primary-outline-button ms-2"
+            tabindex="0"
+            id="pausebtn"
+            fill="outline"
+            (click)="pauseCombo()"
+            >Pause</ion-button
+          > -->
+          <button class="btn-icon-primary" id="pausebtn"
+            (click)="pauseCombo()"  tabindex="0">
+        <span>Pause</span>
+      </button>
+          </div>
+        </div>
+
+        <ion-img *ngIf="isImageShowing" height="550" [src]="imageSrc" />
+        <div *ngIf="timeOrReps === 'reps'">
+          <img 
+            (load)="gifLoading = true; onImageLoad()"
+            [hidden]="!gifLoading"
+            #load
+            id="img-gif"
+            [attr.rel:animated_src]="imageSrc"
+            rel:auto_play="0"
+            [src]="imageSrc"
+          />
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid> 

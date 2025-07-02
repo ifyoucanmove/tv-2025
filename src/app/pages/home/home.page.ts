@@ -63,14 +63,13 @@ export class HomePage implements OnInit {
     };
   }
   recentlyCompleted(): void {
-    console.log('recentlyCompleted');
-    alert('recentlyCompleted');
+    this.router.navigate(['/fitness-dashboard-details']);
   }
 
   onViewAllVideo(): void {
     // Handle view all click
     console.log('View all clicked');
-    this.router.navigate(['/challenge-list']);
+    this.router.navigate(['/video-list']);
   }
 
   async onVideoClick(video: any) {
@@ -89,17 +88,18 @@ export class HomePage implements OnInit {
   }
 
   onCardFitness(video: any): void {
-    this.router.navigate(['/fitness-detail/'], {
+    /*   this.router.navigate(['/fitness-detail/'], {
       queryParams: {
         id: video.id,
         day: video.days[0].day,
       },
-    });
+    }); */
+    this.router.navigate(['/program/', video.id]);
   }
   onViewAllWorkouts(): void {
     this.router.navigate(['/workout-list']);
   }
   onCardWorkouts(video: any): void {
-    this.router.navigate(['/workout-detail']);
+    this.router.navigate(['/workout-day/', video.id]);
   }
 }

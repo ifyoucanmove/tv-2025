@@ -6,9 +6,9 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from '@angular/fire/auth';
-import { doc, docData, Firestore } from '@angular/fire/firestore';
+import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 
 // Define the type for your request payload
 interface SignInData {
@@ -98,5 +98,26 @@ export class AuthService {
   isAuthenticated() {
     let data = localStorage.getItem('user');
     return data ? true : false;
+  }
+
+  getTvAuthDataById(docId: string): Observable<any> {
+    const docRef = doc(this.firestore, 'tvqrauth', docId);
+    return docData(docRef, { idField: 'id' });
+  }
+  addOrUpdateTvAuthQRCollection(docId: string, data: any) {
+    // Reference to the specific document
+    const docRef = doc(this.firestore, 'tvqrauth', docId);
+
+    // Use setDoc for adding a new document or completely replacing an existing one
+    // Use merge: true to update only the provided fields without overwriting the entire document
+    return setDoc(docRef, data, { merge: true })
+      .then(() => {
+        console.log(`Document with ID ${docId} successfully added/updated`);
+        return docId;
+      })
+      .catch((error) => {
+        console.error('Error adding/updating document: ', error);
+        throw error;
+      });
   }
 }

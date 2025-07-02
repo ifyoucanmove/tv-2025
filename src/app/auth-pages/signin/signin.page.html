@@ -2,14 +2,16 @@
   <div class="sign-in-container">
     <div class="sign-in-card">
       <div class="qr-section">
-       <!--  <div class="qr-container">
-          <qr-code 
-          value="Hello world!" 
-          size="250"  [margin]="1"
-          errorCorrectionLevel="Q">
-          </qr-code>
-          <p class="qr-text">Scan QR Code to Sign In</p>
-        </div> -->
+       <div style="height: 370px" class="d-flex align-items-center justify-content-center" >
+          <div>
+          <div class="qrcode d-flex justify-content-center">
+            <qr-code [value]="qrLink" 
+            size="200"  [margin]="1"  lightColor="#ffff"
+            errorCorrectionLevel="Q" />
+          </div>
+          <h3 class="text-center text-white fs-18">Use Camera App to Scan QR</h3>
+          <h5 class="text-center mt-1 text-white fs-14">Click on the link generated to redirect to Ifyoucanmove Web App</h5>
+      </div>  </div>
       </div>
       
       <div class="form-section">

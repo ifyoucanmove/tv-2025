@@ -4,7 +4,7 @@
   </div>
   
   <div class="video-grid" [id]="title()" (focus)="checkEnterFocus()"  >
-    @for (video of videos(); track $index) {
+    @for (video of videos().slice(0,3); track $index) {
     <ion-card class="video-card"
       (focus)="onCardFocus($index)" [id]="'videocard' + $index" 
       (blur)="onCardBlur()"

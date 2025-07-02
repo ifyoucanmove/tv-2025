@@ -1,0 +1,16 @@
+<div class="modal-content p-3" >
+  <div class="modal-header d-flex justify-content-between">
+    <h5 class="modal-title text-white mt-0">Confirm</h5>
+  </div>
+
+  <div class="modal-body">
+    <p class="text-white my-3">
+ {{message}}
+    </p>
+   
+    </div>
+      <div class="modal-footer">
+    <button class="btn btn-secondary-custom me-3" (click)="onSubmit('yes')">Yes</button>
+    <button class="btn btn-secondary-custom" (click)="onSubmit('no')">No</button>
+  </div>
+</div>

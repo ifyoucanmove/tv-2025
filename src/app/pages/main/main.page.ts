@@ -11,7 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { AuthService } from '../../services/auth.service';
 import { HeaderPage } from 'src/app/shared/header/header.page';
-
+import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
+import { ModalController } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -73,13 +74,18 @@ export class MainPage implements OnInit {
     settings: { route: 'settings', elements: ['settings-input'] },
   };
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private modalCtrl: ModalController,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   logout(): void {
+    this.logoutConfirm();
     // this.authService.logout();
-    this.router.navigate(['/sign-in']);
+    ///
   }
 
   toggleSidenav(): void {
@@ -177,6 +183,21 @@ export class MainPage implements OnInit {
   checkEnterFocus(): void {
     if (this.isCollapsed) {
       this.isCollapsed = false;
+    }
+  }
+
+  async logoutConfirm() {
+    const modal = await this.modalCtrl.create({
+      component: ConfirmPopupComponent,
+      cssClass: 'confirm-modal',
+      componentProps: { message: 'Are you sure you want to logout?' },
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data == 'yes') {
+      this.router.navigate(['/signin']);
     }
   }
 }

@@ -1,10 +1,12 @@
 <ion-grid>
-  <ion-row>
+  <ion-row class="mb-3">
     <ion-col size="6">
       <h1 class="text-white text-start p-0 mt-0">{{title}}</h1>
+    <p class="text-white">Repitition : 3 times</p>
+     <p class="text-white"> Rest Time : 15 seconds  </p>
     </ion-col>
     <ion-col size="6">  
-      <button class="btn-icon-primary"  tabindex="0">
+      <button class="btn-icon-primary me-2"  tabindex="0">
         <ion-icon name="heart-outline"></ion-icon>
         <span>Add to Favorites</span>
       </button>
@@ -12,9 +14,13 @@
         <ion-icon name="heart"></ion-icon>
         <span>Added to Favorites</span>
       </button> -->
-      <button class="btn-icon-primary ms-2" routerLink="/play-combo"  tabindex="0">
+      <button class="btn-icon-primary me-2" routerLink="/play-combo"  tabindex="0">
         <span>Start Combo</span>
       </button>
+        <button class="btn-icon-primary me-2"  tabindex="0" (click)="openMoodTracker()">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <span>Mark as Complete</span>
+      </button> 
     </ion-col>
   </ion-row>
   <ion-row>

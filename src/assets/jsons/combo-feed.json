@@ -1,0 +1,46 @@
+[
+  {
+    "id": "1",
+    "image": "https://ifyoucanmove.com/assets/images/user-made-combo.png",
+    "title": "Shoulders",
+    "route": "/user-made-combo",
+    "type": "Advanced",
+    "workouts": "8 Workouts",
+    "enrollments": "11 Enrollments",
+    "duration": "22 Minutes",
+    "author": "Keaira LaShae"
+  },
+  {
+    "id": "2",
+    "image": "https://ifyoucanmove.com/assets/images/user-made-combo.png",
+    "title": "Booty",
+    "route": "/user-made-combo",
+    "type": "Advanced",
+    "workouts": "8 Workouts",
+    "enrollments": "11 Enrollments",
+    "duration": "22 Minutes",
+    "author": "Keaira LaShae"
+  },
+  {
+    "id": "3",
+    "image": "https://ifyoucanmove.com/assets/images/user-made-combo.png",
+    "title": "Heal my core",
+    "route": "/user-made-combo",
+    "type": "Advanced",
+    "workouts": "8 Workouts",
+    "enrollments": "11 Enrollments",
+    "duration": "22 Minutes",
+    "author": "Keaira LaShae"
+  },
+  {
+    "id": "4",
+    "image": "https://ifyoucanmove.com/assets/images/user-made-combo.png",
+    "title": "Mobility Mix",
+    "route": "/user-made-combo",
+    "type": "Advanced",
+    "workouts": "8 Workouts",
+    "enrollments": "11 Enrollments",
+    "duration": "22 Minutes",
+    "author": "Keaira LaShae"
+  }
+]

@@ -19,6 +19,8 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from './environments/environment';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { logInterceptor } from './app/services/log-interceptor';
+import { NgxIndexedDBService, provideIndexedDb } from 'ngx-indexed-db';
+import { dbConfig } from './app/db.config';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -30,5 +32,7 @@ bootstrapApplication(AppComponent, {
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
+    provideIndexedDb(dbConfig),
+    NgxIndexedDBService,
   ],
 });

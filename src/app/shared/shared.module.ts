@@ -27,6 +27,12 @@ import {
   IonImg,
   IonList,
   IonInput,
+  IonTab,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  IonAvatar,
+  IonBadge,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -40,11 +46,17 @@ import {
   happy,
   heart,
   heartOutline,
+  home,
   lockClosedOutline,
   mailOutline,
   pauseCircle,
+  person,
+  play,
   playCircle,
+  pricetag,
   sad,
+  shareSocialOutline,
+  timeOutline,
   volumeHigh,
   volumeMute,
 } from 'ionicons/icons';
@@ -68,6 +80,12 @@ addIcons({
   sad,
   happy,
   close,
+  pricetag,
+  person,
+  home,
+  timeOutline,
+  shareSocialOutline,
+  play,
 });
 @NgModule({
   declarations: [],
@@ -100,6 +118,12 @@ addIcons({
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
+    IonTab,
+    IonTabBar,
+    IonTabButton,
+    IonTabs,
+    IonAvatar,
+    IonBadge,
   ],
   exports: [
     IonContent,
@@ -129,6 +153,12 @@ addIcons({
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
+    IonTab,
+    IonTabBar,
+    IonTabButton,
+    IonTabs,
+    IonAvatar,
+    IonBadge,
   ],
 })
 export class SharedModule {}

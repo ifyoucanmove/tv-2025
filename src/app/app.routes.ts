@@ -114,6 +114,27 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'pre-made-combo',
+        loadComponent: () =>
+          import(
+            './pages/byo/pre-made/pre-made-combo/pre-made-combo.page'
+          ).then((m) => m.PreMadeComboPage),
+      },
+      {
+        path: 'combo-dashboard',
+        loadComponent: () =>
+          import(
+            './pages/byo/combos-dashboard/combo-dashboard/combo-dashboard.page'
+          ).then((m) => m.ComboDashboardPage),
+      },
+      {
+        path: 'combo-feed-details',
+        loadComponent: () =>
+          import(
+            './pages/byo/combos-dashboard/combo-feed-details/combo-feed-details.page'
+          ).then((m) => m.ComboFeedDetailsPage),
+      },
+      {
         path: 'fitness-detail',
         loadComponent: () =>
           import('./pages/fitness/fitness-detail/fitness-detail.page').then(
@@ -139,6 +160,41 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./pages/workouts/workout-list/workout-list.page').then(
             (m) => m.WorkoutListPage
+          ),
+      },
+      {
+        path: 'fitness-dashboard-details',
+        loadComponent: () =>
+          import(
+            './pages/fitness/fitness-dashboard-details/fitness-dashboard-details.page'
+          ).then((m) => m.FitnessDashboardDetailsPage),
+      },
+      {
+        path: 'video-list',
+        loadComponent: () =>
+          import('./pages/video-list/video-list.page').then(
+            (m) => m.VideoListPage
+          ),
+      },
+      {
+        path: 'workout-day/:id',
+        loadComponent: () =>
+          import(
+            './pages/workouts/workout-day-list/workout-day-list.page'
+          ).then((m) => m.WorkoutDayListPage),
+      },
+      {
+        path: 'workout-detail',
+        loadComponent: () =>
+          import('./pages/workouts/workout-detail/workout-detail.page').then(
+            (m) => m.WorkoutDetailPage
+          ),
+      },
+      {
+        path: 'search',
+        loadComponent: () =>
+          import('./pages/search-page/search-page.page').then(
+            (m) => m.SearchPagePage
           ),
       },
     ],

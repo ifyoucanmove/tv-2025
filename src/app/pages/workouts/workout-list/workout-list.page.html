@@ -7,7 +7,7 @@
   <ion-row>
     @for (video of workoutList; track $index) {
     <ion-col size="3">
-      <ion-card class="custom-card"  
+      <ion-card class="custom-card"   (click)="navigateToFitness(video)"
       [tabindex]="0">
       <img [src]="video.image" alt="video image">
       <ion-card-header>

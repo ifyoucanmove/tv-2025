@@ -11,10 +11,12 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './challenge-details.page.html',
   styleUrls: ['./challenge-details.page.scss'],
   standalone: true,
-  imports: [SharedModule, VideoSectionComponent],
+  imports: [SharedModule],
 })
 export class ChallengeDetailsPage implements OnInit {
   challenges: any[] = [];
+  coolDownList: any[] = [];
+  warmUpList: any[] = [];
   constructor(
     private apiService: ApiService,
     private modalController: ModalController,
@@ -29,9 +31,15 @@ export class ChallengeDetailsPage implements OnInit {
     this.apiService.getChallengeList().subscribe((data: any) => {
       this.challenges = data;
     });
+    this.apiService.getCoolDownList().subscribe((data: any) => {
+      this.coolDownList = data;
+    });
+    this.apiService.getWarmUpList().subscribe((data: any) => {
+      this.warmUpList = data;
+    });
   }
-  onViewAllChallenges(): void {
-    this.router.navigate(['/challenge-list']);
+  onClickChallenges(video: any): void {
+    this.router.navigate(['/challenge-video-details/', video.id]);
   }
   async onVideoClick(video: any) {
     try {

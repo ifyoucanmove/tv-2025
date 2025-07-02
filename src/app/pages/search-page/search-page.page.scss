@@ -1,0 +1,21 @@
+.search-box {
+  display: flex;
+  border-radius: 0px;
+  background-color: var(--background-secondary);
+  color: var(--text-primary);
+  .search-input {
+    border-radius: 0px;
+    background-color: var(--background-secondary);
+    color: var(--text-primary);
+    border: none;
+    padding: 15px;
+  }
+  .search-input:focus {
+    box-shadow: none;
+  }
+  .search-btn {
+    border-radius: 0px;
+    background-color: var(--background-elevated);
+    color: var(--accent-primary);
+  }
+}

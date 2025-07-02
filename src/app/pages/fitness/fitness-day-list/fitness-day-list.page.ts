@@ -31,7 +31,7 @@ export class FitnessDayListPage implements OnInit {
     });
   }
   navigateToFitness(item: any) {
-    this.router.navigate(['/fitness-details'], {
+    this.router.navigate(['/fitness-detail'], {
       queryParams: { id: item.id, day: item.day },
     });
   }

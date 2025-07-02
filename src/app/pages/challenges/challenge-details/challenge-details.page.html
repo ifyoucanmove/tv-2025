@@ -1,4 +1,52 @@
 <ion-grid>
+<ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Cool Down</h1>
+    </ion-col>
+  </ion-row>
+<ion-row>
+    <ion-col size="12">
+      
+        <div class="video-grid"   >
+    @for (video of coolDownList; track $index) {
+    <ion-card class="video-card"
+       [id]="'videocard' + $index" 
+      
+      (click)="onClickChallenges(video)">
+      <img [src]="video.image" alt="video image">
+      <ion-card-header>
+        <ion-card-title>{{video.title}}</ion-card-title>
+        <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>}
+  </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Warm Up</h1>
+    </ion-col>
+  </ion-row>
+<ion-row>
+    <ion-col size="12">
+      
+        <div class="video-grid"   >
+    @for (video of warmUpList; track $index) {
+    <ion-card class="video-card"
+       [id]="'videocard' + $index" 
+      
+      (click)="onClickChallenges(video)">
+      <img [src]="video.image" alt="video image">
+      <ion-card-header>
+        <ion-card-title>{{video.title}}</ion-card-title>
+        <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>}
+  </div>
+    </ion-col>
+  </ion-row>
+
   <ion-row>
     <ion-col size="12">
       <h1 class="text-white">Challenge Detail</h1>
@@ -6,42 +54,56 @@
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <app-video-section
-        [videos]="challenges"
-        [title]="'Week 1'"
-        (viewAllClick)="onViewAllChallenges()"
-        (videoClick)="onVideoClick($event)">
-      </app-video-section>
+      <h4 class="text-white">Week 1</h4>
+        <div class="video-grid"   >
+    @for (video of challenges; track $index) {
+    <ion-card class="video-card"
+       [id]="'videocard' + $index" 
+      
+      (click)="onClickChallenges(video)">
+      <img [src]="video.image" alt="video image">
+      <ion-card-header>
+        <ion-card-title>{{video.title}}</ion-card-title>
+        <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>}
+  </div>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <app-video-section
-        [videos]="challenges"
-        [title]="'Week 2'"
-        (viewAllClick)="onViewAllChallenges()"
-        (videoClick)="onVideoClick($event)">
-      </app-video-section>
+            <h4 class="text-white">Week 2</h4>
+       <div class="video-grid"   >
+    @for (video of challenges; track $index) {
+    <ion-card class="video-card"
+       [id]="'videocard' + $index" 
+      
+      (click)="onClickChallenges(video)">
+      <img [src]="video.image" alt="video image">
+      <ion-card-header>
+        <ion-card-title>{{video.title}}</ion-card-title>
+        <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>}
+  </div>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col size="12">
-      <app-video-section
-        [videos]="challenges"
-        [title]="'Week 3'"
-        (viewAllClick)="onViewAllChallenges()"
-        (videoClick)="onVideoClick($event)">
-      </app-video-section>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col size="12">
-      <app-video-section
-        [videos]="challenges"
-        [title]="'Week 4'"
-        (viewAllClick)="onViewAllChallenges()"
-        (videoClick)="onVideoClick($event)">
-      </app-video-section>
+        <h4 class="text-white">Week 3</h4>
+      <div class="video-grid"   >
+    @for (video of challenges; track $index) {
+    <ion-card class="video-card"
+       [id]="'videocard' + $index" 
+      
+      (click)="onClickChallenges(video)">
+      <img [src]="video.image" alt="video image">
+      <ion-card-header>
+        <ion-card-title>{{video.title}}</ion-card-title>
+        <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>}
+  </div>
     </ion-col>
   </ion-row>
 </ion-grid>

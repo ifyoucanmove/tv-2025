@@ -1,0 +1,27 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Dashboard Details</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    @for (item of data; track $index) {
+      <ion-col size="12">
+        <div class="d-flex justify-content-between ">
+          <h3  class="text-white">{{item.week}}</h3>
+          <h3  class="text-white">{{item.days}} Days</h3>
+          <h3  class="text-white">{{item.minutes}} Minutes</h3>
+        </div>
+        @for (item of item.list; track $index) {
+          <ion-card class="fitness-card mt-3">
+            <div class="d-flex justify-content-between align-items-center">
+               <ion-text class="text-white">{{item.date}}</ion-text>
+          <h4 class="text-white">{{item.title}}</h4>
+          <h6 class="text-white">{{item.duration}}</h6>
+            </div>
+          </ion-card>
+        }
+      </ion-col>
+    }
+    </ion-row>
+  </ion-grid>

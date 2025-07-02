@@ -1,0 +1,109 @@
+.empty-div {
+  /*  background-color: #172436; */
+  background-color: #caced4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85%;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+  p {
+    text-align: center;
+  }
+  h3 {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .text-h {
+    background-image: rgb(117, 94, 255);
+    background-image: linear-gradient(
+      230deg,
+      rgba(117, 94, 255, 1) 0%,
+      rgba(228, 225, 0, 1) 100%
+    );
+    font-size: 40px;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 50px !important;
+    text-align: center;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .spinner-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .ready-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    button {
+      background: white;
+      padding: 5px 24px;
+      color: black;
+      font-size: 18px;
+      border-radius: 23px;
+      outline: none;
+      border: none;
+      width: inherit;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      :focus {
+        outline: none;
+      }
+    }
+  }
+
+  .time-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .number-h {
+      color: white;
+      font-weight: 900;
+      font-size: 160px;
+      margin: 20px 0;
+      line-height: 150px;
+    }
+  }
+}
+
+.audio {
+  display: none;
+}
+
+.play-head-view {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pause-btn {
+  background: #00ccbd;
+  padding: 5px 24px;
+  color: black;
+  font-size: 18px;
+  border-radius: 23px;
+  outline: none;
+  border: none;
+  width: inherit;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  :focus {
+    outline: none;
+  }
+}
+
+.img-size {
+  width: 24px;
+  height: 24px;
+}

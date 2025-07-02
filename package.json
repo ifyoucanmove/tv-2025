@@ -32,8 +32,12 @@
     "@capacitor/status-bar": "7.0.1",
     "@ionic/angular": "^8.0.0",
     "ionicons": "^7.0.0",
+    "libgif": "^0.0.3",
+    "ng-qrcode": "^20.0.0",
+    "ngx-indexed-db": "^21.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "wsgif": "^1.0.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

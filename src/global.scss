@@ -215,6 +215,9 @@
     }
   }
 }
+.confirm-modal {
+  --height: auto;
+}
 .mood-tracker-modal {
   --height: 80%;
   --width: 90vw;
@@ -242,4 +245,59 @@
   &::part(backdrop) {
     background: rgba(0, 0, 0, 0.9);
   }
+}
+
+ion-tab {
+  --background: var(--background-primary);
+  --color: var(--text-primary);
+  background-color: var(--background-primary) !important;
+  color: var(--text-primary) !important;
+}
+ion-tab-bar {
+  background-color: var(--background-primary) !important;
+  color: var(--text-primary) !important;
+}
+ion-tab-button {
+  --background: var(--background-primary);
+  --color: var(--text-primary);
+  background-color: var(--background-primary) !important;
+  color: var(--text-primary) !important;
+}
+.tab-selected {
+  color: var(--accent-primary) !important;
+}
+ion-badge {
+  border-radius: 30px;
+  width: fit-content;
+  padding: 2px 10px;
+}
+
+/* scroll-pen Style */
+.scroll-pen::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll-pen::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-pen::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+}
+
+.scroll-pen::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.jsgif {
+  width: 100% !important;
+}
+canvas {
+  width: 100% !important;
+}
+.jsgif_toolbar {
+  // width: 300px !important;
+  // height: 300px !important;
+  min-width: 100% !important;
 }

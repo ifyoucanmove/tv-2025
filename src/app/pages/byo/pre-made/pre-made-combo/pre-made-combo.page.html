@@ -1,0 +1,24 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Pre Made Combo</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    @for (item of preMadeComboList; track $index) {
+    <ion-col size="3" (click)="navigateToComboDetails(item)">
+   
+     <ion-card class="custom-card"  id="user-made-card-{{$index}}"
+      [tabindex]="0">
+      <ion-card-header>
+        <ion-card-title>{{item.title}}</ion-card-title>
+        <div class="d-flex justify-content-between">
+        <ion-card-subtitle>{{item.duration}}</ion-card-subtitle>
+        <span class="text-danger">{{item.type}}</span>
+        </div>
+      </ion-card-header>
+    </ion-card>
+    
+    </ion-col>}
+    </ion-row>
+  </ion-grid>

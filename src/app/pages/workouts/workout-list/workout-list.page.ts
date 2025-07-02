@@ -23,4 +23,8 @@ export class WorkoutListPage implements OnInit {
       this.workoutList = data;
     });
   }
+
+  navigateToFitness(item: any) {
+    this.router.navigate(['/workout-day/', item.id]);
+  }
 }
