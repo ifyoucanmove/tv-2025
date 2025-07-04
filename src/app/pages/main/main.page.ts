@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { AuthService } from '../../services/auth.service';
 import { HeaderPage } from 'src/app/shared/header/header.page';
 import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
-import { ModalController } from '@ionic/angular/standalone';
+import { ModalController,NavController  } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -77,7 +77,7 @@ export class MainPage implements OnInit {
   constructor(
     private authService: AuthService,
     private modalCtrl: ModalController,
-    private router: Router
+    private router: Router,private navCtrl: NavController
   ) {}
 
   ngOnInit(): void {}
@@ -199,5 +199,8 @@ export class MainPage implements OnInit {
     if (data == 'yes') {
       this.router.navigate(['/signin']);
     }
+  }
+ navigateTo(route: string) {
+    this.navCtrl.navigateForward(route);
   }
 }

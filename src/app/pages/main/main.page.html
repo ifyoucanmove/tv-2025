@@ -7,9 +7,10 @@
       (mouseenter)="checkEnterFocus()" (mouseleave)="isCollapsed = true">
       <app-header [isCollapsed]="isCollapsed"></app-header> 
       
-      <mat-nav-list>
+      <mat-nav-list> <!-- (click)="navigateTo(item.route)" -->
         @for (item of menuItems; track $index) {
-        <a mat-list-item  [routerLink]="item.route" routerLinkActive="active"
+        <a mat-list-item   [routerLink]="item.route" routerLinkActive="active"
+          
           (keydown)="onSideNavKeyDown($event)"
           (focus)="checkEnterFocus()"
           tabindex="0">
