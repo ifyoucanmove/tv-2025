@@ -59,12 +59,14 @@ export class SigninPage implements OnInit, OnDestroy {
       .subscribe((res) => {
         console.log(res, 'getQrDataById');
         if (res?.token) {
-          // this.loginWithToken(res.token);
+          this.loginWithToken(res.token);
           this.commonService.showToast('Login with token', '');
         }
       });
   }
-
+  loginWithToken(token: any) {
+    this.authService.loginWithCustomToken(token);
+  }
   async addCodeTvAuth() {
     try {
       let res = this.authService.addOrUpdateTvAuthQRCollection(this.qrValue, {
@@ -103,39 +105,18 @@ export class SigninPage implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    let data = this.loginForm.value;
     if (this.loginForm.valid) {
       this.commonService.showLoader();
       try {
-        /*  this.authService.userRequestData.set({
-          email: this.loginForm.value.email,
-          password: this.loginForm.value.password,
-        }); */
-        if (data.email == 'qa2@mentorem.com' && data.password == 'mentorem') {
-          this.apiService
-            .getUserResponse(this.loginForm.value)
-            ?.subscribe((res: any) => {
-              console.log(res, 'res');
-              if (res) {
-                this.authService.userData.set(res);
-                this.router.navigate(['/home']);
-              } else {
-                this.errorMessage =
-                  'Incorrect email or password. Please try again.';
-                this.showAlert();
-              }
-            });
-        } else {
-          this.errorMessage = 'Incorrect email or password. Please try again.';
-          this.showAlert();
-          this.commonService.hideLoader();
-          return;
+        let res = await this.authService.signin(
+          this.loginForm.value.email,
+          this.loginForm.value.password
+        );
+        if(res){
+this.router.navigate(['/home']);
+       this.authService.userData.set(res);
         }
-        // this.router.navigate(['/home']);
-        /*    if (res.user.uid) {
-          await this.authService.getUserDataPromise(res.user.uid);
-          this.router.navigate(['/home']);
-        } */
+        
         this.commonService.hideLoader();
       } catch (error: any) {
         console.log(error, 'err');
@@ -177,4 +158,6 @@ export class SigninPage implements OnInit, OnDestroy {
       alert.dismiss();
     }, 3000);
   }
+
+  
 }

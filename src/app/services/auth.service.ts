@@ -3,6 +3,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import {
   Auth,
   authState,
+  signInWithCustomToken,
   signInWithEmailAndPassword,
   signOut,
 } from '@angular/fire/auth';
@@ -63,6 +64,10 @@ export class AuthService {
     };
   });
 
+  signin(email:any,password:any){
+   return signInWithEmailAndPassword(this.auth,email,password)
+  }
+
   logout() {
     signOut(this.auth).then((res) => {
       localStorage.clear();
@@ -120,4 +125,27 @@ export class AuthService {
         throw error;
       });
   }
+
+   loginWithCustomToken(token: string) {
+      signInWithCustomToken(this.auth, token)
+        .then((userCredential) => {
+          // Successful login
+          const user = userCredential.user;
+  
+          // Log the activity
+         /*  this.logService.logActivity('web', userEmail, 'login-from-mobile', 
+            `User redirected from app and moved to ${page}`); */
+  
+          // Navigate to the specified page
+          this.router.navigate(['/home']);
+        })
+        .catch((error) => {
+          // Handle login error
+          console.error('Custom token login error:', error);
+  
+          // Log the error
+          /* this.logService.logError('web', userEmail, 'login-from-mobile', 
+            `Auto Login Using token failed: ${error.message}`); */
+        });
+    }
 }
