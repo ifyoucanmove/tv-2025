@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,12 +9,13 @@ import { Router } from '@angular/router';
 export class ApiService {
   router: Router = inject(Router);
   http: HttpClient = inject(HttpClient);
+  apiBaseUrl = environment.apiBaseUrl;
 
   getProgrammList() {
     return this.http.get('assets/jsons/list.json');
   }
   getChallengeList() {
-    return this.http.get('assets/jsons/challenge.json');
+    return this.http.get(`${this.apiBaseUrl}/challenges`);
   }
   getCoolDownList() {
     return this.http.get('assets/jsons/cool-down.json');
@@ -66,5 +68,10 @@ export class ApiService {
   }
   getFitnessDashboardDetails() {
     return this.http.get('assets/jsons/fitness-dashboard-details.json');
+  }
+
+  // Example: Real API call using the base URL
+  getSomethingFromApi() {
+    return this.http.get(`${this.apiBaseUrl}/your-endpoint`);
   }
 }

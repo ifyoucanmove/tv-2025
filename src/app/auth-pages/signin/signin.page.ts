@@ -60,7 +60,7 @@ export class SigninPage implements OnInit, OnDestroy {
         console.log(res, 'getQrDataById');
         if (res?.token) {
           this.loginWithToken(res.token);
-          this.commonService.showToast('Login with token', '');
+          this.tokenSubscription.unsubscribe(); // Unsubscribe after getting the token
         }
       });
   }

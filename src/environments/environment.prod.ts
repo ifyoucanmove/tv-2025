@@ -23,4 +23,5 @@ export const environment = {
     "HXd0Z31iYFRYTicCl19tChUR1L72", // ray
     "fQhcfS7h1mdozCoqfBULx9UIgbX2", // rasheek
   ],
+  apiBaseUrl: 'https://us-central1-ifyoucanmove-dev.cloudfunctions.net/api',
 };
