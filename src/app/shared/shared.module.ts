@@ -60,6 +60,7 @@ import {
   volumeHigh,
   volumeMute,
 } from 'ionicons/icons';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 // Add the icons you want to use
 addIcons({
@@ -124,6 +125,7 @@ addIcons({
     IonTabs,
     IonAvatar,
     IonBadge,
+    NgxSkeletonLoaderModule
   ],
   exports: [
     IonContent,
@@ -159,6 +161,7 @@ addIcons({
     IonTabs,
     IonAvatar,
     IonBadge,
+    NgxSkeletonLoaderModule
   ],
 })
 export class SharedModule {}

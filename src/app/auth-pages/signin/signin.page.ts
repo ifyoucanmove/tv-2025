@@ -57,15 +57,35 @@ export class SigninPage implements OnInit, OnDestroy {
     this.tokenSubscription = this.authService
       .getTvAuthDataById(this.qrValue)
       .subscribe((res) => {
-        console.log(res, 'getQrDataById');
+      //  console.log(res, 'getQrDataById');
         if (res?.token) {
           this.loginWithToken(res.token);
           this.tokenSubscription.unsubscribe(); // Unsubscribe after getting the token
         }
       });
   }
-  loginWithToken(token: any) {
-    this.authService.loginWithCustomToken(token);
+ async loginWithToken(token: any) {
+  try{
+    let res:any = await this.authService.loginWithCustomToken(token);
+    if(res.user.accessToken){
+          console.log(res,"token")
+          let userData ={
+            uid: res.user.uid,
+            displayName: res.user.displayName,
+            email: res.user.email,
+            emailVerified: res.user.emailVerified,
+            photoURL: res.user.photoURL,
+          }
+          let jsonUser = JSON.stringify(userData);
+          localStorage.setItem('userData',jsonUser)
+          localStorage.setItem('uid',res.user.uid)
+        this.router.navigate(['/home']);
+       this.authService.userData.set(res);
+        }
+  }
+    catch(err:any){
+       console.error('Custom token login error:', err);
+    }
   }
   async addCodeTvAuth() {
     try {
@@ -108,12 +128,23 @@ export class SigninPage implements OnInit, OnDestroy {
     if (this.loginForm.valid) {
       this.commonService.showLoader();
       try {
-        let res = await this.authService.signin(
+        let res:any = await this.authService.signin(
           this.loginForm.value.email,
           this.loginForm.value.password
         );
-        if(res){
-this.router.navigate(['/home']);
+        if(res.user.accessToken){
+          console.log(res)
+          let userData ={
+            uid: res.user.uid,
+            displayName: res.user.displayName,
+            email: res.user.email,
+            emailVerified: res.user.emailVerified,
+            photoURL: res.user.photoURL,
+          }
+          let jsonUser = JSON.stringify(userData);
+          localStorage.setItem('userData',jsonUser)
+          localStorage.setItem('uid',res.user.uid)
+        this.router.navigate(['/home']);
        this.authService.userData.set(res);
         }
         

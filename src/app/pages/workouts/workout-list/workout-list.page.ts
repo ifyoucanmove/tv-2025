@@ -20,7 +20,7 @@ export class WorkoutListPage implements OnInit {
 
   loadPrograms() {
     this.apiService.getWorkoutList().subscribe((data: any) => {
-      this.workoutList = data;
+      this.workoutList = data.workout;
     });
   }
 

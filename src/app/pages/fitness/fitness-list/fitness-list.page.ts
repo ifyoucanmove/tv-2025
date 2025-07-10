@@ -20,7 +20,7 @@ export class FitnessListPage implements OnInit {
 
   loadPrograms() {
     this.apiService.getFitnessList().subscribe((data: any) => {
-      this.fitnessList = data;
+      this.fitnessList = data['30day'];
     });
   }
 

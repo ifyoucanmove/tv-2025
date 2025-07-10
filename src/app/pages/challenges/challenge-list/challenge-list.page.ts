@@ -19,8 +19,13 @@ export class ChallengeListPage implements OnInit {
   }
 
   loadPrograms() {
-    this.apiService.getChallengeList().subscribe((data: any) => {
-      this.challengeList = data;
+    this.apiService.getChallengeList().subscribe((res: any) => {
+     this.challengeList = res.challenges.map((ele:any) => {
+                  return {
+                    image: ele.dashBannerUrl,
+                    title: ele.dashTitle
+                  }
+                 })
     });
   }
   onNavigate() {

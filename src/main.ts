@@ -17,11 +17,12 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from './environments/environment';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { logInterceptor } from './app/services/log-interceptor';
 import { NgxIndexedDBService, provideIndexedDb } from 'ngx-indexed-db';
 import { dbConfig } from './app/db.config';
-
+import { AuthInterceptor } from './app/services/http.interceptor';
+import { provideNgxSkeletonLoader } from 'ngx-skeleton-loader';
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
@@ -33,6 +34,13 @@ bootstrapApplication(AppComponent, {
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
     provideIndexedDb(dbConfig),
+    /*  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, */
     NgxIndexedDBService,
+      provideNgxSkeletonLoader({
+      theme: {
+        extendsFromRoot: true,
+        height: '30px',
+      },
+    }),
   ],
 });

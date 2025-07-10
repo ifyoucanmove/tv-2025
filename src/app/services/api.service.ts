@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { collection, collectionData, Firestore, limitToLast, orderBy, query, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
@@ -10,7 +11,7 @@ export class ApiService {
   router: Router = inject(Router);
   http: HttpClient = inject(HttpClient);
   apiBaseUrl = environment.apiBaseUrl;
-
+firestore: Firestore = inject(Firestore); 
   getProgrammList() {
     return this.http.get('assets/jsons/list.json');
   }
@@ -24,10 +25,10 @@ export class ApiService {
     return this.http.get('assets/jsons/warm-up.json');
   }
   getFitnessList() {
-    return this.http.get('assets/jsons/fitness.json');
+    return this.http.get(`${this.apiBaseUrl}/programs`);
   }
   getWorkoutList() {
-    return this.http.get('assets/jsons/workout.json');
+    return  this.http.get(`${this.apiBaseUrl}/programs`);
   }
   getFavList() {
     return this.http.get('assets/jsons/favorite.json');
@@ -74,4 +75,17 @@ export class ApiService {
   getSomethingFromApi() {
     return this.http.get(`${this.apiBaseUrl}/your-endpoint`);
   }
+
+  loadCompletedData(userEmail: any, limit: number) {
+    let collectionRef = collection(this.firestore, "completed")
+    let q = query(collectionRef, where("userId", "==", userEmail)
+    ,orderBy('date', 'asc'),limitToLast(limit)
+  )
+    return collectionData(q, { idField: "id" })
+   
+  }
+   getMystatsData(startDate: string, endDate: string, userEmail: string) {
+    return this.http.get(`https://us-central1-ifyoucanmove-dev.cloudfunctions.net/mystats?userId=${userEmail}&fromDate=${startDate}&toDate=${endDate}`);
+  }
+  
 }

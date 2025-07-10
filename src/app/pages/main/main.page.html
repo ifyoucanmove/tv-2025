@@ -9,8 +9,8 @@
       
       <mat-nav-list> <!-- (click)="navigateTo(item.route)" -->
         @for (item of menuItems; track $index) {
-        <a mat-list-item   [routerLink]="item.route" routerLinkActive="active"
-          
+        <a mat-list-item   (click)="navigateTo(item)" routerLinkActive="active"
+          [disabled]="item.isDisabled"
           (keydown)="onSideNavKeyDown($event)"
           (focus)="checkEnterFocus()"
           tabindex="0">

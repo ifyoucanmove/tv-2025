@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
 import { HeaderPage } from 'src/app/shared/header/header.page';
 import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
 import { ModalController,NavController  } from '@ionic/angular/standalone';
+import { ApiService } from 'src/app/services/api.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -39,13 +40,13 @@ export class MainPage implements OnInit {
   @ViewChild('mainContent') mainContent!: ElementRef;
 
   menuItems = [
-    { icon: 'home', label: 'Home', route: '/home' },
-    { icon: 'search', label: 'Search', route: '/search' },
-    { icon: 'favorite', label: 'Favorites', route: '/favorites' },
-    { icon: 'fastfood', label: 'Recipe', route: '/recipe-category' },
-    { icon: 'donut_small', label: 'Byo Combo', route: '/byo-combo' },
-    { icon: 'person', label: 'Profile', route: '/update-profile' },
-    { icon: 'settings', label: 'Settings', route: '/settings' },
+    { icon: 'home', label: 'Home',isDisabled:false, route: '/home' },
+    { icon: 'search', label: 'Search',isDisabled:true, route: '/search' },
+    { icon: 'favorite', label: 'Favorites',isDisabled:true, route: '/favorites' },
+    { icon: 'fastfood', label: 'Recipe',isDisabled:true, route: '/recipe-category' },
+    { icon: 'donut_small', label: 'Byo Combo',isDisabled:true, route: '/byo-combo' },
+    { icon: 'person', label: 'Profile',isDisabled:true, route: '/update-profile' },
+    { icon: 'settings', label: 'Settings',isDisabled:true, route: '/settings' },
   ];
 
   focusingMap: any = {
@@ -75,12 +76,15 @@ export class MainPage implements OnInit {
   };
 
   constructor(
-    private authService: AuthService,
+    private authService: AuthService,private apiService: ApiService,
     private modalCtrl: ModalController,
     private router: Router,private navCtrl: NavController
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  
+
+  }
 
   logout(): void {
     this.logoutConfirm();
@@ -197,10 +201,13 @@ export class MainPage implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     if (data == 'yes') {
-      this.router.navigate(['/signin']);
+      this.authService.logout()
     }
   }
- navigateTo(route: string) {
-    this.navCtrl.navigateForward(route);
+ navigateTo(item: any) {
+  if(item.isDisabled){
+  return
+  }
+    this.navCtrl.navigateForward(item.route);
   }
 }

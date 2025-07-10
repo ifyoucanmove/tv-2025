@@ -9,7 +9,9 @@ import {
 } from '@angular/fire/auth';
 import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom, from, Observable } from 'rxjs';
+import { collection, collectionData, query, where } from '@angular/fire/firestore';
+import * as jwt_decode from 'jwt-decode';
 
 // Define the type for your request payload
 interface SignInData {
@@ -32,24 +34,35 @@ export class AuthService {
   router: Router = inject(Router);
   userRequestData = signal<any>(null);
   userData = signal<any>(null);
+
+ // customer$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
+  customer = signal<any>(null);
   constructor() {
-    /*   authState(this.auth).subscribe(async (user) => {
+      authState(this.auth).subscribe(async (user) => {
       console.log(user, 'yser');
-      if (user?.uid) {
-        this.getUserData(user.uid);
-        this.router.navigateByUrl('/home');
-      } else {
-        this.router.navigateByUrl('/signin');
+     if (user?.email) {
+        await this.getStripeCustomerData(user.email);
       }
-    }); */
+    }); 
   }
 
-  /*   user = httpResource(() => ({
-    url: `assets/jsons/signin.json`,
-    method: 'POST',
-    body: this.userRequestData(),
-  })); */
-
+   async getTokenAsync() {
+    try {
+      let token = await (await this.auth.currentUser)?.getIdToken();
+       const decodedToken = jwt_decode.jwtDecode(token!);
+      const currentTime = Date.now() / 1000; 
+      if (decodedToken.exp! < currentTime) {
+        console.log('Token has expired');
+        token = await (await this.auth.currentUser)?.getIdToken(true);
+      } 
+      return token;
+    } catch(e) {
+      return null;
+    }
+  }
+getToken(): any {
+  return from(this.getTokenAsync());
+}
   postUser = httpResource<SignInResponse>(() => {
     const data = this.userRequestData();
 
@@ -101,8 +114,14 @@ export class AuthService {
     }
   }
   isAuthenticated() {
-    let data = localStorage.getItem('user');
+    let data = localStorage.getItem('uid');
     return data ? true : false;
+  }
+
+  get userObjData(){
+    let data:any = localStorage.getItem('userData');
+    let parsedata = JSON.parse(data);
+    return parsedata;
   }
 
   getTvAuthDataById(docId: string): Observable<any> {
@@ -127,25 +146,42 @@ export class AuthService {
   }
 
    loginWithCustomToken(token: string) {
-      signInWithCustomToken(this.auth, token)
+    return signInWithCustomToken(this.auth, token)
+      /* signInWithCustomToken(this.auth, token)
         .then((userCredential) => {
-          // Successful login
           const user = userCredential.user;
   
-          // Log the activity
-         /*  this.logService.logActivity('web', userEmail, 'login-from-mobile', 
-            `User redirected from app and moved to ${page}`); */
-  
-          // Navigate to the specified page
           this.router.navigate(['/home']);
         })
         .catch((error) => {
-          // Handle login error
           console.error('Custom token login error:', error);
   
-          // Log the error
-          /* this.logService.logError('web', userEmail, 'login-from-mobile', 
-            `Auto Login Using token failed: ${error.message}`); */
-        });
+        }); */
     }
+
+    /* stripe customer */
+   async getStripeCustomerData(userEmail: string) {
+    try { console.log(userEmail)
+      let collectionRef = collection(this.firestore, "stripe_customers")
+      let q = query(collectionRef, where("email", "==", userEmail));
+      collectionData(q, { idField: "id" }).subscribe(customer =>{
+        console.log(customer,"customer")
+        if (customer && customer.length) {
+          let stripeCustomer:any = customer[0];
+          if(!stripeCustomer?.isCompletedEmails){
+            stripeCustomer.isCompletedEmails=false
+          }
+          this.customer.set(stripeCustomer);
+          //this.customer$.next(stripeCustomer);
+          
+       //  return stripeCustomer
+        }else{
+        // this.customer.update({});
+         // this.customer$.next(null);
+        }
+      })
+    } catch (error) {
+      
+    }
+  }
 }

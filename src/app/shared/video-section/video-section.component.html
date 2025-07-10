@@ -3,6 +3,7 @@
     <h2>{{title()}}</h2>
   </div>
   
+  @if(videos().length > 0){
   <div class="video-grid" [id]="title()" (focus)="checkEnterFocus()"  >
     @for (video of videos().slice(0,3); track $index) {
     <ion-card class="video-card"
@@ -13,7 +14,7 @@
       <img [src]="video.image" alt="video image">
       <ion-card-header>
         <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.duration}}</ion-card-subtitle>
+    <!--     <ion-card-subtitle>{{video.duration}}</ion-card-subtitle> -->
       </ion-card-header>
     </ion-card>}
     <ion-card class="video-card d-flex justify-content-center align-items-center"  
@@ -23,5 +24,10 @@
     (click)="onViewAllClick()">
       <h3 class="text-primary-custom">View All</h3 >
     </ion-card>
-  </div>
+  </div>}
+@else {
+   <ngx-skeleton-loader count="4" appearance="square" [theme]="{height: '100px',width:'25%'}" />
+}
+   
+
 </div> 
