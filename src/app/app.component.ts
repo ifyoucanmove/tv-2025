@@ -19,14 +19,15 @@ export class AppComponent implements OnInit {
     document.addEventListener('ionBackButton',async (ev:any) => {
     const currentUrl = this.router.url;
     const topModal = await this.modalController.getTop();
+    console.log(currentUrl,"currentUrl");
      if(topModal){
       ev.detail.register(10, () => {
         topModal.dismiss();
       });
       return;
      }
-     
       else if(currentUrl.includes('home')){
+        console.log(currentUrl,"home");
         return
       }
       else{

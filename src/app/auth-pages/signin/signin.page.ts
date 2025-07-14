@@ -51,6 +51,10 @@ export class SigninPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+      if (this.authService.isAuthenticated()) {
+    this.router.navigateByUrl('/home')
+  }
+
     this.qrValue = this.generateRandomAlphanumeric();
     this.qrLink = `https://ifyoucanmove.com/tvauth/${this.qrValue}?type=signin`;
     this.addCodeTvAuth();

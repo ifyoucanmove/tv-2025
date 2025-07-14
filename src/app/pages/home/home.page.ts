@@ -165,6 +165,7 @@ thisweekGamifyWeeks: any;
   }
 
   onCardChallenges(video: any): void {
+    return
     this.router.navigate(['/challenge-detail']);
   }
   onViewAllFitness(): void {
@@ -172,6 +173,7 @@ thisweekGamifyWeeks: any;
   }
 
   onCardFitness(video: any): void {
+    return
     /*   this.router.navigate(['/fitness-detail/'], {
       queryParams: {
         id: video.id,
@@ -184,6 +186,7 @@ thisweekGamifyWeeks: any;
     this.router.navigate(['/workout-list']);
   }
   onCardWorkouts(video: any): void {
+    return
     this.router.navigate(['/workout-day/', video.id]);
   }
 

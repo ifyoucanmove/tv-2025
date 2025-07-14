@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { authCheckGuard } from './guards/auth-check.guard';
 
 export const routes: Routes = [
   {
@@ -8,12 +9,12 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'signin',
+    path: 'signin',canActivate:[authCheckGuard],
     loadComponent: () =>
       import('./auth-pages/signin/signin.page').then((m) => m.SigninPage),
   },
   {
-    path: 'forgot-password',
+    path: 'forgot-password',  canActivate:[authCheckGuard],
     loadComponent: () =>
       import('./auth-pages/forgot-password/forgot-password.page').then(
         (m) => m.ForgotPasswordPage
