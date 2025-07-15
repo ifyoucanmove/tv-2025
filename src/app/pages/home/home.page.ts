@@ -17,6 +17,7 @@ import { first } from 'rxjs';
 export class HomePage implements OnInit {
   
   programs: any[] = [];
+  workoutSeries: any[] = [];
   workouts: any[] = [];
   fitness: any[] = [];
   challenges: any[] = [];
@@ -74,11 +75,21 @@ thisweekGamifyWeeks: any;
  this.apiService.getProgrammList().subscribe((res: any) => {
       this.programs = res;
     });
-
+ this.apiService.getCategoriesList().subscribe((res: any) => {
+   this.workouts = res.categories['workouts'].map((ele:any) => {
+                  return {
+                    id:ele.id,
+                    image: ele.imagePath,
+                    title: ele.title
+                  }
+                 })
+                 console.log( res," res")
+    });
     this.apiService.getChallengeList().subscribe((res: any) => {
     //  this.challenges = res.challenges;
         this.challenges =          res.challenges.map((ele:any) => {
                   return {
+                    id:ele.id,
                     image: ele.dashBannerUrl,
                     title: ele.dashTitle,
                     duration: '20'
@@ -90,6 +101,7 @@ thisweekGamifyWeeks: any;
       //this.fitness = res['30day'];
        this.fitness = res['30day'].map((ele:any) => {
                   return {
+                     id:ele.id,
                     image: ele.image,
                     title: ele.title
                   }
@@ -97,8 +109,9 @@ thisweekGamifyWeeks: any;
     });
     this.apiService.getWorkoutList().subscribe((res: any) => {
      // this.workouts = res.workout;
-       this.workouts = res.workout.map((ele:any) => {
+       this.workoutSeries = res.workout.map((ele:any) => {
                   return {
+                     id:ele.id,
                     image: ele.image,
                     title: ele.title
                   }
@@ -165,8 +178,7 @@ thisweekGamifyWeeks: any;
   }
 
   onCardChallenges(video: any): void {
-    return
-    this.router.navigate(['/challenge-detail']);
+    this.router.navigate(['/challenge-detail/', video.id]);
   }
   onViewAllFitness(): void {
     this.router.navigate(['/fitness-list']);

@@ -5,6 +5,7 @@
     </ion-col>
   </ion-row>
   <ion-row>
+         @if(videoList.length > 0){
      @for (video of videoList; track $index) {
     <ion-col size="4" >
       <ion-card class="custom-card"  (click)="onNavigate(video)"
@@ -16,6 +17,11 @@
       </ion-card-header>
     </ion-card>
     </ion-col>
-  }
+  }}
+    @else { 
+    <ngx-skeleton-loader count="3" appearance="square" 
+     class="custom-skeleton-width custom-skeleton-width-col03"
+   [theme]="{height: '120px'}" />
+} 
     </ion-row>
   </ion-grid>

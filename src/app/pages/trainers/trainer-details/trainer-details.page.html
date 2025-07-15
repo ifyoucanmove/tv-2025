@@ -1,0 +1,22 @@
+ <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Trainer Details</h1>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="4">
+      <img [src]="data.image1Url" alt="">
+   </ion-col>
+     <ion-col size="8">
+      <h2 class="text-primary-custom" >{{data.title}}</h2>
+      <p class="text-white">{{data.description}}</p>
+     </ion-col>
+   <ion-col size="12">
+    <div class="tag-section">
+    @for (item of data.tags; track $index) {
+    <div class="tags">
+{{item}}
+    </div>}</div>
+    </ion-col>
+   </ion-row>

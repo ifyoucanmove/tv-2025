@@ -303,4 +303,11 @@ canvas {
 }
 .skeleton-loader{
   background: #1f1f1f no-repeat !important;
+
+}
+.custom-skeleton-width{
+  width: 100% !important;
+}
+.custom-skeleton-width-col03 .skeleton-loader{
+  width: calc(33% - 10px) !important;
 }

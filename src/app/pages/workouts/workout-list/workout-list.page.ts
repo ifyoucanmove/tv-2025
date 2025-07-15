@@ -19,8 +19,15 @@ export class WorkoutListPage implements OnInit {
   }
 
   loadPrograms() {
-    this.apiService.getWorkoutList().subscribe((data: any) => {
-      this.workoutList = data.workout;
+   this.apiService.getCategoriesList().subscribe((res: any) => {
+   this.workoutList = res.categories['workouts'].map((ele:any) => {
+                  return {
+                    id:ele.id,
+                    image: ele.imagePath,
+                    title: ele.title
+                  }
+                 })
+                 console.log( res," res")
     });
   }
 

@@ -32,7 +32,7 @@ export const routes: Routes = [
           import('./pages/home/home.page').then((m) => m.HomePage),
       },
       {
-        path: 'challenge-detail',
+        path: 'challenge-detail/:id',
         loadComponent: () =>
           import(
             './pages/challenges/challenge-details/challenge-details.page'
@@ -46,7 +46,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'challenge-video-details/:id',
+        path: 'challenge-video-details',
         loadComponent: () =>
           import(
             './pages/challenges/challenge-video-details/challenge-video-details.page'
@@ -199,6 +199,18 @@ export const routes: Routes = [
             (m) => m.SearchPagePage
           ),
       },
-    ],
+  {
+    path: 'workout-series-list',
+    loadComponent: () => import('./pages/workouts/workout-series-list/workout-series-list.page').then( m => m.WorkoutSeriesListPage)
   },
+  {
+    path: 'trainers-list',
+    loadComponent: () => import('./pages/trainers/trainer-list/trainer-list.page').then( m => m.TrainerListPage)
+  },
+  {
+    path: 'trainer-details',
+    loadComponent: () => import('./pages/trainers/trainer-details/trainer-details.page').then( m => m.TrainerDetailsPage)
+  }
+    ],
+  }
 ];

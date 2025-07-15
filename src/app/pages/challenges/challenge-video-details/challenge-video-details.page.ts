@@ -6,6 +6,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
+import { image } from 'ionicons/icons';
 @Component({
   selector: 'app-challenge-video-details',
   templateUrl: './challenge-video-details.page.html',
@@ -22,13 +23,22 @@ export class ChallengeVideoDetailsPage implements OnInit {
     public router: Router,
     public apiService: ApiService,
     private modalCtrl: ModalController
-  ) {}
+  ) {
+      const navigation = this.router.getCurrentNavigation();
+         console.log(navigation,"navigation");
+  if (navigation?.extras.state) {
+    const data:any = navigation.extras.state;
+    this.videoData = data.data;
+    console.log(data,"ss"); 
+  }
+  }
 
   ngOnInit() {
-    this.route.params.subscribe((params: any) => {
+   /*  this.route.params.subscribe((params: any) => {
       this.videoId = params.id;
       this.loadVideo();
-    });
+    }); */
+   
   }
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -72,11 +82,18 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   async onVideoOpen(video: any) {
+    let videoData = {
+      title: video.title1,
+      image: video.image,
+      videoId: video.id,
+      video: video.url,
+      description: '',
+    }
     try {
       const modal = await this.modalCtrl.create({
         component: VideoPlayerComponent,
         componentProps: {
-          video: video,
+          video: videoData,
         },
         cssClass: 'video-player-modal',
         showBackdrop: true,

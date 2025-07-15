@@ -1,0 +1,27 @@
+<ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">Trainers</h1>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+        @if(trainerList.length > 0){
+    @for (video of trainerList; track $index) {
+    <ion-col size="3">
+      <ion-card class="custom-card"   (click)="navigateToFitness(video)"
+      [tabindex]="0">
+      <img [src]="video.image2Url" alt="video image">
+      <ion-card-header>
+        <ion-card-title>{{video.title}}</ion-card-title>
+        <ion-card-subtitle>{{video.classes}} Classes</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+    </ion-col>
+  }}
+     @else { 
+    <ngx-skeleton-loader count="4" appearance="square" 
+     class="custom-skeleton-width "
+   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
+} 
+    </ion-row>
+  </ion-grid>

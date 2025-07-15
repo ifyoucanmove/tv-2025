@@ -4,10 +4,12 @@
       <h1 class="text-white">Challenge List</h1>
     </ion-col>
   </ion-row>
+    
   <ion-row>
+     @if(challengeList.length > 0){
      @for (video of challengeList; track $index) {
     <ion-col size="4" >
-      <ion-card class="custom-card"  (click)="onNavigate()"
+      <ion-card class="custom-card"  (click)="onNavigate(video)"
       [tabindex]="0">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
@@ -16,6 +18,11 @@
       </ion-card-header>
     </ion-card>
     </ion-col>
-  }
+  }}
+  @else { 
+    <ngx-skeleton-loader count="3" appearance="square" 
+    class="custom-skeleton-width custom-skeleton-width-col03"
+   [theme]="{height: '120px'}" />
+}  
     </ion-row>
   </ion-grid>

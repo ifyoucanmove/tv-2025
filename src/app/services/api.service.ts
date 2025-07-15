@@ -18,6 +18,12 @@ firestore: Firestore = inject(Firestore);
   getChallengeList() {
     return this.http.get(`${this.apiBaseUrl}/challenges`);
   }
+  getChallengeDetails(id: any) {
+   return this.http.get(`${this.apiBaseUrl}/challenges/${id}/days`);
+  }
+  getCategoriesList() {
+    return this.http.get(`${this.apiBaseUrl}/categories`);
+  }
   getCoolDownList() {
     return this.http.get('assets/jsons/cool-down.json');
   }

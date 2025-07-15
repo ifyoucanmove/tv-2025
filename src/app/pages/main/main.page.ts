@@ -45,6 +45,7 @@ export class MainPage implements OnInit {
     { icon: 'favorite', label: 'Favorites',isDisabled:true, route: '/favorites' },
     { icon: 'fastfood', label: 'Recipe',isDisabled:true, route: '/recipe-category' },
     { icon: 'donut_small', label: 'Byo Combo',isDisabled:true, route: '/byo-combo' },
+    { icon: 'donut_small', label: 'Trainers',isDisabled:false, route: '/trainers-list' },
     { icon: 'person', label: 'Profile',isDisabled:true, route: '/update-profile' },
     { icon: 'settings', label: 'Settings',isDisabled:true, route: '/settings' },
   ];
