@@ -13,7 +13,14 @@ export class ConfirmPopupComponent implements OnInit {
   ngOnInit() {
     console.log(this.message, 'data');
   }
-
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      let ele = document.getElementById('yesbtn');
+      if (ele) {
+        ele.focus();
+      }
+    }, 1000);
+  }
   onSubmit(type: any) {
     this.modalCtrl.dismiss(type);
   }

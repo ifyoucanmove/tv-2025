@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
@@ -14,7 +14,7 @@ import { NavController } from '@ionic/angular';
   standalone: true,
   imports: [SharedModule],
 })
-export class ChallengeDetailsPage implements OnInit {
+export class ChallengeDetailsPage implements OnInit ,AfterViewInit{
   challenges: any[] = [];
   coolDownList: any[] = [];
   warmUpList: any[] = [];
@@ -35,6 +35,25 @@ export class ChallengeDetailsPage implements OnInit {
         this.loadChallengeDetails(challengeId);
       }
     });
+  }
+   ngAfterViewInit(): void {
+    setTimeout(() => {
+      let ele = document.getElementById('weekcard0');
+        console.log(ele,'ionViewDidEnter');
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
+  }
+
+  ionViewDidEnter() {
+    setTimeout(() => {
+      console.log('ionViewDidEnter');
+      let ele = document.getElementById('weekcard0');
+      if (ele) {
+        ele.focus();
+      }
+    }, 3000);
   }
 
   loadChallengeDetails(id:any) {

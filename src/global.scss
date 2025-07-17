@@ -120,11 +120,7 @@
   color: white !important;
 }
 .btn-secondary-custom {
-  background: linear-gradient(
-    to right,
-    var(--accent-primary),
-    var(--accent-secondary)
-  );
+  background:transparent;
   border-radius: 8px;
   padding: 3px 8px;
   font-size: 14px;
@@ -216,6 +212,7 @@
   }
 }
 .confirm-modal {
+  --width: 60vw;
   --height: auto;
 }
 .mood-tracker-modal {

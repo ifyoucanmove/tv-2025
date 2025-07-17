@@ -1,7 +1,4 @@
 <ion-grid>
-<!--   <ngx-skeleton-loader count="5" appearance="square" size="100px" /> -->
-
-
   <ion-row>
     <ion-col size="5">
       <ion-row class="h-100">
@@ -66,11 +63,12 @@
                 <p class="date-range">{{data.lastWeek.weekStartDate}} - {{data.lastWeek.weekEndDate}}</p>
               </div>
             </div>
-           <!--  <div class="recently-completed">
-              <button class="btn btn-primary-custom" tabindex="0" (click)="recentlyCompleted()">
+           <!--   <div class="recently-completed">
+              <button class="btn btn-primary-custom" id="recently-completed-btn" 
+               tabindex="1" (click)="recentlyCompleted()">
                 Recently Completed
               </button>
-            </div> -->
+            </div>  -->
           </ion-card>}
           @else {
                <ngx-skeleton-loader count="1" appearance="square" 
@@ -124,8 +122,8 @@
             <app-video-section
               [videos]="workoutSeries"
               [title]="'Workouts Series'"
-              [tabindex]="3"
-              (viewAllClick)="onViewAllWorkouts()"
+              [tabindex]="4"
+              (viewAllClick)="onViewAllWorkoutsSeries()"
               (videoClick)="onCardWorkouts($event)">
             </app-video-section>
           </ion-col>
@@ -136,9 +134,21 @@
             <app-video-section
               [videos]="workouts"
               [title]="'Workouts'"
-              [tabindex]="3"
+              [tabindex]="5"
               (viewAllClick)="onViewAllWorkouts()"
               (videoClick)="onCardWorkouts($event)">
+            </app-video-section>
+          </ion-col>
+        </ion-row> 
+          <!-- Recipe section -->
+          <ion-row>
+          <ion-col size="12">
+            <app-video-section
+              [videos]="recipe"
+              [title]="'Recipe'"
+              [tabindex]="5"
+              (viewAllClick)="onViewAllReceipe()"
+              (videoClick)="onCardReceipe($event)">
             </app-video-section>
           </ion-col>
         </ion-row> 

@@ -28,6 +28,7 @@ export class RecipeListPage implements OnInit {
 
   loadRecipe(category: string) {
     this.apiService.getRecipeCategory().subscribe((data: any) => {
+      console.log(data)
       let recipeList = data.filter((item: any) => item.title === category);
       this.recipeData = recipeList[0];
       this.recipeList = recipeList[0].category;

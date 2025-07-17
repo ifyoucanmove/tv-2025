@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, effect, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,14 +14,15 @@ import { first } from 'rxjs';
   styleUrls: ['home.page.scss'],
   imports: [SharedModule, VideoSectionComponent],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit,AfterViewInit {
   
   programs: any[] = [];
   workoutSeries: any[] = [];
   workouts: any[] = [];
   fitness: any[] = [];
   challenges: any[] = [];
-stripeCustomer:any;
+  recipe: any[] = [];
+  stripeCustomer:any;
 
 
   data = {
@@ -71,6 +72,15 @@ thisweekGamifyWeeks: any;
    
   }
 
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      let ele = document.getElementById('recently-completed-btn');
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
+  }
+
   getAllData(){
  this.apiService.getProgrammList().subscribe((res: any) => {
       this.programs = res;
@@ -84,6 +94,13 @@ thisweekGamifyWeeks: any;
                   }
                  })
                  console.log( res," res")
+                  this.recipe = res.categories['recipes'].map((ele:any) => {
+                  return {
+                    id:ele.id,
+                    image: ele.imagePath,
+                    title: ele.title
+                  }
+                 })
     });
     this.apiService.getChallengeList().subscribe((res: any) => {
     //  this.challenges = res.challenges;
@@ -160,6 +177,7 @@ thisweekGamifyWeeks: any;
     };
   }
   recentlyCompleted(): void {
+    return
     this.router.navigate(['/fitness-dashboard-details']);
   }
 
@@ -194,6 +212,9 @@ thisweekGamifyWeeks: any;
     }); */
     this.router.navigate(['/program/', video.id]);
   }
+  onViewAllWorkoutsSeries(): void {
+    this.router.navigate(['/workout-series-list']);
+  }
   onViewAllWorkouts(): void {
     this.router.navigate(['/workout-list']);
   }
@@ -201,7 +222,14 @@ thisweekGamifyWeeks: any;
     return
     this.router.navigate(['/workout-day/', video.id]);
   }
+  onViewAllReceipe(): void {
+    this.router.navigate(['/recipe-category']);
+  }
 
+  onCardReceipe(video: any): void {
+    return
+   this.router.navigate(['/recipes'], { queryParams: { category: video.title } });
+  }
   getDate(date: string) {
     const str = date?.split('-')?.join('/');
     return new Date(str);

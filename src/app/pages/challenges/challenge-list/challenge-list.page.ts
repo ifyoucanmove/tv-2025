@@ -18,7 +18,14 @@ export class ChallengeListPage implements OnInit {
   ngOnInit() {
     this.loadPrograms();
   }
-
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      let ele = document.getElementById('weekcard0');
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
+  }
   loadPrograms() {
     this.apiService.getChallengeList().subscribe((res: any) => {
      this.challengeList = res.challenges.map((ele:any) => {

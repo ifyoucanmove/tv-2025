@@ -59,8 +59,8 @@
                @if(challengeDays['week1']?.length > 0){
     @for (video of challengeDays['week1']; track $index) {
     <ion-card class="video-card"
-       [id]="'videocard' + $index" 
-      
+       [id]="'weekcard' + $index" 
+      [tabindex]="1"
       (click)="onClickChallenges(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
@@ -70,7 +70,7 @@
     </ion-card>}
   }
    @else { 
-    <ngx-skeleton-loader count="3" appearance="square" 
+    <ngx-skeleton-loader count="4" appearance="square" 
     class="custom-skeleton-width"
    [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
 }  
@@ -95,7 +95,7 @@
     </ion-card>}
   }
    @else { 
-    <ngx-skeleton-loader count="3" appearance="square" 
+    <ngx-skeleton-loader count="4" appearance="square" 
     class="custom-skeleton-width"
    [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
 }  
@@ -120,7 +120,7 @@
     </ion-card>}
   }
    @else { 
-    <ngx-skeleton-loader count="3" appearance="square" 
+    <ngx-skeleton-loader count="4" appearance="square" 
     class="custom-skeleton-width"
    [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
 }  
@@ -145,7 +145,7 @@
     </ion-card>}
   }
        @else { 
-    <ngx-skeleton-loader count="3" appearance="square" 
+    <ngx-skeleton-loader count="4" appearance="square" 
     class="custom-skeleton-width"
    [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
 }  

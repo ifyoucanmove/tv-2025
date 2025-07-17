@@ -4,6 +4,8 @@ import {
   provideRouter,
   withPreloading,
   PreloadAllModules,
+  withRouterConfig,
+  withInMemoryScrolling,
 } from '@angular/router';
 import {
   IonicRouteStrategy,
@@ -27,7 +29,9 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideRouter(routes, withInMemoryScrolling({
+      scrollPositionRestoration: 'top'
+    }), withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([logInterceptor])),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

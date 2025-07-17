@@ -45,7 +45,7 @@ export class MainPage implements OnInit {
     { icon: 'favorite', label: 'Favorites',isDisabled:true, route: '/favorites' },
     { icon: 'fastfood', label: 'Recipe',isDisabled:true, route: '/recipe-category' },
     { icon: 'donut_small', label: 'Byo Combo',isDisabled:true, route: '/byo-combo' },
-    { icon: 'donut_small', label: 'Trainers',isDisabled:false, route: '/trainers-list' },
+/*     { icon: 'donut_small', label: 'Trainers',isDisabled:false, route: '/trainers-list' }, */
     { icon: 'person', label: 'Profile',isDisabled:true, route: '/update-profile' },
     { icon: 'settings', label: 'Settings',isDisabled:true, route: '/settings' },
   ];
@@ -72,6 +72,10 @@ export class MainPage implements OnInit {
     'update-profile': {
       route: 'update-profile',
       elements: ['update-profile-input'],
+    },
+     'challenge-detail': {
+      route: 'challenge-detail',
+      elements: ['weekcard0'],
     },
     settings: { route: 'settings', elements: ['settings-input'] },
   };
@@ -105,6 +109,7 @@ export class MainPage implements OnInit {
   }
 
   onSideNavKeyDown(event: KeyboardEvent): void {
+    console.log(event.key)
     if (event.key === 'ArrowRight') {
       this.isCollapsed = true;
       event.preventDefault();
@@ -114,6 +119,7 @@ export class MainPage implements OnInit {
           this.mainContent.nativeElement.querySelector(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
           );
+           console.log(firstFocusableElement,"firstFocusableElement")
         if (firstFocusableElement) {
           firstFocusableElement.focus();
         } else {
@@ -121,8 +127,10 @@ export class MainPage implements OnInit {
         }
       }
       const currentUrl = this.router.url;
+       console.log(currentUrl,"currentUrl")
       if (currentUrl.includes(this.focusingMap['home'].route)) {
         let ele = document.getElementById(this.focusingMap['home'].elements[0]);
+         console.log(ele,"ele")
         if (ele) {
           ele.focus();
         }
@@ -183,9 +191,11 @@ export class MainPage implements OnInit {
           ele.focus();
         }
       }
+      
     }
   }
   checkEnterFocus(): void {
+    console.log(this.isCollapsed,'checkEnterFocus')
     if (this.isCollapsed) {
       this.isCollapsed = false;
     }
