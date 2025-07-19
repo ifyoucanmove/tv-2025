@@ -186,6 +186,10 @@ export const routes: Routes = [
           ).then((m) => m.WorkoutDayListPage),
       },
       {
+    path: 'workout-day-series/:id',
+    loadComponent: () => import('./pages/workouts/workout-day-series-list/workout-day-series-list.page').then( m => m.WorkoutDaySeriesListPage)
+  },
+      {
         path: 'workout-detail',
         loadComponent: () =>
           import('./pages/workouts/workout-detail/workout-detail.page').then(
@@ -212,5 +216,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/trainers/trainer-details/trainer-details.page').then( m => m.TrainerDetailsPage)
   }
     ],
-  }
+  },
+  
 ];

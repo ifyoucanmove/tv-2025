@@ -7,10 +7,10 @@
     </ion-col>
     <ion-col size="6">
       <h1 class="text-white text-start">{{recipeData?.title}}</h1>
-      <button class="btn-icon-primary" id="recipe-single-0"   tabindex="0">
+     <!--  <button class="btn-icon-primary" id="recipe-single-0"   tabindex="0">
         <ion-icon name="heart-outline"></ion-icon>
         <span>Add to Favorites</span>
-      </button>
+      </button> -->
 
       <div class="mt-3">
         <h5 class="text-white">Description:</h5>
@@ -21,11 +21,11 @@
   <ion-row>
     <ion-col size="12">
       <h5 class="text-white">Ingredients:</h5>
-      <p class="text-white">{{recipeData?.ingredients[0]}}</p>
+      <p class="text-white" [innerHTML]="recipeData?.ingredients"></p>
     </ion-col>
     <ion-col size="12">
-      <h5 class="text-white">Description:</h5>
-      <p class="text-white">{{recipeData?.directions[0]}}</p>
+      <h5 class="text-white">Directions:</h5>
+      <p class="text-white" [innerHTML]="recipeData?.directions"></p>
     </ion-col>
   </ion-row>
 </ion-grid>

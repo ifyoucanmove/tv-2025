@@ -1,27 +1,27 @@
-@if(fitnessDay){
+@if(workoutDay){
 <ion-grid>
-<ion-row>
+ <ion-row>
     <ion-col size="12">
       <h1 class="text-white">{{data.title}}</h1>
     </ion-col>
-  </ion-row>
+  </ion-row> 
   <ion-row class="mt-4">
-          @if(fitnessDay.length > 0){
-    @for (item of fitnessDay; track $index) {
+     @if(workoutDay.length > 0){
+    @for (item of workoutDay; track $index) {
     <ion-col size="3" >
       <ion-card class="custom-card"  (click)="onVideoClick(item)"
       [tabindex]="0">
       <img [src]="item.postImage" alt="image">
       <ion-card-header>
-        <ion-card-subtitle>{{item.post.duration}}</ion-card-subtitle>
+      <ion-card-subtitle>{{item.post.duration}} Mins</ion-card-subtitle> 
       </ion-card-header>
     </ion-card>
     </ion-col>
-      }
     }
-     @else { 
+  }
+        @else { 
     <ngx-skeleton-loader count="4" appearance="square" 
-     class="custom-skeleton-width"
+     class="custom-skeleton-width "
    [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
 } 
     </ion-row>

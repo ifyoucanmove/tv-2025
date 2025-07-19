@@ -1,52 +1,4 @@
 <ion-grid>
-<!-- <ion-row>
-    <ion-col size="12">
-      <h1 class="text-white">Cool Down</h1>
-    </ion-col>
-  </ion-row>
-<ion-row>
-    <ion-col size="12">
-      
-        <div class="video-grid"   >
-    @for (video of coolDownList; track $index) {
-    <ion-card class="video-card"
-       [id]="'videocard' + $index" 
-      
-      (click)="onClickChallenges(video)">
-      <img [src]="video.image" alt="video image">
-      <ion-card-header>
-        <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.durationMinutes}}</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>}
-  </div>
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col size="12">
-      <h1 class="text-white">Warm Up</h1>
-    </ion-col>
-  </ion-row>
-<ion-row>
-    <ion-col size="12">
-      
-        <div class="video-grid"   >
-    @for (video of warmUpList; track $index) {
-    <ion-card class="video-card"
-       [id]="'videocard' + $index" 
-      
-      (click)="onClickChallenges(video)">
-      <img [src]="video.image" alt="video image">
-      <ion-card-header>
-        <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.durationMinutes}}</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>}
-  </div>
-    </ion-col>
-  </ion-row> -->
-
   <ion-row>
     <ion-col size="12">
       <h1 class="text-white">Challenge Detail</h1>
@@ -64,8 +16,7 @@
       (click)="onClickChallenges(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
-        <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.durationMinutes}}</ion-card-subtitle>
+        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
       </ion-card-header>
     </ion-card>}
   }
@@ -89,8 +40,7 @@
       (click)="onClickChallenges(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
-        <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.durationMinutes}}</ion-card-subtitle>
+        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
       </ion-card-header>
     </ion-card>}
   }
@@ -114,8 +64,7 @@
       (click)="onClickChallenges(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
-        <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.durationMinutes}}</ion-card-subtitle>
+        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
       </ion-card-header>
     </ion-card>}
   }
@@ -139,8 +88,7 @@
       (click)="onClickChallenges(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
-        <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.durationMinutes}}</ion-card-subtitle>
+        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
       </ion-card-header>
     </ion-card>}
   }
@@ -164,8 +112,7 @@
       (click)="onClickChallenges(video)">
       <img [src]="video.image" alt="video image">
       <ion-card-header>
-        <ion-card-title>{{video.title}}</ion-card-title>
-        <ion-card-subtitle>{{video.durationMinutes}}</ion-card-subtitle>
+        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
       </ion-card-header>
     </ion-card>}
   }

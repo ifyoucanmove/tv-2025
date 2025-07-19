@@ -5,11 +5,18 @@
     </ion-col>
   </ion-row>
   <ion-row>
+         @if(recipeList.length > 0){
      @for (recipe of recipeList; track $index) {
     <ion-col size="3" >
       <ion-card (click)="navigateToRecipe(recipe.title)" id="recipe-card-{{$index}}">
        <ion-img [src]="recipe.imagePath"></ion-img>
       </ion-card>
     </ion-col>}
+     }
+        @else { 
+    <ngx-skeleton-loader count="4" appearance="square" 
+     class="custom-skeleton-width "
+   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
+} 
   </ion-row>
-</ion-grid>>
+</ion-grid>

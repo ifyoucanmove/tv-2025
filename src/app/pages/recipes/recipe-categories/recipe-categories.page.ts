@@ -19,9 +19,6 @@ export class RecipeCategoriesPage implements OnInit {
   }
 
   loadRecipe() {
-    this.apiService.getRecipeCategory().subscribe((data: any) => {
-      this.recipeList = data;
-    });
      this.apiService.getCategoriesList().subscribe((res: any) => {
    this.recipeList = res.categories['recipes'];
                  console.log( res," res")

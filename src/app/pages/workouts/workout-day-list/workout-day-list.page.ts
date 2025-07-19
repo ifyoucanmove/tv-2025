@@ -10,6 +10,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
+import { ModalController } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-workout-day-list',
@@ -19,28 +21,51 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [SharedModule],
 })
 export class WorkoutDayListPage implements OnInit {
-  workoutDay: any;
+  workoutDay: any =[];
+     name:any;
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+        private modalController: ModalController
   ) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
+       this.name = params['id'];
       this.loadWorkoutList(params['id']);
     });
   }
 
   loadWorkoutList(id: string) {
-    this.apiService.getWorkoutList().subscribe((data: any) => {
-      this.workoutDay = data.filter((item: any) => item.id === id);
-      this.workoutDay = this.workoutDay[0];
-    });
+      this.apiService.getPostByCategory(id).subscribe((data: any) => {
+ console.log(data)
+ this.workoutDay = data.posts;
+    })
+
   }
-  navigateToFitness(item: any) {
-    this.router.navigate(['/workout-detail'], {
-      queryParams: { id: item.id, day: item.day },
-    });
-  }
+  async onVideoClick(video: any) {
+      let videoData = {
+        title: video.title,
+        image: video.image,
+        videoId: video.id,
+        video: video.media,
+        description: '',
+      }
+      try {
+        const modal = await this.modalController.create({
+          component: VideoPlayerComponent,
+          componentProps: {
+            video: videoData,
+          },
+          cssClass: 'video-player-modal',
+          showBackdrop: true,
+          backdropDismiss: true,
+        });
+  
+        await modal.present();
+      } catch (error) {
+        console.error('Error opening video modal:', error);
+      }
+    }
 }

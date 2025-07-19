@@ -1,13 +1,14 @@
 <ion-grid>
   <ion-row>
     <ion-col size="12">
-      <h1 class="text-white">{{recipeData?.title}}</h1>
+      <h1 class="text-white">{{categoryName}}</h1>
     </ion-col>
   </ion-row>
   <ion-row>
+      @if(recipeList.length > 0){
     @for (recipe of recipeList; track $index) {
     <ion-col size="3" >
-      <ion-card class="video-card" id="recipe-list-{{$index}}" (click)="navigateToSingleRecipe(recipe.id)">
+      <ion-card class="video-card" id="recipe-list-{{$index}}" (click)="navigateToSingleRecipe(recipe)">
       <img  [src]="recipe.image" alt="video image">
       <ion-card-header>
         <ion-card-title>{{recipe.title}}</ion-card-title>
@@ -16,5 +17,11 @@
     </ion-card>
 
     </ion-col>}
+  }
+        @else { 
+    <ngx-skeleton-loader count="4" appearance="square" 
+     class="custom-skeleton-width "
+   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
+} 
   </ion-row>
-</ion-grid>>
+</ion-grid>

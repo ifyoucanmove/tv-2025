@@ -8,6 +8,7 @@ import * as _ from 'lodash';
 import moment from 'moment';
 import { Auth, authState } from '@angular/fire/auth';
 import { first } from 'rxjs';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -52,7 +53,7 @@ thisweekGamifyWeeks: any;
      auth: Auth = inject(Auth);
   constructor(
     public authService: AuthService,
-    public router: Router,
+    public router: Router, private navCtrl: NavController,
     public apiService: ApiService
   ) {
     effect(() => {
@@ -203,14 +204,11 @@ thisweekGamifyWeeks: any;
   }
 
   onCardFitness(video: any): void {
-    return
-    /*   this.router.navigate(['/fitness-detail/'], {
-      queryParams: {
-        id: video.id,
-        day: video.days[0].day,
-      },
-    }); */
-    this.router.navigate(['/program/', video.id]);
+  this.navCtrl.navigateForward(`/program/${video.id}`, {
+    state: {
+      data: video
+    }
+  });
   }
   onViewAllWorkoutsSeries(): void {
     this.router.navigate(['/workout-series-list']);
@@ -218,16 +216,22 @@ thisweekGamifyWeeks: any;
   onViewAllWorkouts(): void {
     this.router.navigate(['/workout-list']);
   }
+  onCardWorkoutsSeries(video: any): void {
+         this.navCtrl.navigateForward(`/workout-day-series/${video.id}`, {
+    state: {
+      data: video
+    }
+  });
+ //  this.router.navigate(['/workout-day-series/', video.id]);
+  }
   onCardWorkouts(video: any): void {
-    return
-    this.router.navigate(['/workout-day/', video.id]);
+   this.router.navigate(['/workout-day/', video.id]);
   }
   onViewAllReceipe(): void {
     this.router.navigate(['/recipe-category']);
   }
 
   onCardReceipe(video: any): void {
-    return
    this.router.navigate(['/recipes'], { queryParams: { category: video.title } });
   }
   getDate(date: string) {

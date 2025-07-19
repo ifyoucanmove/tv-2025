@@ -1,27 +1,30 @@
 @if(workoutDay){
 <ion-grid>
-  <ion-row>
-    <ion-col size="6">
-     <img [src]="workoutDay.image" alt="image">
-    </ion-col>
-    <ion-col size="6">
-      <h1 class="text-white text-start ">{{workoutDay.title}}</h1>
-      <p class="text-white">
-        {{workoutDay.desc}}
-      </p>
+ <ion-row>
+    <ion-col size="12">
+      <h1 class="text-white">{{name}}</h1>
     </ion-col>
   </ion-row>
   <ion-row class="mt-4">
-    <ion-col size="3" *ngFor="let item of workoutDay.days; let i = index">
-      <ion-card class="custom-card"  (click)="navigateToFitness(item)"
+       @if(workoutDay.length > 0){
+    @for (item of workoutDay; track $index) {
+    <ion-col size="3" >
+      <ion-card class="custom-card"  (click)="onVideoClick(item)"
       [tabindex]="0">
       <img [src]="item.image" alt="image">
       <ion-card-header>
-        <ion-card-title>{{item.title}}</ion-card-title>
+     <!--    <ion-card-title>{{item.title}}</ion-card-title> -->
         <ion-card-subtitle>{{item.duration}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     </ion-col>
+}
+  }
+        @else { 
+    <ngx-skeleton-loader count="4" appearance="square" 
+     class="custom-skeleton-width "
+   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
+} 
     </ion-row>
   </ion-grid>
 }

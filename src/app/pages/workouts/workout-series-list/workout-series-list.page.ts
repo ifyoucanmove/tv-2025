@@ -5,7 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/stan
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-workout-series-list',
   templateUrl: './workout-series-list.page.html',
@@ -16,7 +16,8 @@ import { Router } from '@angular/router';
 export class WorkoutSeriesListPage implements OnInit {
 
  workoutList: any[] = [];
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService,private navCtrl: NavController,
+     private router: Router) {}
 
   ngOnInit() {
     this.loadPrograms();
@@ -29,7 +30,12 @@ export class WorkoutSeriesListPage implements OnInit {
   }
 
   navigateToFitness(item: any) {
-    this.router.navigate(['/workout-day/', item.id]);
+         this.navCtrl.navigateForward(`/workout-day-series/${item.id}`, {
+    state: {
+      data: item
+    }
+  });
+   /// this.router.navigate(['/workout-day-series/', item.id]);
   }
 
 }

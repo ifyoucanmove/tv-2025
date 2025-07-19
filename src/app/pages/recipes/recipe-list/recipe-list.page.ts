@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.page.html',
@@ -11,32 +11,36 @@ import { ApiService } from 'src/app/services/api.service';
   imports: [SharedModule],
 })
 export class RecipeListPage implements OnInit {
-  recipeData: any;
+  categoryName: any;
   recipeList: any[] = [];
   constructor(
     public route: ActivatedRoute,
-    private apiService: ApiService,
+    private apiService: ApiService,private navCtrl: NavController,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
       console.log(params);
+      this.categoryName = params.category;
       this.loadRecipe(params.category);
     });
   }
 
   loadRecipe(category: string) {
-    this.apiService.getRecipeCategory().subscribe((data: any) => {
-      console.log(data)
-      let recipeList = data.filter((item: any) => item.title === category);
-      this.recipeData = recipeList[0];
-      this.recipeList = recipeList[0].category;
-      console.log(this.recipeList);
-    });
+    this.apiService.getPostByCategory(category).subscribe((data: any) => {
+ console.log(data)
+ this.recipeList = data.posts;
+    })
+  
   }
 
-  navigateToSingleRecipe(id: string) {
-    this.router.navigate(['/single-recipe', id]);
+  navigateToSingleRecipe(item: any) {
+     this.navCtrl.navigateForward(`/single-recipe/${item.id}`, {
+    state: {
+      data: item
+    }
+  });
+  //  this.router.navigate(['/single-recipe', id]);
   }
 }

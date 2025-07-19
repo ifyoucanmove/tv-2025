@@ -24,6 +24,12 @@ firestore: Firestore = inject(Firestore);
   getCategoriesList() {
     return this.http.get(`${this.apiBaseUrl}/categories`);
   }
+   getPostByCategory(categoryid:any) {
+    return this.http.get(`${this.apiBaseUrl}/posts-by-category?category=${categoryid}`);
+  }
+   getProgramItems(id:any) {
+    return this.http.get(`${this.apiBaseUrl}/program-items?programId=${id}`);
+  }
   getCoolDownList() {
     return this.http.get('assets/jsons/cool-down.json');
   }

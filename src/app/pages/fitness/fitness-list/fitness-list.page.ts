@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-fitness-list',
   templateUrl: './fitness-list.page.html',
@@ -12,7 +12,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class FitnessListPage implements OnInit {
   fitnessList: any[] = [];
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService,private navCtrl: NavController,
+     private router: Router) {}
 
   ngOnInit() {
     this.loadPrograms();
@@ -25,6 +26,11 @@ export class FitnessListPage implements OnInit {
   }
 
   navigateToFitness(item: any) {
-    this.router.navigate(['/program/', item.id]);
+        this.navCtrl.navigateForward(`/program/${item.id}`, {
+    state: {
+      data: item
+    }
+  });
+   // this.router.navigate(['/program/', item.id]);
   }
 }

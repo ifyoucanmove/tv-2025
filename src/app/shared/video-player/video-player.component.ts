@@ -74,6 +74,10 @@ export class VideoPlayerComponent implements OnInit {
   initializeVideo() {
     console.log(this.videoElement.nativeElement, 'initializeVideo');
     const video = this.videoElement.nativeElement;
+    if (!this.isPlaying) {
+      video.play();
+       this.isPlaying = !this.isPlaying;
+    }
     video.addEventListener('loadedmetadata', () => {
       this.duration = video.duration;
     });
