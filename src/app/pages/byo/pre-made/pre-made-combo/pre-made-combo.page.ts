@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
@@ -12,20 +13,18 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class PreMadeComboPage implements OnInit {
   preMadeComboList: any[] = [];
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService,public authService:AuthService, private router: Router) {}
 
   ngOnInit() {
     this.loadByo();
   }
 
   loadByo() {
-    this.apiService.getPreMadeCombo().subscribe((data: any) => {
-      this.preMadeComboList = data;
+       this.apiService.getPreMadeCombo().subscribe((data: any) => {
+      this.preMadeComboList = data.combos;
     });
   }
   navigateToComboDetails(item: any) {
-    this.router.navigate(['/combo-details'], {
-      queryParams: { id: item.id, title: item.title },
-    });
+    this.router.navigate(['/combo-details',item.id]);
   }
 }

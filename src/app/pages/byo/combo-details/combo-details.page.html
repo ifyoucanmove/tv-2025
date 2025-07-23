@@ -1,42 +1,53 @@
 <ion-grid>
   <ion-row class="mb-3">
-    <ion-col size="6">
-      <h1 class="text-white text-start p-0 mt-0">{{title}}</h1>
-    <p class="text-white">Repitition : 3 times</p>
-     <p class="text-white"> Rest Time : 15 seconds  </p>
+    <ion-col size="4">
+      <h1 class="text-white text-start p-0 mt-0">{{comboDetails?.name}}</h1> 
+      
     </ion-col>
-    <ion-col size="6">  
-      <button class="btn-icon-primary me-2"  tabindex="0">
+        <ion-col size="4">
+@if (comboDetails?.restTime) {
+    <p class="text-white mb-0">Repitition : {{comboDetails?.repeatCount}} times</p>
+     <p class="text-white mb-0"> Rest Time : {{comboDetails?.restTime}} seconds  </p> }
+        </ion-col>
+    <ion-col size="4" class="text-end">  
+    <!--   <button class="btn-icon-primary me-2"  tabindex="0">
         <ion-icon name="heart-outline"></ion-icon>
         <span>Add to Favorites</span>
-      </button>
+      </button> -->
     <!--   <button class="btn-icon-primary"  tabindex="0">
         <ion-icon name="heart"></ion-icon>
         <span>Added to Favorites</span>
       </button> -->
-      <button class="btn-icon-primary me-2" routerLink="/play-combo"  tabindex="0">
+      <button class="btn-icon-primary me-2" id="combobtn" (click)="startCombo()"  [tabindex]="0">
         <span>Start Combo</span>
       </button>
-        <button class="btn-icon-primary me-2"  tabindex="0" (click)="openMoodTracker()">
+    <!--     <button class="btn-icon-primary me-2"  tabindex="0" (click)="openMoodTracker()">
         <ion-icon name="checkmark-circle-outline"></ion-icon>
         <span>Mark as Complete</span>
-      </button> 
+      </button>  -->
     </ion-col>
   </ion-row>
   <ion-row>
-    @for (item of comboDetailsList; track $index) {
+      @if(comboDetails?.comboWorkouts.length > 0){
+    @for (item of comboDetails?.comboWorkouts; track $index) {
     <ion-col size="3" >
      <ion-card class="custom-card"  id="combo-details-card-{{$index}}"
       [tabindex]="0">
-      <img [src]="item.image" alt="image">
+      <img [src]="item.postDetails.media" alt="image">
       <ion-card-header>
-        <ion-card-title>{{item.title}}</ion-card-title>
+        <ion-card-title>{{item.postDetails.title}}</ion-card-title>
         <div class="d-flex justify-content-between">
-        <ion-card-subtitle>{{item.reps}} reps</ion-card-subtitle>
-        <span class="text-danger fs-12">{{item.rest}}</span>
+       <!--  <ion-card-subtitle>{{item.postDetails.reps}} reps</ion-card-subtitle> -->
+        <span class="text-danger fs-12">{{item.restTime}}s</span>
         </div>
       </ion-card-header>
     </ion-card>
     </ion-col>}
+  }
+      @else { 
+    <ngx-skeleton-loader count="4" appearance="square" 
+     class="custom-skeleton-width"
+   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
+} 
     </ion-row>
   </ion-grid>

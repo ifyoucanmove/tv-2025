@@ -5,20 +5,27 @@
     </ion-col>
   </ion-row>
   <ion-row>
+     @if(userMadeList.length > 0){
     @for (item of userMadeList; track $index) {
     <ion-col size="3" (click)="navigateToComboDetails(item)">
    
      <ion-card class="custom-card"  id="user-made-card-{{$index}}"
       [tabindex]="0">
       <ion-card-header>
-        <ion-card-title>{{item.title}}</ion-card-title>
-        <div class="d-flex justify-content-between">
-        <ion-card-subtitle>{{item.duration}}</ion-card-subtitle>
-        <span class="text-danger">{{item.type}}</span>
+        <ion-card-title>{{item.name}}</ion-card-title>
+        <div class="d-flex justify-content-end">
+     <!--    <ion-card-subtitle>{{item.duration}}</ion-card-subtitle> -->
+        <span class="text-danger">{{item.level}}</span>
         </div>
       </ion-card-header>
     </ion-card>
     
     </ion-col>}
+  }
+     @else { 
+    <ngx-skeleton-loader count="4" appearance="square" 
+     class="custom-skeleton-width"
+   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
+} 
     </ion-row>
   </ion-grid>

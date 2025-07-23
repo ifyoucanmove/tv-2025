@@ -1,12 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/angular/standalone';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';

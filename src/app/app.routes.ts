@@ -88,7 +88,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'combo-details',
+        path: 'combo-details/:id',
         loadComponent: () =>
           import('./pages/byo/combo-details/combo-details.page').then(
             (m) => m.ComboDetailsPage

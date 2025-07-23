@@ -8,7 +8,7 @@ import {
   IonToolbar,
 } from '@ionic/angular/standalone';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
 import { ModalController } from '@ionic/angular/standalone';
@@ -20,25 +20,27 @@ import { ModalController } from '@ionic/angular/standalone';
   imports: [SharedModule],
 })
 export class ComboDetailsPage implements OnInit {
-  comboDetailsList: any[] = [];
+  comboDetails:any;
   title: string = '';
+  id:any;
   constructor(
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
-    private apiService: ApiService
+    private apiService: ApiService,
+    public router:Router
   ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
-      this.title = params['title'];
-      this.apiService.getComboDetails().subscribe((data) => {
-        this.comboDetailsList = data;
+    this.route.paramMap.subscribe((params:any) => {
+      this.id = params.params['id'];
+      this.apiService.getComboDetails( this.id).subscribe((data:any) => {
+        this.comboDetails = data;
       });
     });
   }
   ngAfterViewInit(): void {
     setTimeout(() => {
-      let ele = document.getElementById('combo-details-card-0');
+      let ele = document.getElementById('combobtn');
       if (ele) {
         ele.focus();
       }
@@ -57,5 +59,10 @@ export class ComboDetailsPage implements OnInit {
     if (data) {
       console.log('Selected mood:', data.mood);
     }
+  }
+  startCombo(){
+    this.router.navigate(['/play-combo'], {
+      queryParams: { id: this.comboDetails.id, title: this.comboDetails.name },
+    }); 
   }
 }

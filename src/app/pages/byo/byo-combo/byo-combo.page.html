@@ -5,13 +5,23 @@
     </ion-col>
   </ion-row>
   <ion-row>
+   @if(byoList.length > 0){
     @for (item of byoList; track $index) {
+      @if (item.title != 'Combo Dashboard') {
     <ion-col size="4" >
      <ion-card class="custom-card"   id="byo-card-{{$index}}"
       [tabindex]="0" (click)="navigateTo(item.route)">
       <img [src]="item.image" alt=" image">
     </ion-card>
   
-    </ion-col>}
+    </ion-col>
+    }
+  }
+  }
+       @else { 
+    <ngx-skeleton-loader count="3" appearance="square" 
+   class="custom-skeleton-width custom-skeleton-width-col03"
+   [theme]="{height: '120px'}" />
+} 
     </ion-row>
   </ion-grid>

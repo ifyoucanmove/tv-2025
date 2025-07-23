@@ -54,14 +54,14 @@ firestore: Firestore = inject(Firestore);
   getByoList() {
     return this.http.get('assets/jsons/byo.json');
   }
-  getComboDetails() {
-    return this.http.get<any>('assets/jsons/combo-details.json');
+  getComboDetails(id:any) {
+ return this.http.get(`${this.apiBaseUrl}/byo-combo-details?id=${id}`);
   }
-  getUserMadeCombo() {
-    return this.http.get('assets/jsons/user-made.json');
+  getUserMadeCombo(type:any,uid:any) {
+    return this.http.get(`${this.apiBaseUrl}/byo-combos?type=${type}&uid=${uid}`);
   }
   getPreMadeCombo() {
-    return this.http.get('assets/jsons/pre-made.json');
+ return this.http.get(`${this.apiBaseUrl}/admin-byo-combos`);
   }
   getComboFeed() {
     return this.http.get('assets/jsons/combo-feed.json');

@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { PlayComboService } from 'src/app/services/play-combo.service';
 import { ModalController } from '@ionic/angular/standalone';
 import SuperGif from 'libgif';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-play-combo',
@@ -45,20 +46,29 @@ export class PlayComboPage implements OnInit {
   isPaused: boolean = false;
   isComboCompleted: boolean = false;
   userEmail = '';
-
+id:any;
   constructor(
     private apiService: ApiService,
     public gifService: PlayComboService,
-    public modalController: ModalController
+    public modalController: ModalController,public route:ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.apiService.getPlayCombo().subscribe((data: any) => {
+    this.route.queryParamMap.subscribe((params:any) => {
+      this.id = params.params['id'];
+     
+      this.apiService.getComboDetails( this.id).subscribe((data:any) => {
+          this.combo = data;
+        this.comboDetails.comboWorkouts = data.comboWorkouts;
+         this.downloadCombos();
+      });
+    });
+    /* this.apiService.getPlayCombo().subscribe((data: any) => {
       this.combo = data;
       this.comboDetails.comboWorkouts = data;
       console.log(this.combo, 'combo');
       this.downloadCombos();
-    });
+    }); */
   }
 
   /*  loadComboWatchData() {
@@ -176,6 +186,13 @@ export class PlayComboPage implements OnInit {
     // console.log("Done downloading", this.gifService.imagesData);
 
     this.isComboDownloading = false;
+      setTimeout(() => {
+      let ele = document.getElementById('playbtn');
+       console.log('ele',ele);
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
   }
 
   playBYOCombo(type: string) {
