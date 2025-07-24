@@ -80,7 +80,7 @@
   </ion-row>
 
     <!-- video section -->
-  <ion-row>
+  <!-- <ion-row>
     <ion-col size="12">
       <app-video-section
         [videos]="programs"
@@ -90,12 +90,12 @@
         (videoClick)="onVideoClick($event)">
       </app-video-section>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
 
     <!-- Challenge section -->
      <ion-row>
       <ion-col size="12">
-        <app-video-section
+        <app-video-section #videoSection
           [videos]="challenges"
           [title]="'Top Challenges'"
           [tabindex]="2"

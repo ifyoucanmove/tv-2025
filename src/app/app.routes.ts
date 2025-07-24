@@ -46,7 +46,7 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'challenge-video-details',
+        path: 'challenge-video-detail/:id',
         loadComponent: () =>
           import(
             './pages/challenges/challenge-video-details/challenge-video-details.page'
@@ -137,7 +137,7 @@ export const routes: Routes = [
           ).then((m) => m.ComboFeedDetailsPage),
       },
       {
-        path: 'fitness-detail',
+        path: 'fitness-detail/:id',
         loadComponent: () =>
           import('./pages/fitness/fitness-detail/fitness-detail.page').then(
             (m) => m.FitnessDetailPage
@@ -190,12 +190,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/workouts/workout-day-series-list/workout-day-series-list.page').then( m => m.WorkoutDaySeriesListPage)
   },
       {
-        path: 'workout-detail',
+        path: 'workout-detail/:id',
         loadComponent: () =>
           import('./pages/workouts/workout-detail/workout-detail.page').then(
             (m) => m.WorkoutDetailPage
           ),
       },
+       {
+    path: 'workout-series-detail/:id',
+    loadComponent: () => import('./pages/workouts/workout-series-detail/workout-series-detail.page').then( m => m.WorkoutSeriesDetailPage)
+  },
       {
         path: 'search',
         loadComponent: () =>
@@ -217,5 +221,6 @@ export const routes: Routes = [
   }
     ],
   },
+ 
   
 ];

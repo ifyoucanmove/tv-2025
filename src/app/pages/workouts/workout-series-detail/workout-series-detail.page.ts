@@ -1,43 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { ModalController } from '@ionic/angular/standalone';
+
+import { SharedModule } from 'src/app/shared/shared.module';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
+import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
 import { NavController } from '@ionic/angular';
 @Component({
-  selector: 'app-fitness-detail',
-  templateUrl: './fitness-detail.page.html',
-  styleUrls: ['./fitness-detail.page.scss'],
+  selector: 'app-workout-series-detail',
+  templateUrl: './workout-series-detail.page.html',
+  styleUrls: ['./workout-series-detail.page.scss'],
   standalone: true,
   imports: [SharedModule, VideoSectionComponent],
 })
-export class FitnessDetailPage implements OnInit {
-  fitnessId: any;
-  day: any;
-  fitnessData: any;
-  programs: any[] = [];
+export class WorkoutSeriesDetailPage implements OnInit {
+
+  id: any;
+  data: any;
+  workoutSeries: any[] = [];
   constructor(
     private route: ActivatedRoute,
     public router: Router,private navCtrl: NavController,
     public apiService: ApiService,
     private modalCtrl: ModalController
   ) {
-     const navigation = this.router.getCurrentNavigation();
+       const navigation = this.router.getCurrentNavigation();
   if (navigation?.extras.state) {
     const data:any = navigation.extras.state;
-    this.fitnessData = data.data;
+    this.data = data.data;
     console.log(data.data,"ss"); 
   }
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
-      this.fitnessId = params.id;
-      this.day = params.day;
-      this.loadData();
+      this.id = params.id;
+      this.loadVideo();
     });
   }
   ngAfterViewInit(): void {
@@ -59,9 +59,9 @@ export class FitnessDetailPage implements OnInit {
     }, 3000);
   }
 
-  loadData() {
-      this.apiService.getFitnessList().subscribe((res: any) => {
-       this.programs = res['30day'].map((ele:any) => {
+  loadVideo() {
+     this.apiService.getWorkoutList().subscribe((res: any) => {
+     this.workoutSeries = res.workout.map((ele:any) => {
                   return {
                      id:ele.id,
                     image: ele.image,
@@ -84,43 +84,43 @@ export class FitnessDetailPage implements OnInit {
     }
   }
 
-  async onVideoOpen(video: any) {
-  if(video.post.type =='Byo'){
+ async onVideoOpen(video: any) {
+   if(video.post.type =='Byo'){
     return
   }
-       let videoData = {
+      let videoData = {
         title: video.postTitle,
         image: video.postImage,
         videoId: video.id,
         video: video.post.media,
         description: '',
       }
-    try {
-      const modal = await this.modalCtrl.create({
-        component: VideoPlayerComponent,
-        componentProps: {
-          video: videoData,
-        },
-        cssClass: 'video-player-modal',
-        showBackdrop: true,
-        backdropDismiss: true,
-      });
-
-      await modal.present();
-    } catch (error) {
-      console.error('Error opening video modal:', error);
+      try {
+        const modal = await this.modalCtrl.create({
+          component: VideoPlayerComponent,
+          componentProps: {
+            video: videoData,
+          },
+          cssClass: 'video-player-modal',
+          showBackdrop: true,
+          backdropDismiss: true,
+        });
+  
+        await modal.present();
+      } catch (error) {
+        console.error('Error opening video modal:', error);
+      }
     }
-  }
 
-  onViewAllFitness(): void {
-    this.router.navigate(['/fitness-list']);
+ onViewAllWorkoutsSeries(): void {
+    this.router.navigate(['/workout-series-list']);
   }
-
-  onCardFitness(video: any): void {
-  this.navCtrl.navigateForward(`/program/${video.id}`, {
+  onCardWorkoutsSeries(video: any): void {
+         this.navCtrl.navigateForward(`/workout-day-series/${video.id}`, {
     state: {
       data: video
     }
   });
   }
 }
+

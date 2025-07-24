@@ -1,32 +1,28 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import {
-  IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
+  IonSkeletonText,
 } from '@ionic/angular/standalone';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 import { ModalController } from '@ionic/angular/standalone';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-workout-day-list',
   templateUrl: './workout-day-list.page.html',
   styleUrls: ['./workout-day-list.page.scss'],
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule,IonSkeletonText],
 })
 export class WorkoutDayListPage implements OnInit {
   workoutDay: any =[];
      name:any;
+       imageLoaded:boolean = true;
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router,
+    private router: Router,private navCtrl: NavController,
         private modalController: ModalController
   ) {}
 
@@ -41,31 +37,25 @@ export class WorkoutDayListPage implements OnInit {
       this.apiService.getPostByCategory(id).subscribe((data: any) => {
  console.log(data)
  this.workoutDay = data.posts;
+  this.setFocus()
     })
 
   }
-  async onVideoClick(video: any) {
-      let videoData = {
-        title: video.title,
-        image: video.image,
-        videoId: video.id,
-        video: video.media,
-        description: '',
+    setFocus() {
+    setTimeout(() => {
+      let ele = document.getElementById('workoutday-card-0');
+       if (ele) {
+        ele.focus();
       }
-      try {
-        const modal = await this.modalController.create({
-          component: VideoPlayerComponent,
-          componentProps: {
-            video: videoData,
-          },
-          cssClass: 'video-player-modal',
-          showBackdrop: true,
-          backdropDismiss: true,
-        });
-  
-        await modal.present();
-      } catch (error) {
-        console.error('Error opening video modal:', error);
-      }
+    }, 2000);
+  }
+ 
+
+     openDetailPage(item:any){
+        this.navCtrl.navigateForward(`/workout-detail/${item.id}`, {
+    state: {
+      data: item
     }
+  });
+      }
 }

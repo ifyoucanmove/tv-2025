@@ -1,14 +1,14 @@
-@if(fitnessData){
-  <div class="hero-background" [ngStyle]="{'background-image': 'url(' + fitnessData.post.image + ')'}"></div>
+@if(data){
+  <div class="hero-background" [ngStyle]="{'background-image': 'url(' + data.postImage + ')'}"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="hero-title">
-      <h1>{{ fitnessData.postTitle }}</h1>
+      <h1>{{ data.postTitle }}</h1>
      <div class="hero-description">
-        {{ fitnessData.post.description }}
+        {{ data.post.description }}
       </div> 
       <div class="hero-actions">
-        <button class="btn-icon-primary ion"  id="play-btn" tabindex="0" (click)="onVideoOpen(fitnessData)">
+        <button class="btn-icon-primary ion"  id="play-btn" tabindex="0" (click)="onVideoOpen(data)">
           <ion-icon name="play" slot="start"></ion-icon>
           <span>Play</span>
         </button>
@@ -36,17 +36,17 @@
   </div>
   
   }
-  
-
-  <ion-grid class="mt-3">
+    <ion-grid class="mt-3">
   <ion-row>
     <ion-col size="12">
       <app-video-section
-        [videos]="programs"
-        [title]="'Top Fitness'"
-        (viewAllClick)="onViewAllFitness()"
-        (videoClick)="onCardFitness($event)">
+        [videos]="workoutSeries"
+        [title]="'Top Workout Series'"
+        (viewAllClick)="onViewAllWorkoutsSeries()"
+        (videoClick)="onCardWorkoutsSeries($event)">
       </app-video-section>
     </ion-col>
   </ion-row>
 </ion-grid>
+
+  

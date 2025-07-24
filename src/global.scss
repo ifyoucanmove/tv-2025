@@ -308,3 +308,7 @@ canvas {
 .custom-skeleton-width-col03 .skeleton-loader{
   width: calc(33% - 10px) !important;
 }
+
+ion-skeleton-text {
+  --background: rgba(95, 89, 96, 0.065);
+}

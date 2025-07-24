@@ -22,7 +22,16 @@ export class PreMadeComboPage implements OnInit {
   loadByo() {
        this.apiService.getPreMadeCombo().subscribe((data: any) => {
       this.preMadeComboList = data.combos;
+         this.setFocus()
     });
+  }
+   setFocus() {
+    setTimeout(() => {
+      let ele = document.getElementById('pre-made-card-0');
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
   }
   navigateToComboDetails(item: any) {
     this.router.navigate(['/combo-details',item.id]);

@@ -3,16 +3,19 @@ import { ApiService } from 'src/app/services/api.service';
 import { Router } from '@angular/router';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CommonModule } from '@angular/common';
-
+import {
+  IonSkeletonText,
+} from '@ionic/angular/standalone';
 @Component({
   selector: 'app-challenge-list',
   templateUrl: './challenge-list.page.html',
   styleUrls: ['./challenge-list.page.scss'],
   standalone: true,
-  imports: [SharedModule,CommonModule],
+  imports: [SharedModule,CommonModule,IonSkeletonText],
 })
 export class ChallengeListPage implements OnInit {
   challengeList: any[] = [];
+  imageLoaded:boolean = true;
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
@@ -40,4 +43,6 @@ export class ChallengeListPage implements OnInit {
   onNavigate(video: any) {
   this.router.navigate(['/challenge-detail/', video.id]);
   }
+
+  
 }

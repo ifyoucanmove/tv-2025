@@ -1,0 +1,20 @@
+ion-card{
+      min-height: 70px;
+}
+.text-transform-capitalize{
+  text-transform: capitalize;
+}
+.level-span{
+  position: absolute;
+  background: linear-gradient(
+    to right,
+    var(--accent-primary),
+    var(--accent-secondary)
+  );
+  color: black;
+  bottom: 0px;
+  right: 0px;
+  border-bottom-right-radius: 8px;
+ border-top-left-radius: 8px;
+      padding: 0px 10px;
+}

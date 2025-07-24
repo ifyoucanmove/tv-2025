@@ -18,7 +18,7 @@ export class UserMadeComboPage implements OnInit {
   ngOnInit() {
     this.loadUserMade();
   }
-  ngAfterViewInit(): void {
+  setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('user-made-card-0');
       if (ele) {
@@ -29,6 +29,7 @@ export class UserMadeComboPage implements OnInit {
   loadUserMade() {
     this.apiService.getUserMadeCombo('user',this.authService.userObjData.uid).subscribe((data: any) => {
       this.userMadeList = data.combos;
+      this.setFocus();
     });
   }
 

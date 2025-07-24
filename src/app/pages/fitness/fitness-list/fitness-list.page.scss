@@ -1,3 +1,15 @@
-.custom-card img{
-  min-height: 110px;
+.custom-card{
+  height: 110px;
+}
+.image-container-placeholder{
+  background-color: rgb(100 100 100 / 42%);
+  height: 110px;
+  max-height: 110px;
+  min-height: 110px;  
+  ion-img{
+         height: 110px;
+  max-height: 110px;
+  min-height: 110px; 
+  object-fit: cover;
+      }
 }

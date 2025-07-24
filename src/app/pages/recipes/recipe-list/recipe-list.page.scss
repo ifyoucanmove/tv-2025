@@ -18,15 +18,9 @@
     z-index: 1;
   }
 
-  img {
-    width: 100%;
-    height: 105px;
-    object-fit: cover;
-  }
-
   ion-card-header {
     padding: 12px;
-
+    min-height: 90px;
     ion-card-title {
       font-size: 16px;
       font-weight: 400;
@@ -43,4 +37,17 @@
       font-size: 14px;
     }
   }
+}
+
+.image-container-placeholder{
+  background-color: rgb(100 100 100 / 42%);
+  height: 120px;
+  max-height: 120px;
+  min-height: 120px;  
+  ion-img{
+         height: 120px;
+  max-height: 120px;
+  min-height: 120px; 
+  object-fit: cover;
+      }
 }

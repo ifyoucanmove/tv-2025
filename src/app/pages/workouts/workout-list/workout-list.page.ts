@@ -2,16 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { SharedModule } from 'src/app/shared/shared.module';
-
+import {
+  IonSkeletonText,
+} from '@ionic/angular/standalone';
 @Component({
   selector: 'app-workout-list',
   templateUrl: './workout-list.page.html',
   styleUrls: ['./workout-list.page.scss'],
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule,IonSkeletonText],
 })
 export class WorkoutListPage implements OnInit {
   workoutList: any[] = [];
+   imageLoaded:boolean = true;
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
@@ -27,10 +30,17 @@ export class WorkoutListPage implements OnInit {
                     title: ele.title
                   }
                  })
-                 console.log( res," res")
+             this.setFocus()
     });
   }
-
+  setFocus() {
+    setTimeout(() => {
+      let ele = document.getElementById('workout-card-0');
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
+  }
   navigateToFitness(item: any) {
     this.router.navigate(['/workout-day/', item.id]);
   }

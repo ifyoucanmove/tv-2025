@@ -17,7 +17,7 @@ import { image } from 'ionicons/icons';
 export class ChallengeVideoDetailsPage implements OnInit {
   videoId: any;
   videoData: any;
-  programs: any[] = [];
+  challenges: any[] = [];
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -34,10 +34,10 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-   /*  this.route.params.subscribe((params: any) => {
+    this.route.params.subscribe((params: any) => {
       this.videoId = params.id;
       this.loadVideo();
-    }); */
+    }); 
    
   }
   ngAfterViewInit(): void {
@@ -61,10 +61,15 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   loadVideo() {
-    this.apiService.getProgrammList().subscribe((data: any) => {
-      this.programs = data;
-      this.videoData = data.find((item: any) => item.id === this.videoId);
-      console.log(this.videoData);
+   this.apiService.getChallengeList().subscribe((res: any) => {
+    this.challenges =          res.challenges.map((ele:any) => {
+                  return {
+                    id:ele.id,
+                    image: ele.dashBannerUrl,
+                    title: ele.dashTitle,
+                    duration: '20'
+                  }
+                 })
     });
   }
   async openMoodTracker() {
@@ -81,7 +86,7 @@ export class ChallengeVideoDetailsPage implements OnInit {
     }
   }
 
-  async onVideoOpen(video: any) {
+ async onVideoOpen(video: any) {
     let videoData = {
       title: video.title1,
       image: video.image,
@@ -105,13 +110,12 @@ export class ChallengeVideoDetailsPage implements OnInit {
       console.error('Error opening video modal:', error);
     }
   }
-
-  onViewAllVideo(): void {
-    // Handle view all click
-    console.log('View all clicked');
+ onViewAllChallenges(): void {
+    this.router.navigate(['/challenge-list']);
   }
 
-  async onVideoClick(video: any) {
-    this.router.navigate(['/challenge-video-details/', video.id]);
+  onCardChallenges(video: any): void {
+    this.router.navigate(['/challenge-detail/', video.id]);
   }
+ 
 }

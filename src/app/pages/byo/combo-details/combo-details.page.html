@@ -33,13 +33,11 @@
     <ion-col size="3" >
      <ion-card class="custom-card"  id="combo-details-card-{{$index}}"
       [tabindex]="0">
-      <img [src]="item.postDetails.media" alt="image">
+       <div class="image-container-placeholder">
+      <img [src]="item.postDetails.media" alt="image"></div>
       <ion-card-header>
         <ion-card-title>{{item.postDetails.title}}</ion-card-title>
-        <div class="d-flex justify-content-between">
-       <!--  <ion-card-subtitle>{{item.postDetails.reps}} reps</ion-card-subtitle> -->
-        <span class="text-danger fs-12">{{item.restTime}}s</span>
-        </div>
+       
       </ion-card-header>
     </ion-card>
     </ion-col>}

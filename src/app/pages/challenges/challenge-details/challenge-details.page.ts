@@ -6,13 +6,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular/standalone';
 import { ApiService } from 'src/app/services/api.service';
 import { NavController } from '@ionic/angular';
+import {
+  IonSkeletonText,
+} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-challenge-details',
   templateUrl: './challenge-details.page.html',
   styleUrls: ['./challenge-details.page.scss'],
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule,IonSkeletonText],
 })
 export class ChallengeDetailsPage implements OnInit ,AfterViewInit{
   challenges: any[] = [];
@@ -20,6 +23,7 @@ export class ChallengeDetailsPage implements OnInit ,AfterViewInit{
   warmUpList: any[] = [];
 
   challengeDays:any = {};
+    imageLoaded:boolean = true;
   constructor(
     private apiService: ApiService,
     private modalController: ModalController,
@@ -85,38 +89,12 @@ export class ChallengeDetailsPage implements OnInit ,AfterViewInit{
   console.log('Grouped Days by Weeks:', result);
   return result;
 }
-  onClickChallenges(video: any): void {
-    this.onVideoClick(video)
-    return;
-      this.navCtrl.navigateForward('/challenge-video-details', {
+  openDetailPage(item:any){
+        this.navCtrl.navigateForward(`/challenge-video-detail/${item.id}`, {
     state: {
-      data: video
+      data: item
     }
   });
-    
-  }
-  async onVideoClick(video: any) {
-    let videoData = {
-      title: video.title1,
-      image: video.image,
-      videoId: video.id,
-      video: video.url,
-      description: '',
-    }
-    try {
-      const modal = await this.modalController.create({
-        component: VideoPlayerComponent,
-        componentProps: {
-          video: videoData,
-        },
-        cssClass: 'video-player-modal',
-        showBackdrop: true,
-        backdropDismiss: true,
-      });
-
-      await modal.present();
-    } catch (error) {
-      console.error('Error opening video modal:', error);
-    }
-  }
+      }
+ 
 }

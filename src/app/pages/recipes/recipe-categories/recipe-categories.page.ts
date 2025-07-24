@@ -21,10 +21,18 @@ export class RecipeCategoriesPage implements OnInit {
   loadRecipe() {
      this.apiService.getCategoriesList().subscribe((res: any) => {
    this.recipeList = res.categories['recipes'];
-                 console.log( res," res")
+             this.setFocus()
     });
   }
-
+setFocus() {
+    setTimeout(() => {
+      let ele = document.getElementById('recipee-card-0');
+       console.log(ele,"ele")
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
+  }
   navigateToRecipe(title: string) {
     this.router.navigate(['/recipes'], { queryParams: { category: title } });
   }

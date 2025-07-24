@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, effect, inject, OnInit, signal } from '@angular/core';
+import { AfterViewInit, Component, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -51,6 +51,7 @@ export class HomePage implements OnInit,AfterViewInit {
 thisweekGamifyWeeks: any;
    lastweekGamifyWeeks: any;
      auth: Auth = inject(Auth);
+      @ViewChild('videoSection') videoSection: any; 
   constructor(
     public authService: AuthService,
     public router: Router, private navCtrl: NavController,
@@ -94,7 +95,7 @@ thisweekGamifyWeeks: any;
                     title: ele.title
                   }
                  })
-                 console.log( res," res")
+               
                   this.recipe = res.categories['recipes'].map((ele:any) => {
                   return {
                     id:ele.id,
@@ -104,8 +105,7 @@ thisweekGamifyWeeks: any;
                  })
     });
     this.apiService.getChallengeList().subscribe((res: any) => {
-    //  this.challenges = res.challenges;
-        this.challenges =          res.challenges.map((ele:any) => {
+     this.challenges = res.challenges.map((ele:any) => {
                   return {
                     id:ele.id,
                     image: ele.dashBannerUrl,
@@ -113,10 +113,9 @@ thisweekGamifyWeeks: any;
                     duration: '20'
                   }
                  })
-                 console.log( this.challenges," this.challenges")
+                   console.log( res," res")
     });
     this.apiService.getFitnessList().subscribe((res: any) => {
-      //this.fitness = res['30day'];
        this.fitness = res['30day'].map((ele:any) => {
                   return {
                      id:ele.id,
@@ -126,8 +125,7 @@ thisweekGamifyWeeks: any;
                  })
     });
     this.apiService.getWorkoutList().subscribe((res: any) => {
-     // this.workouts = res.workout;
-       this.workoutSeries = res.workout.map((ele:any) => {
+     this.workoutSeries = res.workout.map((ele:any) => {
                   return {
                      id:ele.id,
                     image: ele.image,

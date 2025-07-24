@@ -9,15 +9,13 @@
     @for (item of userMadeList; track $index) {
     <ion-col size="3" (click)="navigateToComboDetails(item)">
    
-     <ion-card class="custom-card"  id="user-made-card-{{$index}}"
+     <ion-card class="custom-card position-relative"  id="user-made-card-{{$index}}"
       [tabindex]="0">
       <ion-card-header>
         <ion-card-title>{{item.name}}</ion-card-title>
-        <div class="d-flex justify-content-end">
-     <!--    <ion-card-subtitle>{{item.duration}}</ion-card-subtitle> -->
-        <span class="text-danger">{{item.level}}</span>
-        </div>
+      
       </ion-card-header>
+      <span class=" text-transform-capitalize level-span">{{item.level}}</span>
     </ion-card>
     
     </ion-col>}

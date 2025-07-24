@@ -4,29 +4,32 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { ModalController } from '@ionic/angular/standalone';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
+import { NavController } from '@ionic/angular';
+import {
+  IonSkeletonText,
+} from '@ionic/angular/standalone';
 @Component({
   selector: 'app-workout-day-series-list',
   templateUrl: './workout-day-series-list.page.html',
   styleUrls: ['./workout-day-series-list.page.scss'],
   standalone: true,
-  imports: [SharedModule]
+  imports: [SharedModule,IonSkeletonText]
 })
 export class WorkoutDaySeriesListPage implements OnInit {
 
    data:any;
    workoutDay: any =[];
+     imageLoaded:boolean = true;
   constructor(
     private route: ActivatedRoute,
-    private apiService: ApiService,
+    private apiService: ApiService,private navCtrl: NavController,
     private router: Router,    private modalController: ModalController
   ) {
          const navigation = this.router.getCurrentNavigation();
-         console.log(navigation,"navigation");
-  if (navigation?.extras.state) {
+   if (navigation?.extras.state) {
     const data:any = navigation.extras.state;
     this.data = data.data;
     console.log(data,"ss"); 
-  //   this.loadWorkoutList(this.data['id']);
   }
   }
 
@@ -40,34 +43,25 @@ export class WorkoutDaySeriesListPage implements OnInit {
       this.apiService.getProgramItems(id).subscribe((data: any) => {
  console.log(data)
  this.workoutDay = data.items;
+ this.setFocus()
     })
  
   }
- async onVideoClick(video: any) {
-   if(video.post.type =='Byo'){
-    return
+    setFocus() {
+    setTimeout(() => {
+      let ele = document.getElementById('workoutday-series-card-0');
+      if (ele) {
+        ele.focus();
+      }
+    }, 2000);
   }
-      let videoData = {
-        title: video.postTitle,
-        image: video.postImage,
-        videoId: video.id,
-        video: video.post.media,
-        description: '',
-      }
-      try {
-        const modal = await this.modalController.create({
-          component: VideoPlayerComponent,
-          componentProps: {
-            video: videoData,
-          },
-          cssClass: 'video-player-modal',
-          showBackdrop: true,
-          backdropDismiss: true,
-        });
-  
-        await modal.present();
-      } catch (error) {
-        console.error('Error opening video modal:', error);
-      }
+
+
+      openDetailPage(item:any){
+        this.navCtrl.navigateForward(`/workout-series-detail/${item.id}`, {
+    state: {
+      data: item
     }
+  });
+      }
 }

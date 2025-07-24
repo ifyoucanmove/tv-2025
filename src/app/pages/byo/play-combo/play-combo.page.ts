@@ -56,19 +56,16 @@ id:any;
   ngOnInit() {
     this.route.queryParamMap.subscribe((params:any) => {
       this.id = params.params['id'];
-     
-      this.apiService.getComboDetails( this.id).subscribe((data:any) => {
+     if(this.id){
+   this.apiService.getComboDetails( this.id).subscribe((data:any) => {
           this.combo = data;
         this.comboDetails.comboWorkouts = data.comboWorkouts;
          this.downloadCombos();
       });
+     }
+   
     });
-    /* this.apiService.getPlayCombo().subscribe((data: any) => {
-      this.combo = data;
-      this.comboDetails.comboWorkouts = data;
-      console.log(this.combo, 'combo');
-      this.downloadCombos();
-    }); */
+    
   }
 
   /*  loadComboWatchData() {
@@ -100,7 +97,6 @@ id:any;
   }
 
   startTimer(time: number, type: string) {
-    console.log('starttimer', time, type);
 
     if (type == 'resting') {
       this.buzzerAudio.nativeElement.play();
@@ -168,7 +164,6 @@ id:any;
   async downloadCombos() {
     this.comboLeft = this.comboDetails.repeatCount - 1;
     await this.gifService.getGifs();
-    // console.log("Start downloading", this.gifService.imagesData);
     this.isComboDownloading = true;
     for (let i = 0; i < this.comboDetails.comboWorkouts.length; i++) {
       const media =
@@ -183,7 +178,6 @@ id:any;
       }
     }
     await this.gifService.getGifs();
-    // console.log("Done downloading", this.gifService.imagesData);
 
     this.isComboDownloading = false;
       setTimeout(() => {
@@ -196,7 +190,6 @@ id:any;
   }
 
   playBYOCombo(type: string) {
-    console.log(type, 'playBYOCombo', this.comboDetails.comboWorkouts);
     if (type == 'start') {
       this.startTime = new Date();
       this.currentPlayingIndex = 0;

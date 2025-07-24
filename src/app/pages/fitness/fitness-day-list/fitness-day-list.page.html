@@ -9,11 +9,19 @@
           @if(fitnessDay.length > 0){
     @for (item of fitnessDay; track $index) {
     <ion-col size="3" >
-      <ion-card class="custom-card"  (click)="onVideoClick(item)"
+      <ion-card class="custom-card"  (click)="openDetailPage(item)"
+      id="fitnessday-card-{{$index}}"
       [tabindex]="0">
-      <img [src]="item.postImage" alt="image">
+       <div class="image-container-placeholder">
+        <div *ngIf="!imageLoaded">
+  <ion-skeleton-text style="width: 100%; height: 85px;" animated></ion-skeleton-text>
+</div>
+<ion-img [src]="item.postImage" (ionImgDidLoad)="imageLoaded = true"></ion-img></div>
+ 
       <ion-card-header>
-        <ion-card-subtitle>{{item.post.duration}}</ion-card-subtitle>
+        <ion-card-subtitle class="d-flex align-items-center ">
+              <ion-icon name="time-outline" class="me-1"></ion-icon>
+          {{item.post.duration}}</ion-card-subtitle>
       </ion-card-header>
     </ion-card>
     </ion-col>

@@ -8,8 +8,9 @@
          @if(recipeList.length > 0){
      @for (recipe of recipeList; track $index) {
     <ion-col size="3" >
-      <ion-card (click)="navigateToRecipe(recipe.title)" id="recipe-card-{{$index}}">
-       <ion-img [src]="recipe.imagePath"></ion-img>
+      <ion-card (click)="navigateToRecipe(recipe.title)" [tabindex]="0" id="recipee-card-{{$index}}">
+         <div class="image-container-placeholder">
+       <ion-img [src]="recipe.imagePath"></ion-img></div>
       </ion-card>
     </ion-col>}
      }

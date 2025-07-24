@@ -6,6 +6,7 @@ import {
   input,
   OnInit,
   output,
+  SimpleChanges,
 } from '@angular/core';
 import { SharedModule } from '../shared.module';
 
@@ -41,16 +42,34 @@ export class VideoSectionComponent implements OnInit {
   }
   constructor() {}
   ngOnInit() {
+   
     setTimeout(() => {
-      //  this.videoContainer = document.querySelector('.video-grid');
-      this.videoContainer = document.getElementById(
+       this.videoContainer = document.getElementById(
         this.title()
       ) as HTMLElement;
+    //  this.setFocus()
     }, 0);
   }
-  checkEnterFocus(): void {
-    console.log('checkEnterFocus');
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['videos'] && changes['videos'].currentValue) {
+      // Trigger your function when videos (challenges) are loaded
+      this.setFocus()
+    }
+  }
+
+  setFocus() {
+    setTimeout(() => {
+      let element = `videocardTop Challenges0`;
+      let ele = document.getElementById(element);
+     //  console.log(ele,"ele")
+      if (ele) {
+        ele.focus();
+      }
+    }, 4000);
+  }
+
+  checkEnterFocus(): void {
     const videoCard = this.videoContainer?.children[0] as HTMLElement;
     if (videoCard) {
       videoCard.focus();

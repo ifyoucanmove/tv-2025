@@ -7,7 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
-
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-workout-detail',
   templateUrl: './workout-detail.page.html',
@@ -16,21 +16,26 @@ import { VideoSectionComponent } from 'src/app/shared/video-section/video-sectio
   imports: [SharedModule, VideoSectionComponent],
 })
 export class WorkoutDetailPage implements OnInit {
-  fitnessId: any;
-  day: any;
-  fitnessData: any;
-  programs: any[] = [];
+  id: any;
+  data: any;
+  workouts: any[] = [];
   constructor(
     private route: ActivatedRoute,
-    public router: Router,
+    public router: Router,private navCtrl: NavController,
     public apiService: ApiService,
     private modalCtrl: ModalController
-  ) {}
+  ) {
+       const navigation = this.router.getCurrentNavigation();
+  if (navigation?.extras.state) {
+    const data:any = navigation.extras.state;
+    this.data = data.data;
+    console.log(data.data,"ss"); 
+  }
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
-      this.fitnessId = params.id;
-      this.day = params.day;
+      this.id = params.id;
       this.loadVideo();
     });
   }
@@ -54,15 +59,15 @@ export class WorkoutDetailPage implements OnInit {
   }
 
   loadVideo() {
-    this.apiService.getFitnessList().subscribe((data: any) => {
-      this.programs = data;
-      this.fitnessData = this.programs.find(
-        (item: any) => item.id === this.fitnessId
-      );
-      this.fitnessData = this.fitnessData.days.find(
-        (item: any) => item.day === this.day
-      );
-      console.log(this.fitnessData);
+ this.apiService.getCategoriesList().subscribe((res: any) => {
+   this.workouts = res.categories['workouts'].map((ele:any) => {
+                  return {
+                    id:ele.id,
+                    image: ele.imagePath,
+                    title: ele.title
+                  }
+                 })
+              
     });
   }
   async openMoodTracker() {
@@ -79,30 +84,38 @@ export class WorkoutDetailPage implements OnInit {
     }
   }
 
-  async onVideoOpen(video: any) {
-    try {
-      const modal = await this.modalCtrl.create({
-        component: VideoPlayerComponent,
-        componentProps: {
-          video: video,
-        },
-        cssClass: 'video-player-modal',
-        showBackdrop: true,
-        backdropDismiss: true,
-      });
-
-      await modal.present();
-    } catch (error) {
-      console.error('Error opening video modal:', error);
+ async onVideoOpen(video: any) {
+   if(video.type =='Byo'){
+    return
+  }
+      let videoData = {
+        title: video.title,
+        image: video.image,
+        videoId: video.id,
+        video: video.media,
+        description: '',
+      }
+      try {
+        const modal = await this.modalCtrl.create({
+          component: VideoPlayerComponent,
+          componentProps: {
+            video: videoData,
+          },
+          cssClass: 'video-player-modal',
+          showBackdrop: true,
+          backdropDismiss: true,
+        });
+  
+        await modal.present();
+      } catch (error) {
+        console.error('Error opening video modal:', error);
+      }
     }
-  }
 
-  onViewAllVideo(): void {
-    // Handle view all click
-    console.log('View all clicked');
+ onViewAllWorkouts(): void {
+    this.router.navigate(['/workout-list']);
   }
-
-  async onVideoClick(video: any) {
-    this.router.navigate(['/workout-day/', video.id]);
+   onCardWorkouts(video: any): void {
+   this.router.navigate(['/workout-day/', video.id]);
   }
 }

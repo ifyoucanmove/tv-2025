@@ -4,9 +4,9 @@
 <div class="hero-content">
   <div class="hero-title">
     <h1>{{ videoData.title }}</h1>
-   <!--  <div class="hero-description">
-      {{ videoData.description }}
-    </div> -->
+ <div class="hero-description">
+     Duration: {{ videoData.durationMinutes }} Mins
+    </div> 
     <div class="hero-actions">
       <button class="btn-icon-primary ion"  id="play-btn" tabindex="0" (click)="onVideoOpen(videoData)">
         <ion-icon name="play" slot="start"></ion-icon>
@@ -41,10 +41,10 @@
   <ion-row>
     <ion-col size="12">
       <app-video-section
-        [videos]="programs"
-        [title]="'Top Videos'"
-        (viewAllClick)="onViewAllVideo()"
-        (videoClick)="onVideoClick($event)">
+        [videos]="challenges"
+        [title]="'Top Challenges'"
+        (viewAllClick)="onViewAllChallenges()"
+        (videoClick)="onCardChallenges($event)">
       </app-video-section>
     </ion-col>
   </ion-row>
