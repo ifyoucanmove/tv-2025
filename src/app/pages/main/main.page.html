@@ -27,12 +27,9 @@
     </mat-sidenav>
   
     <!-- Main Content -->
-    <mat-sidenav-content class="dark-theme" style="margin-left: 0px;">
-      <div class="content" [class.content-collapsed]="isCollapsed" tabindex="-1" #mainContent>
-      <!--   <button mat-icon-button (click)="toggleSidenav()" style="z-index: 99;">
-          <mat-icon>{{ isCollapsed ? 'menu' : 'menu_open' }}</mat-icon>
-        </button> -->
-        <router-outlet></router-outlet>
+    <mat-sidenav-content class="dark-theme" [tabindex]="-1" style="margin-left: 0px;">
+      <div class="content" [class.content-collapsed]="isCollapsed" [tabindex]="-1" #mainContent>
+     <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>

@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import {
   IonSkeletonText,
 } from '@ionic/angular/standalone';
+import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-challenge-list',
   templateUrl: './challenge-list.page.html',
@@ -16,7 +17,8 @@ import {
 export class ChallengeListPage implements OnInit {
   challengeList: any[] = [];
   imageLoaded:boolean = true;
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private navCtrl: NavController,
+    private router: Router) {}
 
   ngOnInit() {
     this.loadPrograms();
@@ -41,7 +43,12 @@ export class ChallengeListPage implements OnInit {
     });
   }
   onNavigate(video: any) {
-  this.router.navigate(['/challenge-detail/', video.id]);
+      this.navCtrl.navigateForward(`/challenge-detail/${video.id}`, {
+    state: {
+      data: video.title
+    }
+  });
+ // this.router.navigate(['/challenge-detail/', video.id]);
   }
 
   

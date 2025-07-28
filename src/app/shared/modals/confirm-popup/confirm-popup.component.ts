@@ -24,4 +24,7 @@ export class ConfirmPopupComponent implements OnInit {
   onSubmit(type: any) {
     this.modalCtrl.dismiss(type);
   }
+   onCancel() {
+    this.modalCtrl.dismiss(null);
+  }
 }

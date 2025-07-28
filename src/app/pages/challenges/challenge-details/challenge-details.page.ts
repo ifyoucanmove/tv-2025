@@ -19,22 +19,30 @@ import {
 })
 export class ChallengeDetailsPage implements OnInit ,AfterViewInit{
   challenges: any[] = [];
-  coolDownList: any[] = [];
-  warmUpList: any[] = [];
 
   challengeDays:any = {};
     imageLoaded:boolean = true;
+    id:any;
+    data:any
   constructor(
     private apiService: ApiService,
     private modalController: ModalController,
     private router: Router,
     public route:ActivatedRoute,
     private navCtrl: NavController
-  ) {}
+  ) {
+      const navigation = this.router.getCurrentNavigation();
+  if (navigation?.extras.state) {
+    const data:any = navigation.extras.state;
+    this.data = data.data;
+    console.log(this.data,"da")
+  }
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       const challengeId = params['id'];
+      this.id = params['id'];
       if (challengeId) {
         this.loadChallengeDetails(challengeId);
       }
@@ -64,14 +72,9 @@ export class ChallengeDetailsPage implements OnInit ,AfterViewInit{
     this.apiService.getChallengeDetails(id).subscribe((data: any) => {
       this.challenges = data.days;
      this.challengeDays = this.groupDaysByWeeks(this.challenges)
-      console.log('Challenges:', this.challenges);
+      console.log(data,'Challenges:', this.challenges);
     });
-    this.apiService.getCoolDownList().subscribe((data: any) => {
-      this.coolDownList = data;
-    });
-    this.apiService.getWarmUpList().subscribe((data: any) => {
-      this.warmUpList = data;
-    });
+  
   }
   groupDaysByWeeks(daysArray:any) {
   const result:any = {};
@@ -92,7 +95,9 @@ export class ChallengeDetailsPage implements OnInit ,AfterViewInit{
   openDetailPage(item:any){
         this.navCtrl.navigateForward(`/challenge-video-detail/${item.id}`, {
     state: {
-      data: item
+      data: item,
+      challengeId: this.id,
+      challengeName: this.data
     }
   });
       }

@@ -14,14 +14,17 @@
         </button>
       </div>
       <div class="d-flex gap-2 mt-3 flex-wrap">
-         <button class="btn-icon-primary"  tabindex="0" (click)="openMoodTracker()">
-          <ion-icon name="checkmark-circle-outline"></ion-icon>
-          <span>Mark as Complete</span>
-        </button>
-        <button class="btn-icon-primary"  tabindex="0">
-          <ion-icon name="checkmark-done-circle-outline"></ion-icon>
-          <span>Completed</span>
-        </button>
+           @if (!isDayVideoWatched(day)) {
+       <button class="btn-icon-primary"  tabindex="0" (click)="openMoodTracker()">
+        <ion-icon name="checkmark-circle-outline"></ion-icon>
+        <span>Mark as Complete</span>
+      </button> }
+         @if (isDayVideoWatched(day)) {
+      <button class="btn-icon-primary"  tabindex="0"  (click)="openMoodTracker()">
+        <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+         <span class="me-2">Completed <span *ngIf="getDayWatchCount(day) > 1">({{getDayWatchCount(day)
+                  }})</span></span>
+      </button>}
         <button class="btn-icon-primary"  tabindex="0">
           <ion-icon name="heart-outline"></ion-icon>
           

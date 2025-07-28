@@ -100,4 +100,20 @@ firestore: Firestore = inject(Firestore);
     return this.http.get(`https://us-central1-ifyoucanmove-dev.cloudfunctions.net/mystats?userId=${userEmail}&fromDate=${startDate}&toDate=${endDate}`);
   }
   
+  markAsComplete(data:any){
+    return this.http.post(`${this.apiBaseUrl}/mark-as-complete`,data)
+  }
+
+   geCompletetionDataOfSeries(data:any) {
+    return this.http.get(`${this.apiBaseUrl}/completion-status?userId=${data.userId}&programId=${data.programId}&repeatCount=${data.repeatCount}`);
+  }
+   geCompletetionDataOfWorkout(data:any) {
+    return this.http.get(`${this.apiBaseUrl}/completion-status?userId=${data.userId}&category=${data.category}&postId=${data.postId}`);
+  }
+   geWatchCompletedDataOfChallenge(data:any) {
+    return this.http.get(`${this.apiBaseUrl}/challenge-watch-count?challengeId=${data.challengeId}&day=${data.day}&userId=${data.userId}&repeatCount=${data.repeatCount}`);
+  }
+   geWatchCompletedDataOfProgram(data:any) {
+    return this.http.get(`${this.apiBaseUrl}/challenge-watch-count?programId=${data.programId}&userId=${data.userId}&repeatCount=${data.repeatCount}`);
+  }
 }

@@ -142,12 +142,12 @@ thisweekGamifyWeeks: any;
         this.yesterday = [];
         this.older = [];
         res.forEach((item: any) => {
-          if (moment(item.date.toDate()).isSame(moment(), 'day')) {
+          if (moment(item.date).isSame(moment(), 'day')) {
             this.today.push(item);
             this.today.reverse();
             console.log(this.today, 'this.today');
           } else if (
-            moment(item.date.toDate()).isSame(
+            moment(item.date).isSame(
               moment().subtract(1, 'day'),
               'day'
             )
@@ -195,7 +195,11 @@ thisweekGamifyWeeks: any;
   }
 
   onCardChallenges(video: any): void {
-    this.router.navigate(['/challenge-detail/', video.id]);
+     this.navCtrl.navigateForward(`/challenge-detail/${video.id}`, {
+    state: {
+      data: video.title
+    }
+  });
   }
   onViewAllFitness(): void {
     this.router.navigate(['/fitness-list']);

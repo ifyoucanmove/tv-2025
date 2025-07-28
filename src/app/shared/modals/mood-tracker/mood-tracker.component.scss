@@ -13,8 +13,11 @@
 }
 
 .energy-card.selected {
-  background-color: #2a2a2a;
+  .card-body{
+  background-color: #00ffa3;
   color: white;
+  }
+
 }
 
 .mood-emoji {

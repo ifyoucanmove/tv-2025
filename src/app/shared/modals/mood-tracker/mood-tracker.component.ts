@@ -33,14 +33,14 @@ export class MoodTrackerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.data(), 'fat');
+   /*  console.log(this.data(), 'fat');
     if (this.data()) {
       this.workoutForm.patchValue(this.data().energyData);
-    }
+    } */
   }
 
   close() {
-    this.modalCtrl.dismiss();
+    this.modalCtrl.dismiss(null);
   }
 
   selectEnergyLevel(field: string, level: number): void {
@@ -51,8 +51,10 @@ export class MoodTrackerComponent implements OnInit {
     this.workoutForm.get(field)?.setValue(mood);
   }
 
-  onSubmit(): void {}
-  update() {}
+  onSubmit(): void {
+    this.modalCtrl.dismiss(this.workoutForm.value);
+  }
+ 
   continueWithoutSaving() {
     this.close();
   }

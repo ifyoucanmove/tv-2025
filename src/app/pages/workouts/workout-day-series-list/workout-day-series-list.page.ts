@@ -60,7 +60,8 @@ export class WorkoutDaySeriesListPage implements OnInit {
       openDetailPage(item:any){
         this.navCtrl.navigateForward(`/workout-series-detail/${item.id}`, {
     state: {
-      data: item
+      data: item,
+      programTitle: this.data.title
     }
   });
       }

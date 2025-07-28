@@ -202,3 +202,11 @@ ion-grid {
     }
   }
 }
+
+
+ion-grid:focus {
+  outline: none;
+}
+ion-grid:focus-visible {
+  outline: none;
+}

@@ -7,6 +7,8 @@ import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.c
 import { VideoSectionComponent } from 'src/app/shared/video-section/video-section.component';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
 import { image } from 'ionicons/icons';
+import { AuthService } from 'src/app/services/auth.service';
+import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
 @Component({
   selector: 'app-challenge-video-details',
   templateUrl: './challenge-video-details.page.html',
@@ -18,9 +20,15 @@ export class ChallengeVideoDetailsPage implements OnInit {
   videoId: any;
   videoData: any;
   challenges: any[] = [];
+  challengeId:any;
+    challengeName:any;
+   repeatCount!: number;
+   watchData: any[] = [];
+    lastWatched: any[] = [];
+      isCompleted = false;
   constructor(
     private route: ActivatedRoute,
-    public router: Router,
+    public router: Router,public authService:AuthService,
     public apiService: ApiService,
     private modalCtrl: ModalController
   ) {
@@ -29,11 +37,19 @@ export class ChallengeVideoDetailsPage implements OnInit {
   if (navigation?.extras.state) {
     const data:any = navigation.extras.state;
     this.videoData = data.data;
+ this.challengeId = data.challengeId;
+ this.challengeName  = data.challengeName;
     console.log(data,"ss"); 
   }
   }
 
   ngOnInit() {
+       if (this.authService.customer().challengeData[this.challengeId]) {
+      this.repeatCount = this.authService.customer().challengeData[this.challengeId].repeatCount;
+    } else {
+      this.repeatCount = 0;
+    }
+        console.log(this.authService.customer(),"cu",this.repeatCount)
     this.route.params.subscribe((params: any) => {
       this.videoId = params.id;
       this.loadVideo();
@@ -71,6 +87,43 @@ export class ChallengeVideoDetailsPage implements OnInit {
                   }
                  })
     });
+  this.loadWatchData()
+  }
+
+  loadWatchData(){
+    let data={
+"repeatCount": this.repeatCount,
+ "userId": this.authService.userObjData.email,
+ "challengeId": this.challengeId,
+"day": this.videoData.day,   
+} 
+
+    this.apiService.geWatchCompletedDataOfChallenge(data).subscribe((res:any) => {
+      console.log(res)
+         this.watchData = res;
+          this.getLastWatched(this.watchData);
+    })
+  }
+   getLastWatched(watched: any[]) {
+    const data = watched.filter((result: { day: string; }) => {
+      return result.day === String(this.videoData.day);
+    });
+    if (data.length > 1) {
+      data.sort((a: any, b: any) => {
+        return a.date - b.date;
+      });
+    }
+    this.lastWatched = data;
+  }
+   isDayVideoWatched(day: any) {
+    const data = this.watchData.filter((res) => {
+      return res.day === String(day);
+    });
+    if (data.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
   async openMoodTracker() {
     const modal = await this.modalCtrl.create({
@@ -82,10 +135,45 @@ export class ChallengeVideoDetailsPage implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     if (data) {
-      console.log('Selected mood:', data.mood);
+      console.log('Selected mood:', data);
+      this.saveMarkAsComplete(data)
     }
   }
 
+  saveMarkAsComplete(energyData:any){
+  this.isCompleted = this.isDayVideoWatched(this.videoData.day);
+  let obj = {
+     category: "challenge",
+       isCompletedEmails: this.authService.customer().isCompletedEmails??false,
+     date: new Date(),
+    energyData: energyData,
+      userId: this.authService.userObjData.email,
+  title: this.challengeName,
+  durationMinutes: this.videoData.durationMinutes,
+watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
+  repeatCount:this.repeatCount,
+  isEnergyDataAvailable: energyData ? true : false,
+ challengeId: this.challengeId,
+  day: this.videoData.day,    
+  }
+  console.log(obj)
+  if (this.isCompleted) {
+        this.openDialog(obj);
+      } 
+      else{
+ this.apiService.markAsComplete(obj).subscribe(res =>{
+    console.log(res)
+  })
+      }
+ 
+  }
+  getMaxWatchCount(): number {
+    if(!this.watchData){
+      return 0
+    }
+    return this.watchData.length;
+    
+  }
  async onVideoOpen(video: any) {
     let videoData = {
       title: video.title1,
@@ -117,5 +205,39 @@ export class ChallengeVideoDetailsPage implements OnInit {
   onCardChallenges(video: any): void {
     this.router.navigate(['/challenge-detail/', video.id]);
   }
- 
+
+
+   async openDialog(watchData: any) {
+       const modal = await this.modalCtrl.create({
+      component: ConfirmPopupComponent,
+     componentProps: {
+    // Your data goes here
+    title: 'Confirm Action',
+    message: "Are you sure you want to mark this video as complete again?",
+    confirmText: 'Yes',
+    cancelText: 'No'
+  },
+   cssClass: 'confirm-modal',
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      console.log('Selected:', data);
+      this.apiService.markAsComplete(watchData).subscribe(res =>{
+    console.log(res)
+      this.loadWatchData()
+  })
+    }
+
+   
+  }
+ getDayWatchCount(day: any) {
+    const data = this.watchData.filter((res) => {
+      return res.day === String(day);
+    });
+    return data?.length??0;
+    
+  }
 }

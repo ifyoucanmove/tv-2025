@@ -88,7 +88,8 @@ export class FitnessDayListPage implements OnInit {
       openDetailPage(item:any){
         this.navCtrl.navigateForward(`/fitness-detail/${item.id}`, {
     state: {
-      data: item
+      programData: item,
+      fitnessData: this.data
     }
   });
       }
