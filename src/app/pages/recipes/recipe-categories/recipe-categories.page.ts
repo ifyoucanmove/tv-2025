@@ -19,15 +19,15 @@ export class RecipeCategoriesPage implements OnInit {
   }
 
   loadRecipe() {
-     this.apiService.getCategoriesList().subscribe((res: any) => {
-   this.recipeList = res.categories['recipes'];
-             this.setFocus()
+    this.apiService.getCategoriesList().subscribe((res: any) => {
+      this.recipeList = res.categories['recipes'];
+      this.setFocus();
     });
   }
-setFocus() {
+  setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('recipee-card-0');
-       console.log(ele,"ele")
+      console.log(ele, 'ele');
       if (ele) {
         ele.focus();
       }

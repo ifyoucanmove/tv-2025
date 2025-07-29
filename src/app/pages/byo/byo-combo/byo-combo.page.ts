@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  IonSkeletonText,
-} from '@ionic/angular/standalone';
+import { IonSkeletonText } from '@ionic/angular/standalone';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
@@ -11,11 +9,11 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './byo-combo.page.html',
   styleUrls: ['./byo-combo.page.scss'],
   standalone: true,
-  imports: [SharedModule,IonSkeletonText],
+  imports: [SharedModule, IonSkeletonText],
 })
 export class ByoComboPage implements OnInit {
   byoList: any[] = [];
-    imageLoaded:boolean = true;
+  imageLoaded: boolean = true;
   constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
@@ -25,10 +23,10 @@ export class ByoComboPage implements OnInit {
   loadByo() {
     this.apiService.getByoList().subscribe((data: any) => {
       this.byoList = data;
-      this.setFocus()
+      this.setFocus();
     });
   }
-    setFocus() {
+  setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('byo-card-0');
       if (ele) {

@@ -13,19 +13,23 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class PreMadeComboPage implements OnInit {
   preMadeComboList: any[] = [];
-  constructor(private apiService: ApiService,public authService:AuthService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    public authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadByo();
   }
 
   loadByo() {
-       this.apiService.getPreMadeCombo().subscribe((data: any) => {
+    this.apiService.getPreMadeCombo().subscribe((data: any) => {
       this.preMadeComboList = data.combos;
-         this.setFocus()
+      this.setFocus();
     });
   }
-   setFocus() {
+  setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('pre-made-card-0');
       if (ele) {
@@ -34,6 +38,6 @@ export class PreMadeComboPage implements OnInit {
     }, 2000);
   }
   navigateToComboDetails(item: any) {
-    this.router.navigate(['/combo-details',item.id]);
+    this.router.navigate(['/combo-details', item.id]);
   }
 }

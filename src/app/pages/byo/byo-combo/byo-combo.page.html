@@ -5,28 +5,36 @@
     </ion-col>
   </ion-row>
   <ion-row>
-   @if(byoList.length > 0){
-    @for (item of byoList; track $index) {
-      @if (item.title != 'Combo Dashboard') {
-    <ion-col size="4" >
-     <ion-card class="custom-card"   id="byo-card-{{$index}}"
-      [tabindex]="0" (click)="navigateTo(item.route)">
-       <div class="image-container-placeholder">
-        <div *ngIf="!imageLoaded">
-  <ion-skeleton-text style="width: 100%; height: 100px;" animated></ion-skeleton-text>
-</div>
-<ion-img [src]="item.image" (ionImgDidLoad)="imageLoaded = true"></ion-img>
-</div>
-    </ion-card>
-  
+    @if(byoList.length > 0){ @for (item of byoList; track $index) { @if
+    (item.title != 'Combo Dashboard') {
+    <ion-col size="4">
+      <ion-card
+        class="custom-card"
+        id="byo-card-{{$index}}"
+        [tabindex]="0"
+        (click)="navigateTo(item.route)"
+      >
+        <div class="image-container-placeholder">
+          <div *ngIf="!imageLoaded">
+            <ion-skeleton-text
+              style="width: 100%; height: 100px"
+              animated
+            ></ion-skeleton-text>
+          </div>
+          <ion-img
+            [src]="item.image"
+            (ionImgDidLoad)="imageLoaded = true"
+          ></ion-img>
+        </div>
+      </ion-card>
     </ion-col>
+    } } } @else {
+    <ngx-skeleton-loader
+      count="3"
+      appearance="square"
+      class="custom-skeleton-width custom-skeleton-width-col03"
+      [theme]="{height: '120px'}"
+    />
     }
-  }
-  }
-       @else { 
-    <ngx-skeleton-loader count="3" appearance="square" 
-   class="custom-skeleton-width custom-skeleton-width-col03"
-   [theme]="{height: '120px'}" />
-} 
-    </ion-row>
-  </ion-grid>
+  </ion-row>
+</ion-grid>

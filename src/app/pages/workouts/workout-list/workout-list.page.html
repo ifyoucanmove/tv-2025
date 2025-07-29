@@ -5,25 +5,35 @@
     </ion-col>
   </ion-row>
   <ion-row>
-        @if(workoutList.length > 0){
-    @for (video of workoutList; track $index) {
+    @if(workoutList.length > 0){ @for (video of workoutList; track $index) {
     <ion-col size="3">
-      <ion-card class="custom-card"   (click)="navigateToFitness(video)"
-      id="workout-card-{{$index}}"
-      [tabindex]="0">
-       <div class="image-container-placeholder">
-      <div *ngIf="!imageLoaded">
-  <ion-skeleton-text style="width: 100%; height: 110px;" animated></ion-skeleton-text>
-</div>
-<ion-img [src]="video.image" (ionImgDidLoad)="imageLoaded = true"></ion-img>
-</div>
-    </ion-card>
+      <ion-card
+        class="custom-card"
+        (click)="navigateToFitness(video)"
+        id="workout-card-{{$index}}"
+        [tabindex]="0"
+      >
+        <div class="image-container-placeholder">
+          <div *ngIf="!imageLoaded">
+            <ion-skeleton-text
+              style="width: 100%; height: 110px"
+              animated
+            ></ion-skeleton-text>
+          </div>
+          <ion-img
+            [src]="video.image"
+            (ionImgDidLoad)="imageLoaded = true"
+          ></ion-img>
+        </div>
+      </ion-card>
     </ion-col>
-  }}
-     @else { 
-    <ngx-skeleton-loader count="4" appearance="square" 
-     class="custom-skeleton-width "
-   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
-} 
-    </ion-row>
-  </ion-grid>
+    }} @else {
+    <ngx-skeleton-loader
+      count="4"
+      appearance="square"
+      class="custom-skeleton-width"
+      [theme]="{height: '120px',width: 'calc(25% - 10px)'}"
+    />
+    }
+  </ion-row>
+</ion-grid>

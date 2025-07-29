@@ -3,29 +3,27 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { NavController } from '@ionic/angular';
-import {
-  IonSkeletonText,
-} from '@ionic/angular/standalone';
+import { IonSkeletonText } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.page.html',
   styleUrls: ['./recipe-list.page.scss'],
   standalone: true,
-  imports: [SharedModule,IonSkeletonText],
+  imports: [SharedModule, IonSkeletonText],
 })
 export class RecipeListPage implements OnInit {
   categoryName: any;
   recipeList: any[] = [];
-   imageLoaded:boolean = true;
+  imageLoaded: boolean = true;
   constructor(
     public route: ActivatedRoute,
-    private apiService: ApiService,private navCtrl: NavController,
+    private apiService: ApiService,
+    private navCtrl: NavController,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: any) => {
-      console.log(params);
       this.categoryName = params.category;
       this.loadRecipe(params.category);
     });
@@ -33,13 +31,11 @@ export class RecipeListPage implements OnInit {
 
   loadRecipe(category: string) {
     this.apiService.getPostByCategory(category).subscribe((data: any) => {
-
- this.recipeList = data.posts;
- this.setFocus()
-    })
-  
+      this.recipeList = data.posts;
+      this.setFocus();
+    });
   }
-setFocus() {
+  setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('recipe-list-0');
       if (ele) {
@@ -48,11 +44,10 @@ setFocus() {
     }, 2000);
   }
   navigateToSingleRecipe(item: any) {
-     this.navCtrl.navigateForward(`/single-recipe/${item.id}`, {
-    state: {
-      data: item
-    }
-  });
-  //  this.router.navigate(['/single-recipe', id]);
+    this.navCtrl.navigateForward(`/single-recipe/${item.id}`, {
+      state: {
+        data: item,
+      },
+    });
   }
 }

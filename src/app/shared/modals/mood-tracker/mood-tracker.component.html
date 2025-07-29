@@ -1,4 +1,4 @@
-<div class="modal-content p-3" >
+<div class="modal-content p-3">
   <div class="modal-header d-flex justify-content-between">
     <h5 class="modal-title text-white mt-0">Workout Mood & Energy Tracker</h5>
   </div>
@@ -46,7 +46,7 @@
                     "
                     (click)="selectMood('beforeMood', mood.value)"
                   >
-                    <span style="font-size: 2rem" class="text-white">{{
+                    <span style="font-size: 1rem" class="text-white">{{
                       mood.emoji
                     }}</span>
                     <span class="mood-label text-white">{{ mood.label }}</span>
@@ -62,7 +62,7 @@
 
               <!-- Energy Level Selection -->
               <label class="form-label text-white">Energy Level (1-5)</label>
-              <div class="d-flex flex-wrap gap-2 mb-3">
+              <div class="d-flex flex-wrap gap-1 mb-3">
                 @for (level of energyLevels; track $index) {
                 <ng-container>
                   <div
@@ -82,7 +82,7 @@
 
               <!-- Mood Selection -->
               <label class="form-label text-white">Mood</label>
-              <div class="d-flex flex-wrap gap-3 mb-3">
+              <div class="d-flex flex-wrap gap-1 mb-3">
                 @for (mood of moods; track $index) {
                 <ng-container>
                   <div
@@ -93,7 +93,7 @@
                     "
                     (click)="selectMood('afterMood', mood.value)"
                   >
-                    <span style="font-size: 2rem" class="text-white">{{
+                    <span style="font-size: 1rem" class="text-white">{{
                       mood.emoji
                     }}</span>
                     <span class="mood-label text-white">{{ mood.label }}</span>
@@ -109,7 +109,7 @@
 
   <div class="modal-footer">
     <button class="btn btn-secondary-custom" (click)="onSubmit()">Save</button>
-   
+
     <button class="btn btn-secondary-custom" (click)="close()">Cancel</button>
   </div>
 </div>

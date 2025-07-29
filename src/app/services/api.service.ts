@@ -12,9 +12,35 @@ export class ApiService {
   http: HttpClient = inject(HttpClient);
   apiBaseUrl = environment.apiBaseUrl;
 firestore: Firestore = inject(Firestore); 
+
+/* jsons */
   getProgrammList() {
     return this.http.get('assets/jsons/list.json');
   }
+    getFavList() {
+    return this.http.get('assets/jsons/favorite.json');
+  }
+
+  getByoList() {
+    return this.http.get('assets/jsons/byo.json');
+  }
+ /*  combo feed */
+  getComboFeed() {
+    return this.http.get('assets/jsons/combo-feed.json');
+  }
+  getMyCombo() {
+    return this.http.get('assets/jsons/my-combo.json');
+  }
+  getComboFeedDetails() {
+    return this.http.get<any>('assets/jsons/combo-feed-details.json');
+  }
+ 
+  getFitnessDashboardDetails() {
+    return this.http.get('assets/jsons/fitness-dashboard-details.json');
+  }
+
+/*   api calls */
+
   getChallengeList() {
     return this.http.get(`${this.apiBaseUrl}/challenges`);
   }
@@ -30,30 +56,14 @@ firestore: Firestore = inject(Firestore);
    getProgramItems(id:any) {
     return this.http.get(`${this.apiBaseUrl}/program-items?programId=${id}`);
   }
-  getCoolDownList() {
-    return this.http.get('assets/jsons/cool-down.json');
-  }
-  getWarmUpList() {
-    return this.http.get('assets/jsons/warm-up.json');
-  }
+
   getFitnessList() {
     return this.http.get(`${this.apiBaseUrl}/programs`);
   }
   getWorkoutList() {
     return  this.http.get(`${this.apiBaseUrl}/programs`);
   }
-  getFavList() {
-    return this.http.get('assets/jsons/favorite.json');
-  }
-  getRecipeCategory() {
-    return this.http.get('assets/jsons/recipe.json');
-  }
-  getSingleRecipe() {
-    return this.http.get('assets/jsons/single-recipe.json');
-  }
-  getByoList() {
-    return this.http.get('assets/jsons/byo.json');
-  }
+
   getComboDetails(id:any) {
  return this.http.get(`${this.apiBaseUrl}/byo-combo-details?id=${id}`);
   }
@@ -63,30 +73,8 @@ firestore: Firestore = inject(Firestore);
   getPreMadeCombo() {
  return this.http.get(`${this.apiBaseUrl}/admin-byo-combos`);
   }
-  getComboFeed() {
-    return this.http.get('assets/jsons/combo-feed.json');
-  }
-  getMyCombo() {
-    return this.http.get('assets/jsons/my-combo.json');
-  }
-  getComboFeedDetails() {
-    return this.http.get<any>('assets/jsons/combo-feed-details.json');
-  }
-  getUserResponse(data: any) {
-    return this.http.get('assets/jsons/user-response.json');
-  }
 
-  getPlayCombo() {
-    return this.http.get('assets/jsons/play-combo.json');
-  }
-  getFitnessDashboardDetails() {
-    return this.http.get('assets/jsons/fitness-dashboard-details.json');
-  }
 
-  // Example: Real API call using the base URL
-  getSomethingFromApi() {
-    return this.http.get(`${this.apiBaseUrl}/your-endpoint`);
-  }
 
   loadCompletedData(userEmail: any, limit: number) {
     let collectionRef = collection(this.firestore, "completed")
@@ -109,6 +97,9 @@ firestore: Firestore = inject(Firestore);
   }
    geCompletetionDataOfWorkout(data:any) {
     return this.http.get(`${this.apiBaseUrl}/completion-status?userId=${data.userId}&category=${data.category}&postId=${data.postId}`);
+  }
+   geCompletetionDataOfByo(data:any) {
+    return this.http.get(`${this.apiBaseUrl}/completion-status?userId=${data.userId}&category=${data.category}&comboId=${data.comboId}`);
   }
    geWatchCompletedDataOfChallenge(data:any) {
     return this.http.get(`${this.apiBaseUrl}/challenge-watch-count?challengeId=${data.challengeId}&day=${data.day}&userId=${data.userId}&repeatCount=${data.repeatCount}`);

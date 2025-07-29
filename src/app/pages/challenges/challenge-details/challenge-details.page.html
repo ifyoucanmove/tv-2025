@@ -7,143 +7,187 @@
   <ion-row>
     <ion-col size="12">
       <h4 class="text-white">Week 1</h4>
-        <div class="video-grid"   >
-               @if(challengeDays['week1']?.length > 0){
-    @for (video of challengeDays['week1']; track $index) {
-    <ion-card class="video-card"
-       [id]="'weekcard' + $index" 
-      [tabindex]="1"
-      (click)="openDetailPage(video)">
-      <div class="image-container-placeholder">
-     <div *ngIf="!imageLoaded">
-  <ion-skeleton-text style="width: 100%; height: 110px;" animated></ion-skeleton-text>
-</div>
-<ion-img [src]="video.image" (ionImgDidLoad)="imageLoaded = true"></ion-img>
-</div>
-      <ion-card-header>
-        <ion-card-subtitle class="d-flex align-items-center ">
-          <ion-icon name="time-outline" class="me-1"></ion-icon>
-          {{video.durationMinutes}} Mins</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>}
-  }
-   @else { 
-    <ngx-skeleton-loader count="4" appearance="square" 
-    class="custom-skeleton-width"
-   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
-}  
-  </div>
+      <div class="video-grid">
+        @if(challengeDays['week1']?.length > 0){ @for (video of
+        challengeDays['week1']; track $index) {
+        <ion-card
+          class="video-card"
+          [id]="'weekcard' + $index"
+          [tabindex]="1"
+          (click)="openDetailPage(video)"
+        >
+          <div class="image-container-placeholder">
+            <div *ngIf="!imageLoaded">
+              <ion-skeleton-text
+                style="width: 100%; height: 110px"
+                animated
+              ></ion-skeleton-text>
+            </div>
+            <ion-img
+              [src]="video.image"
+              (ionImgDidLoad)="imageLoaded = true"
+            ></ion-img>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle class="d-flex align-items-center">
+              <ion-icon name="time-outline" class="me-1"></ion-icon>
+              {{video.durationMinutes}} Mins</ion-card-subtitle
+            >
+          </ion-card-header> </ion-card
+        >} } @else {
+        <ngx-skeleton-loader
+          count="4"
+          appearance="square"
+          class="custom-skeleton-width"
+          [theme]="{height: '120px',width: 'calc(25% - 10px)'}"
+        />
+        }
+      </div>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col size="12">
-            <h4 class="text-white">Week 2</h4>
-       <div class="video-grid"   >
-             @if(challengeDays['week2']?.length > 0){
-    @for (video of challengeDays['week2']; track $index) {
-    <ion-card class="video-card"
-       [id]="'videocard' + $index" 
-      
-      (click)="openDetailPage(video)">
-     <div class="image-container-placeholder">
-     <div *ngIf="!imageLoaded">
-  <ion-skeleton-text style="width: 100%; height: 110px;" animated></ion-skeleton-text>
-</div>
-<ion-img [src]="video.image" (ionImgDidLoad)="imageLoaded = true"></ion-img>
-</div>
-      <ion-card-header>
-        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>}
-  }
-   @else { 
-    <ngx-skeleton-loader count="4" appearance="square" 
-    class="custom-skeleton-width"
-   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
-}  
-  </div>
+      <h4 class="text-white">Week 2</h4>
+      <div class="video-grid">
+        @if(challengeDays['week2']?.length > 0){ @for (video of
+        challengeDays['week2']; track $index) {
+        <ion-card
+          class="video-card"
+          [id]="'videocard' + $index"
+          (click)="openDetailPage(video)"
+        >
+          <div class="image-container-placeholder">
+            <div *ngIf="!imageLoaded">
+              <ion-skeleton-text
+                style="width: 100%; height: 110px"
+                animated
+              ></ion-skeleton-text>
+            </div>
+            <ion-img
+              [src]="video.image"
+              (ionImgDidLoad)="imageLoaded = true"
+            ></ion-img>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle
+              >{{video.durationMinutes}} Mins</ion-card-subtitle
+            >
+          </ion-card-header> </ion-card
+        >} } @else {
+        <ngx-skeleton-loader
+          count="4"
+          appearance="square"
+          class="custom-skeleton-width"
+          [theme]="{height: '120px',width: 'calc(25% - 10px)'}"
+        />
+        }
+      </div>
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col size="12">
-        <h4 class="text-white">Week 3</h4>
-      <div class="video-grid"   >
-             @if(challengeDays['week3']?.length > 0){
-    @for (video of challengeDays['week3']; track $index) {
-    <ion-card class="video-card"
-       [id]="'videocard' + $index" 
-      
-      (click)="openDetailPage(video)">
-      <div class="image-container-placeholder">
-     <div *ngIf="!imageLoaded">
-  <ion-skeleton-text style="width: 100%; height: 110px;" animated></ion-skeleton-text>
-</div>
-<ion-img [src]="video.image" (ionImgDidLoad)="imageLoaded = true"></ion-img>
-</div>
-      <ion-card-header>
-        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>}
-  }
-   @else { 
-    <ngx-skeleton-loader count="4" appearance="square" 
-    class="custom-skeleton-width"
-   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
-}  
-  </div>
+      <h4 class="text-white">Week 3</h4>
+      <div class="video-grid">
+        @if(challengeDays['week3']?.length > 0){ @for (video of
+        challengeDays['week3']; track $index) {
+        <ion-card
+          class="video-card"
+          [id]="'videocard' + $index"
+          (click)="openDetailPage(video)"
+        >
+          <div class="image-container-placeholder">
+            <div *ngIf="!imageLoaded">
+              <ion-skeleton-text
+                style="width: 100%; height: 110px"
+                animated
+              ></ion-skeleton-text>
+            </div>
+            <ion-img
+              [src]="video.image"
+              (ionImgDidLoad)="imageLoaded = true"
+            ></ion-img>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle
+              >{{video.durationMinutes}} Mins</ion-card-subtitle
+            >
+          </ion-card-header> </ion-card
+        >} } @else {
+        <ngx-skeleton-loader
+          count="4"
+          appearance="square"
+          class="custom-skeleton-width"
+          [theme]="{height: '120px',width: 'calc(25% - 10px)'}"
+        />
+        }
+      </div>
     </ion-col>
   </ion-row>
-   <ion-row>
+  <ion-row>
     <ion-col size="12">
-        <h4 class="text-white">Week 4</h4>
-      <div class="video-grid"   >
-             @if(challengeDays['week4']?.length > 0){
-    @for (video of challengeDays['week4']; track $index) {
-    <ion-card class="video-card"
-       [id]="'videocard' + $index" 
-      
-      (click)="openDetailPage(video)">
-       <div class="image-container-placeholder">
-     <div *ngIf="!imageLoaded">
-  <ion-skeleton-text style="width: 100%; height: 110px;" animated></ion-skeleton-text>
-</div>
-<ion-img [src]="video.image" (ionImgDidLoad)="imageLoaded = true"></ion-img>
-</div>
-      <ion-card-header>
-        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>}
-  }
-       @else { 
-    <ngx-skeleton-loader count="4" appearance="square" 
-    class="custom-skeleton-width"
-   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
-}  
-  </div>
+      <h4 class="text-white">Week 4</h4>
+      <div class="video-grid">
+        @if(challengeDays['week4']?.length > 0){ @for (video of
+        challengeDays['week4']; track $index) {
+        <ion-card
+          class="video-card"
+          [id]="'videocard' + $index"
+          (click)="openDetailPage(video)"
+        >
+          <div class="image-container-placeholder">
+            <div *ngIf="!imageLoaded">
+              <ion-skeleton-text
+                style="width: 100%; height: 110px"
+                animated
+              ></ion-skeleton-text>
+            </div>
+            <ion-img
+              [src]="video.image"
+              (ionImgDidLoad)="imageLoaded = true"
+            ></ion-img>
+          </div>
+          <ion-card-header>
+            <ion-card-subtitle
+              >{{video.durationMinutes}} Mins</ion-card-subtitle
+            >
+          </ion-card-header> </ion-card
+        >} } @else {
+        <ngx-skeleton-loader
+          count="4"
+          appearance="square"
+          class="custom-skeleton-width"
+          [theme]="{height: '120px',width: 'calc(25% - 10px)'}"
+        />
+        }
+      </div>
     </ion-col>
   </ion-row>
-    <ion-row>
+  <ion-row>
     <ion-col size="12">
-        <h4 class="text-white">Week 5</h4>
-      <div class="video-grid"   >
-             @if(challengeDays['week5']?.length > 0){
-    @for (video of challengeDays['week5']; track $index) {
-    <ion-card class="video-card"
-       [id]="'videocard' + $index" 
-      
-      (click)="openDetailPage(video)">
-      <img [src]="video.image" alt="video image">
-      <ion-card-header>
-        <ion-card-subtitle>{{video.durationMinutes}} Mins</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>}
-  }
-      @else { 
-    <ngx-skeleton-loader count="4" appearance="square" 
-    class="custom-skeleton-width"
-   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
-}  
-  </div>
+      <h4 class="text-white">Week 5</h4>
+      <div class="video-grid">
+        @if(challengeDays['week5']?.length > 0){ @for (video of
+        challengeDays['week5']; track $index) {
+        <ion-card
+          class="video-card"
+          [id]="'videocard' + $index"
+          (click)="openDetailPage(video)"
+        >
+          <img [src]="video.image" alt="video image" />
+          <ion-card-header>
+            <ion-card-subtitle
+              >{{video.durationMinutes}} Mins</ion-card-subtitle
+            >
+          </ion-card-header> </ion-card
+        >} } @else {
+        <ngx-skeleton-loader
+          count="4"
+          appearance="square"
+          class="custom-skeleton-width"
+          [theme]="{height: '120px',width: 'calc(25% - 10px)'}"
+        />
+        }
+      </div>
     </ion-col>
   </ion-row>
 </ion-grid>

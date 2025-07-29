@@ -13,7 +13,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class UserMadeComboPage implements OnInit {
   userMadeList: any[] = [];
-  constructor(private apiService: ApiService,public authService:AuthService, private router: Router) {}
+  constructor(
+    private apiService: ApiService,
+    public authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.loadUserMade();
@@ -27,14 +31,16 @@ export class UserMadeComboPage implements OnInit {
     }, 2000);
   }
   loadUserMade() {
-    this.apiService.getUserMadeCombo('user',this.authService.userObjData.uid).subscribe((data: any) => {
-      this.userMadeList = data.combos;
-      this.setFocus();
-    });
+    this.apiService
+      .getUserMadeCombo('user', this.authService.userObjData.uid)
+      .subscribe((data: any) => {
+        this.userMadeList = data.combos;
+        this.setFocus();
+      });
   }
 
   navigateToComboDetails(item: any) {
-    this.router.navigate(['/combo-details',item.id]);
+    this.router.navigate(['/combo-details', item.id]);
     /* this.router.navigate(['/combo-details'], {
       queryParams: { id: item.id, title: item.title },
     }); */

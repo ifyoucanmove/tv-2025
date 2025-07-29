@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, effect, inject, OnInit, signal, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  effect,
+  inject,
+  OnInit,
+  signal,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,16 +23,14 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
   imports: [SharedModule, VideoSectionComponent],
 })
-export class HomePage implements OnInit,AfterViewInit {
-  
+export class HomePage implements OnInit, AfterViewInit {
   programs: any[] = [];
   workoutSeries: any[] = [];
   workouts: any[] = [];
   fitness: any[] = [];
   challenges: any[] = [];
   recipe: any[] = [];
-  stripeCustomer:any;
-
+  stripeCustomer: any;
 
   data = {
     lastWeek: {
@@ -41,37 +47,37 @@ export class HomePage implements OnInit,AfterViewInit {
     },
   };
 
-   today: any[] = [];
+  today: any[] = [];
   yesterday: any[] = [];
   older: any[] = [];
 
-    thisweekGamifyData: any;
+  thisweekGamifyData: any;
   lastweekGamifyData: any;
 
-thisweekGamifyWeeks: any;
-   lastweekGamifyWeeks: any;
-     auth: Auth = inject(Auth);
-      @ViewChild('videoSection') videoSection: any; 
+  thisweekGamifyWeeks: any;
+  lastweekGamifyWeeks: any;
+  auth: Auth = inject(Auth);
+  @ViewChild('videoSection') videoSection: any;
   constructor(
     public authService: AuthService,
-    public router: Router, private navCtrl: NavController,
+    public router: Router,
+    private navCtrl: NavController,
     public apiService: ApiService
   ) {
     effect(() => {
-  const customerValue = this.authService.customer();
-  if (customerValue) {
-    console.log('Customer changed:', customerValue);
-   this.stripeCustomer = customerValue;
-  }
-});
+      const customerValue = this.authService.customer();
+      if (customerValue) {
+        console.log('Customer changed:', customerValue);
+        this.stripeCustomer = customerValue;
+      }
+    });
   }
 
- async ngOnInit() {
-      const user = await authState(this.auth).pipe(first()).toPromise();
-      if(user){
-      this.getAllData()
-      }
-   
+  async ngOnInit() {
+    const user = await authState(this.auth).pipe(first()).toPromise();
+    if (user) {
+      this.getAllData();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -83,58 +89,58 @@ thisweekGamifyWeeks: any;
     }, 2000);
   }
 
-  getAllData(){
- this.apiService.getProgrammList().subscribe((res: any) => {
+  getAllData() {
+    this.apiService.getProgrammList().subscribe((res: any) => {
       this.programs = res;
     });
- this.apiService.getCategoriesList().subscribe((res: any) => {
-   this.workouts = res.categories['workouts'].map((ele:any) => {
-                  return {
-                    id:ele.id,
-                    image: ele.imagePath,
-                    title: ele.title
-                  }
-                 })
-               
-                  this.recipe = res.categories['recipes'].map((ele:any) => {
-                  return {
-                    id:ele.id,
-                    image: ele.imagePath,
-                    title: ele.title
-                  }
-                 })
+    this.apiService.getCategoriesList().subscribe((res: any) => {
+      this.workouts = res.categories['workouts'].map((ele: any) => {
+        return {
+          id: ele.id,
+          image: ele.imagePath,
+          title: ele.title,
+        };
+      });
+
+      this.recipe = res.categories['recipes'].map((ele: any) => {
+        return {
+          id: ele.id,
+          image: ele.imagePath,
+          title: ele.title,
+        };
+      });
     });
     this.apiService.getChallengeList().subscribe((res: any) => {
-     this.challenges = res.challenges.map((ele:any) => {
-                  return {
-                    id:ele.id,
-                    image: ele.dashBannerUrl,
-                    title: ele.dashTitle,
-                    duration: '20'
-                  }
-                 })
-                   console.log( res," res")
+      this.challenges = res.challenges.map((ele: any) => {
+        return {
+          id: ele.id,
+          image: ele.dashBannerUrl,
+          title: ele.dashTitle,
+          duration: '20',
+        };
+      });
+      console.log(res, ' res');
     });
     this.apiService.getFitnessList().subscribe((res: any) => {
-       this.fitness = res['30day'].map((ele:any) => {
-                  return {
-                     id:ele.id,
-                    image: ele.image,
-                    title: ele.title
-                  }
-                 })
+      this.fitness = res['30day'].map((ele: any) => {
+        return {
+          id: ele.id,
+          image: ele.image,
+          title: ele.title,
+        };
+      });
     });
     this.apiService.getWorkoutList().subscribe((res: any) => {
-     this.workoutSeries = res.workout.map((ele:any) => {
-                  return {
-                     id:ele.id,
-                    image: ele.image,
-                    title: ele.title
-                  }
-                 })
+      this.workoutSeries = res.workout.map((ele: any) => {
+        return {
+          id: ele.id,
+          image: ele.image,
+          title: ele.title,
+        };
+      });
     });
 
-     this.apiService
+    this.apiService
       .loadCompletedData(this.authService.userObjData.email, 3)
       .subscribe((res) => {
         console.log(res, 'res');
@@ -147,10 +153,7 @@ thisweekGamifyWeeks: any;
             this.today.reverse();
             console.log(this.today, 'this.today');
           } else if (
-            moment(item.date).isSame(
-              moment().subtract(1, 'day'),
-              'day'
-            )
+            moment(item.date).isSame(moment().subtract(1, 'day'), 'day')
           ) {
             this.yesterday.push(item);
             this.yesterday.reverse();
@@ -176,7 +179,7 @@ thisweekGamifyWeeks: any;
     };
   }
   recentlyCompleted(): void {
-    return
+    return;
     this.router.navigate(['/fitness-dashboard-details']);
   }
 
@@ -195,22 +198,22 @@ thisweekGamifyWeeks: any;
   }
 
   onCardChallenges(video: any): void {
-     this.navCtrl.navigateForward(`/challenge-detail/${video.id}`, {
-    state: {
-      data: video.title
-    }
-  });
+    this.navCtrl.navigateForward(`/challenge-detail/${video.id}`, {
+      state: {
+        data: video.title,
+      },
+    });
   }
   onViewAllFitness(): void {
     this.router.navigate(['/fitness-list']);
   }
 
   onCardFitness(video: any): void {
-  this.navCtrl.navigateForward(`/program/${video.id}`, {
-    state: {
-      data: video
-    }
-  });
+    this.navCtrl.navigateForward(`/program/${video.id}`, {
+      state: {
+        data: video,
+      },
+    });
   }
   onViewAllWorkoutsSeries(): void {
     this.router.navigate(['/workout-series-list']);
@@ -219,22 +222,24 @@ thisweekGamifyWeeks: any;
     this.router.navigate(['/workout-list']);
   }
   onCardWorkoutsSeries(video: any): void {
-         this.navCtrl.navigateForward(`/workout-day-series/${video.id}`, {
-    state: {
-      data: video
-    }
-  });
- //  this.router.navigate(['/workout-day-series/', video.id]);
+    this.navCtrl.navigateForward(`/workout-day-series/${video.id}`, {
+      state: {
+        data: video,
+      },
+    });
+    //  this.router.navigate(['/workout-day-series/', video.id]);
   }
   onCardWorkouts(video: any): void {
-   this.router.navigate(['/workout-day/', video.id]);
+    this.router.navigate(['/workout-day/', video.id]);
   }
   onViewAllReceipe(): void {
     this.router.navigate(['/recipe-category']);
   }
 
   onCardReceipe(video: any): void {
-   this.router.navigate(['/recipes'], { queryParams: { category: video.title } });
+    this.router.navigate(['/recipes'], {
+      queryParams: { category: video.title },
+    });
   }
   getDate(date: string) {
     const str = date?.split('-')?.join('/');
@@ -244,13 +249,13 @@ thisweekGamifyWeeks: any;
     return (dateString = dateString.substring(0, dateString.indexOf(',')));
   }
 
-    async getThisWeek() {
+  async getThisWeek() {
     const currentDate = moment();
     const weekStart = currentDate.clone().startOf('weeks').format('MM-DD-YYYY');
     const weekEnd = currentDate.clone().endOf('weeks').format('MM-DD-YYYY');
     try {
       this.apiService
-        .getMystatsData(weekStart, weekEnd,this.authService.userObjData.email)
+        .getMystatsData(weekStart, weekEnd, this.authService.userObjData.email)
         .subscribe((res: any) => {
           const dataThisWeek = res;
           if (dataThisWeek && dataThisWeek.message === 'Success') {
@@ -278,12 +283,10 @@ thisweekGamifyWeeks: any;
             });
 
             this.data.thisWeek.totalMinutes = this.thisweekGamifyWeeks.total;
-           // this.addRemoveGif();
+            // this.addRemoveGif();
           }
         });
-    } catch (error) {
-    
-    }
+    } catch (error) {}
   }
 
   async getLastweek() {
@@ -339,7 +342,6 @@ thisweekGamifyWeeks: any;
         });
     } catch (err) {
       console.log('error', err);
-    
     }
   }
 }

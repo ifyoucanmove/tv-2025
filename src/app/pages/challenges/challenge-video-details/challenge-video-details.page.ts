@@ -20,41 +20,42 @@ export class ChallengeVideoDetailsPage implements OnInit {
   videoId: any;
   videoData: any;
   challenges: any[] = [];
-  challengeId:any;
-    challengeName:any;
-   repeatCount!: number;
-   watchData: any[] = [];
-    lastWatched: any[] = [];
-      isCompleted = false;
+  challengeId: any;
+  challengeName: any;
+  repeatCount!: number;
+  watchData: any[] = [];
+  lastWatched: any[] = [];
+  isCompleted = false;
   constructor(
     private route: ActivatedRoute,
-    public router: Router,public authService:AuthService,
+    public router: Router,
+    public authService: AuthService,
     public apiService: ApiService,
     private modalCtrl: ModalController
   ) {
-      const navigation = this.router.getCurrentNavigation();
-         console.log(navigation,"navigation");
-  if (navigation?.extras.state) {
-    const data:any = navigation.extras.state;
-    this.videoData = data.data;
- this.challengeId = data.challengeId;
- this.challengeName  = data.challengeName;
-    console.log(data,"ss"); 
-  }
+    const navigation = this.router.getCurrentNavigation();
+    console.log(navigation, 'navigation');
+    if (navigation?.extras.state) {
+      const data: any = navigation.extras.state;
+      this.videoData = data.data;
+      this.challengeId = data.challengeId;
+      this.challengeName = data.challengeName;
+      console.log(data, 'ss');
+    }
   }
 
   ngOnInit() {
-       if (this.authService.customer().challengeData[this.challengeId]) {
-      this.repeatCount = this.authService.customer().challengeData[this.challengeId].repeatCount;
+    if (this.authService.customer().challengeData[this.challengeId]) {
+      this.repeatCount =
+        this.authService.customer().challengeData[this.challengeId].repeatCount;
     } else {
       this.repeatCount = 0;
     }
-        console.log(this.authService.customer(),"cu",this.repeatCount)
+    console.log(this.authService.customer(), 'cu', this.repeatCount);
     this.route.params.subscribe((params: any) => {
       this.videoId = params.id;
       this.loadVideo();
-    }); 
-   
+    });
   }
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -77,35 +78,37 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   loadVideo() {
-   this.apiService.getChallengeList().subscribe((res: any) => {
-    this.challenges =          res.challenges.map((ele:any) => {
-                  return {
-                    id:ele.id,
-                    image: ele.dashBannerUrl,
-                    title: ele.dashTitle,
-                    duration: '20'
-                  }
-                 })
+    this.apiService.getChallengeList().subscribe((res: any) => {
+      this.challenges = res.challenges.map((ele: any) => {
+        return {
+          id: ele.id,
+          image: ele.dashBannerUrl,
+          title: ele.dashTitle,
+          duration: '20',
+        };
+      });
     });
-  this.loadWatchData()
+    this.loadWatchData();
   }
 
-  loadWatchData(){
-    let data={
-"repeatCount": this.repeatCount,
- "userId": this.authService.userObjData.email,
- "challengeId": this.challengeId,
-"day": this.videoData.day,   
-} 
+  loadWatchData() {
+    let data = {
+      repeatCount: this.repeatCount,
+      userId: this.authService.userObjData.email,
+      challengeId: this.challengeId,
+      day: this.videoData.day,
+    };
 
-    this.apiService.geWatchCompletedDataOfChallenge(data).subscribe((res:any) => {
-      console.log(res)
-         this.watchData = res;
-          this.getLastWatched(this.watchData);
-    })
+    this.apiService
+      .geWatchCompletedDataOfChallenge(data)
+      .subscribe((res: any) => {
+        console.log(res);
+        this.watchData = res;
+        this.getLastWatched(this.watchData);
+      });
   }
-   getLastWatched(watched: any[]) {
-    const data = watched.filter((result: { day: string; }) => {
+  getLastWatched(watched: any[]) {
+    const data = watched.filter((result: { day: string }) => {
       return result.day === String(this.videoData.day);
     });
     if (data.length > 1) {
@@ -115,7 +118,7 @@ export class ChallengeVideoDetailsPage implements OnInit {
     }
     this.lastWatched = data;
   }
-   isDayVideoWatched(day: any) {
+  isDayVideoWatched(day: any) {
     const data = this.watchData.filter((res) => {
       return res.day === String(day);
     });
@@ -136,52 +139,51 @@ export class ChallengeVideoDetailsPage implements OnInit {
     const { data } = await modal.onWillDismiss();
     if (data) {
       console.log('Selected mood:', data);
-      this.saveMarkAsComplete(data)
+      this.saveMarkAsComplete(data);
     }
   }
 
-  saveMarkAsComplete(energyData:any){
-  this.isCompleted = this.isDayVideoWatched(this.videoData.day);
-  let obj = {
-     category: "challenge",
-       isCompletedEmails: this.authService.customer().isCompletedEmails??false,
-     date: new Date(),
-    energyData: energyData,
+  saveMarkAsComplete(energyData: any) {
+    this.isCompleted = this.isDayVideoWatched(this.videoData.day);
+    let obj = {
+      category: 'challenge',
+      isCompletedEmails: this.authService.customer().isCompletedEmails ?? false,
+      date: new Date(),
+      energyData: energyData,
       userId: this.authService.userObjData.email,
-  title: this.challengeName,
-  durationMinutes: this.videoData.durationMinutes,
-watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
-  repeatCount:this.repeatCount,
-  isEnergyDataAvailable: energyData ? true : false,
- challengeId: this.challengeId,
-  day: this.videoData.day,    
-  }
-  console.log(obj)
-  if (this.isCompleted) {
-        this.openDialog(obj);
-      } 
-      else{
- this.apiService.markAsComplete(obj).subscribe(res =>{
-    console.log(res)
-  })
-      }
- 
+      title: this.challengeName,
+      durationMinutes: this.videoData.durationMinutes,
+      watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
+      repeatCount: this.repeatCount,
+      isEnergyDataAvailable: energyData ? true : false,
+      challengeId: this.challengeId,
+      day: this.videoData.day,
+    };
+    console.log(obj);
+    if (this.isCompleted) {
+      this.openDialog(obj);
+    } else {
+      this.apiService.markAsComplete(obj).subscribe((res) => {
+        if (res) {
+          this.loadWatchData();
+        }
+      });
+    }
   }
   getMaxWatchCount(): number {
-    if(!this.watchData){
-      return 0
+    if (!this.watchData) {
+      return 0;
     }
     return this.watchData.length;
-    
   }
- async onVideoOpen(video: any) {
+  async onVideoOpen(video: any) {
     let videoData = {
       title: video.title1,
       image: video.image,
       videoId: video.id,
       video: video.url,
       description: '',
-    }
+    };
     try {
       const modal = await this.modalCtrl.create({
         component: VideoPlayerComponent,
@@ -198,7 +200,7 @@ watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
       console.error('Error opening video modal:', error);
     }
   }
- onViewAllChallenges(): void {
+  onViewAllChallenges(): void {
     this.router.navigate(['/challenge-list']);
   }
 
@@ -206,18 +208,17 @@ watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
     this.router.navigate(['/challenge-detail/', video.id]);
   }
 
-
-   async openDialog(watchData: any) {
-       const modal = await this.modalCtrl.create({
+  async openDialog(watchData: any) {
+    const modal = await this.modalCtrl.create({
       component: ConfirmPopupComponent,
-     componentProps: {
-    // Your data goes here
-    title: 'Confirm Action',
-    message: "Are you sure you want to mark this video as complete again?",
-    confirmText: 'Yes',
-    cancelText: 'No'
-  },
-   cssClass: 'confirm-modal',
+      componentProps: {
+        // Your data goes here
+        title: 'Confirm Action',
+        message: 'Are you sure you want to mark this video as complete again?',
+        confirmText: 'Yes',
+        cancelText: 'No',
+      },
+      cssClass: 'confirm-modal',
     });
 
     await modal.present();
@@ -225,19 +226,16 @@ watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
     const { data } = await modal.onWillDismiss();
     if (data) {
       console.log('Selected:', data);
-      this.apiService.markAsComplete(watchData).subscribe(res =>{
-    console.log(res)
-      this.loadWatchData()
-  })
+      this.apiService.markAsComplete(watchData).subscribe((res) => {
+        console.log(res);
+        this.loadWatchData();
+      });
     }
-
-   
   }
- getDayWatchCount(day: any) {
+  getDayWatchCount(day: any) {
     const data = this.watchData.filter((res) => {
       return res.day === String(day);
     });
-    return data?.length??0;
-    
+    return data?.length ?? 0;
   }
 }

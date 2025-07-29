@@ -21,55 +21,55 @@ export class FitnessDetailPage implements OnInit {
   day: any;
   fitnessData: any;
   programData: any;
-  data:any;
+  data: any;
   programs: any[] = [];
 
-     repeatCount!: number;
-   watchData: any[] = [];
-    lastWatched: any[] = [];
-      isCompleted = false;
+  repeatCount!: number;
+  watchData: any[] = [];
+  lastWatched: any[] = [];
+  isCompleted = false;
   constructor(
     private route: ActivatedRoute,
-    public router: Router,private navCtrl: NavController,
-    public apiService: ApiService,public authService:AuthService,
+    public router: Router,
+    private navCtrl: NavController,
+    public apiService: ApiService,
+    public authService: AuthService,
     private modalCtrl: ModalController
   ) {
-     const navigation = this.router.getCurrentNavigation();
-  if (navigation?.extras.state) {
-    const data:any = navigation.extras.state;
-    this.fitnessData = data.fitnessData;
-    this.programData = data.programData;
-    this.day = data.programData.dayNumber
-    console.log(data,"ss"); 
-  }
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      const data: any = navigation.extras.state;
+      this.fitnessData = data.fitnessData;
+      this.programData = data.programData;
+      this.day = data.programData.dayNumber;
+      console.log(data, 'ss');
+    }
   }
 
   ngOnInit() {
- 
     this.route.paramMap.subscribe((params: any) => {
-   //  this.programId = params.params.id;
-   this.programId = this.programData.programId;
+      //  this.programId = params.params.id;
+      this.programId = this.programData.programId;
       this.loadData();
     });
   }
 
-    loadWatchData(){
-    let data={
-   "userId": this.authService.userObjData.email,
- "programId":this.programId,
- "repeatCount": this.repeatCount,
- }
-  this.apiService.geCompletetionDataOfSeries(data).subscribe((res:any) => {
-      console.log(res)
-        if (res.length > 0) {
-            this.watchData = res.filter((ele:any) => ele.day == this.day);
-            console.log(this.watchData)
-              this.getLastWatched(this.watchData);
-          } else {
-            this.watchData = [];
-          }
-    }) 
-
+  loadWatchData() {
+    let data = {
+      userId: this.authService.userObjData.email,
+      programId: this.programId,
+      repeatCount: this.repeatCount,
+    };
+    this.apiService.geCompletetionDataOfSeries(data).subscribe((res: any) => {
+      console.log(res);
+      if (res.length > 0) {
+        this.watchData = res.filter((ele: any) => ele.day == this.day);
+        console.log(this.watchData);
+        this.getLastWatched(this.watchData);
+      } else {
+        this.watchData = [];
+      }
+    });
   }
 
   ngAfterViewInit(): void {
@@ -92,36 +92,36 @@ export class FitnessDetailPage implements OnInit {
   }
 
   loadData() {
-       console.log(this.authService.customer(),"customer")
-        if (this.authService.customer().programData[this.programId]) {
-      this.repeatCount = this.authService.customer().programData[this.programId].repeatCount;
+    console.log(this.authService.customer(), 'customer');
+    if (this.authService.customer().programData[this.programId]) {
+      this.repeatCount =
+        this.authService.customer().programData[this.programId].repeatCount;
     } else {
       this.repeatCount = 0;
     }
-      this.apiService.getFitnessList().subscribe((res: any) => {
-       this.programs = res['30day'].map((ele:any) => {
-                  return {
-                     id:ele.id,
-                    image: ele.image,
-                    title: ele.title
-                  }
-                 })
-                 this.loadWatchData()
+    this.apiService.getFitnessList().subscribe((res: any) => {
+      this.programs = res['30day'].map((ele: any) => {
+        return {
+          id: ele.id,
+          image: ele.image,
+          title: ele.title,
+        };
+      });
+      this.loadWatchData();
     });
   }
 
-
   async onVideoOpen(video: any) {
-  if(video.post.type =='Byo'){
-    return
-  }
-       let videoData = {
-        title: video.postTitle,
-        image: video.postImage,
-        videoId: video.id,
-        video: video.post.media,
-        description: '',
-      }
+    if (video.post.type == 'Byo') {
+      return;
+    }
+    let videoData = {
+      title: video.postTitle,
+      image: video.postImage,
+      videoId: video.id,
+      video: video.post.media,
+      description: '',
+    };
     try {
       const modal = await this.modalCtrl.create({
         component: VideoPlayerComponent,
@@ -144,15 +144,15 @@ export class FitnessDetailPage implements OnInit {
   }
 
   onCardFitness(video: any): void {
-  this.navCtrl.navigateForward(`/program/${video.id}`, {
-    state: {
-      data: video
-    }
-  });
+    this.navCtrl.navigateForward(`/program/${video.id}`, {
+      state: {
+        data: video,
+      },
+    });
   }
 
-   getLastWatched(watched: any[]) {
-    const data = watched.filter((result: { day: string; }) => {
+  getLastWatched(watched: any[]) {
+    const data = watched.filter((result: { day: string }) => {
       return result.day === String(this.day);
     });
     if (data.length > 1) {
@@ -162,7 +162,7 @@ export class FitnessDetailPage implements OnInit {
     }
     this.lastWatched = data;
   }
-   isDayVideoWatched(day: any) {
+  isDayVideoWatched(day: any) {
     const data = this.watchData.filter((res) => {
       return res.day == day;
     });
@@ -183,73 +183,70 @@ export class FitnessDetailPage implements OnInit {
     const { data } = await modal.onWillDismiss();
     if (data) {
       console.log('Selected mood:', data);
-      this.saveMarkAsComplete(data)
+      this.saveMarkAsComplete(data);
     }
   }
 
-  saveMarkAsComplete(energyData:any){
-  this.isCompleted = this.isDayVideoWatched(this.day);
-  let obj = {
-     category:  "30day",
-       isCompletedEmails: this.authService.customer().isCompletedEmails??false,
-     date: new Date(),
-    energyData: energyData,
+  saveMarkAsComplete(energyData: any) {
+    this.isCompleted = this.isDayVideoWatched(this.day);
+    let obj = {
+      category: '30day',
+      isCompletedEmails: this.authService.customer().isCompletedEmails ?? false,
+      date: new Date(),
+      energyData: energyData,
       userId: this.authService.userObjData.email,
-  title: this.programData.postTitle,
-  programTitle:this.fitnessData.title,
-  durationMinutes: this.programData.post.durationMinutes,
-  watchCount: this.isCompleted ? this.getDayWatchCount(this.day) + 1 : 1,
-  repeatCount:this.repeatCount,
-  isEnergyDataAvailable: energyData ? true : false,
- programId: this.programId,
-  day: this.day,    
-  }
-  console.log(obj)
-  if (this.isCompleted) {
-        this.openDialog(obj);
-      } 
-      else{
- this.apiService.markAsComplete(obj).subscribe(res =>{
-    console.log(res)
-  })
-      }
- 
+      title: this.programData.postTitle,
+      programTitle: this.fitnessData.title,
+      durationMinutes: this.programData.post.durationMinutes,
+      watchCount: this.isCompleted ? this.getDayWatchCount(this.day) + 1 : 1,
+      repeatCount: this.repeatCount,
+      isEnergyDataAvailable: energyData ? true : false,
+      programId: this.programId,
+      day: this.day,
+    };
+    console.log(obj);
+    if (this.isCompleted) {
+      this.openDialog(obj);
+    } else {
+      this.apiService.markAsComplete(obj).subscribe((res) => {
+        if (res) {
+          this.loadWatchData();
+        }
+      });
+    }
   }
   getMaxWatchCount(): number {
-    if(!this.watchData){
-      return 0
+    if (!this.watchData) {
+      return 0;
     }
     return this.watchData.length;
-    
   }
-  
-     async openDialog(watchData: any) {
-         const modal = await this.modalCtrl.create({
-        component: ConfirmPopupComponent,
-       componentProps: {
-      // Your data goes here
-      title: 'Confirm Action',
-      message: "Are you sure you want to mark this video as complete again?",
-      confirmText: 'Yes',
-      cancelText: 'No'
-    },
-     cssClass: 'confirm-modal',
+
+  async openDialog(watchData: any) {
+    const modal = await this.modalCtrl.create({
+      component: ConfirmPopupComponent,
+      componentProps: {
+        // Your data goes here
+        title: 'Confirm Action',
+        message: 'Are you sure you want to mark this video as complete again?',
+        confirmText: 'Yes',
+        cancelText: 'No',
+      },
+      cssClass: 'confirm-modal',
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      console.log('Selected:', data);
+      this.apiService.markAsComplete(watchData).subscribe((res) => {
+        console.log(res);
+        this.loadWatchData();
       });
-  
-      await modal.present();
-  
-      const { data } = await modal.onWillDismiss();
-      if (data) {
-        console.log('Selected:', data);
-        this.apiService.markAsComplete(watchData).subscribe(res =>{
-      console.log(res)
-        this.loadWatchData()
-    })
-      }
-  
-     
     }
-   getDayWatchCount(day: any): any {
+  }
+  getDayWatchCount(day: any): any {
     if (this.watchData && this.watchData.length) {
       const data = this.watchData.filter((res) => {
         return res.day === day;

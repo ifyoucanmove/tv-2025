@@ -5,25 +5,25 @@
     </ion-col>
   </ion-row>
   <ion-row>
-     @if(userMadeList.length > 0){
-    @for (item of userMadeList; track $index) {
+    @if(userMadeList.length > 0){ @for (item of userMadeList; track $index) {
     <ion-col size="3" (click)="navigateToComboDetails(item)">
-   
-     <ion-card class="custom-card position-relative"  id="user-made-card-{{$index}}"
-      [tabindex]="0">
-      <ion-card-header>
-        <ion-card-title>{{item.name}}</ion-card-title>
-      
-      </ion-card-header>
-      <span class=" text-transform-capitalize level-span">{{item.level}}</span>
-    </ion-card>
-    
-    </ion-col>}
-  }
-     @else { 
-    <ngx-skeleton-loader count="4" appearance="square" 
-     class="custom-skeleton-width"
-   [theme]="{height: '120px',width: 'calc(25% - 10px)'}" />
-} 
-    </ion-row>
-  </ion-grid>
+      <ion-card
+        class="custom-card position-relative"
+        id="user-made-card-{{$index}}"
+        [tabindex]="0"
+      >
+        <ion-card-header>
+          <ion-card-title>{{item.name}}</ion-card-title>
+        </ion-card-header>
+        <span class="text-transform-capitalize level-span">{{item.level}}</span>
+      </ion-card> </ion-col
+    >} } @else {
+    <ngx-skeleton-loader
+      count="4"
+      appearance="square"
+      class="custom-skeleton-width"
+      [theme]="{height: '120px',width: 'calc(25% - 10px)'}"
+    />
+    }
+  </ion-row>
+</ion-grid>

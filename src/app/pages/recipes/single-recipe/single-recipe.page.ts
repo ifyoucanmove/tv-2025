@@ -17,25 +17,16 @@ export class SingleRecipePage implements OnInit {
     private apiService: ApiService,
     private router: Router
   ) {
-      const navigation = this.router.getCurrentNavigation();
-  if (navigation?.extras.state) {
-    const data:any = navigation.extras.state;
-    this.recipeData = data.data;
-    console.log(data.data,"ss"); 
-  }
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      const data: any = navigation.extras.state;
+      this.recipeData = data.data;
+      console.log(data.data, 'ss');
+    }
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params: any) => {
-      console.log(params);
-    //  this.loadRecipe(params.id);
-    });
   }
 
-  loadRecipe(id: string) {
-    this.apiService.getSingleRecipe().subscribe((data: any) => {
-      let recipeList = data.filter((item: any) => item.id === id);
-      this.recipeData = recipeList[0];
-    });
-  }
+ 
 }

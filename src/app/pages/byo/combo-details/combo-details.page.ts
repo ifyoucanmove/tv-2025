@@ -12,6 +12,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tracker.component';
 import { ModalController } from '@ionic/angular/standalone';
+import { AuthService } from 'src/app/services/auth.service';
+import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
 @Component({
   selector: 'app-combo-details',
   templateUrl: './combo-details.page.html',
@@ -20,22 +22,51 @@ import { ModalController } from '@ionic/angular/standalone';
   imports: [SharedModule],
 })
 export class ComboDetailsPage implements OnInit {
-  comboDetails:any;
+  comboDetails: any;
   title: string = '';
-  id:any;
+  id: any;
+
+  watchData: any[] = [];
+  isCompleted = false;
+  watchCount!: number;
   constructor(
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
     private apiService: ApiService,
-    public router:Router
+    public router: Router,
+    public authService: AuthService
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params:any) => {
+    this.route.paramMap.subscribe((params: any) => {
       this.id = params.params['id'];
-      this.apiService.getComboDetails( this.id).subscribe((data:any) => {
-        this.comboDetails = data;
-      });
+      console.log(params, this.id);
+      this.loadData();
+    });
+  }
+
+  loadData() {
+    this.apiService.getComboDetails(this.id).subscribe((data: any) => {
+      this.comboDetails = data;
+      this.loadWatchData();
+    });
+  }
+  loadWatchData() {
+    let data = {
+      userId: this.authService.userObjData.email,
+      comboId: this.id,
+      category: 'byo-combo',
+    };
+    this.apiService.geCompletetionDataOfByo(data).subscribe((res: any) => {
+      console.log(res);
+      if (res.length > 0) {
+        this.watchData = res;
+        this.isCompleted = true;
+        this.watchCount = this.getWatchCount();
+      } else {
+        this.isCompleted = false;
+        this.watchData = [];
+      }
     });
   }
   ngAfterViewInit(): void {
@@ -45,6 +76,12 @@ export class ComboDetailsPage implements OnInit {
         ele.focus();
       }
     }, 2000);
+  }
+
+  startCombo() {
+    this.router.navigate(['/play-combo'], {
+      queryParams: { id: this.comboDetails.id, title: this.comboDetails.name },
+    });
   }
 
   async openMoodTracker() {
@@ -57,12 +94,83 @@ export class ComboDetailsPage implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     if (data) {
-      console.log('Selected mood:', data.mood);
+      console.log('Selected mood:', data);
+      this.saveMarkAsComplete(data);
     }
   }
-  startCombo(){
-    this.router.navigate(['/play-combo'], {
-      queryParams: { id: this.comboDetails.id, title: this.comboDetails.name },
-    }); 
+
+  saveMarkAsComplete(energyData: any) {
+    this.watchCount = this.isCompleted ? this.getMaxWatchCount() : 1;
+    let obj = {
+      comboId: this.id,
+      userId: this.authService.userObjData.email,
+      category: 'byo-combo',
+      subCategory: this.comboDetails.type,
+      title: this.comboDetails.name,
+      durationMinutes: this.comboDetails.durationMinutes,
+      watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
+      date: new Date(),
+      isCompletedEmails: this.authService.customer().isCompletedEmails ?? false,
+      isEnergyDataAvailable: energyData ? true : false,
+      energyData: energyData,
+    };
+    console.log(obj);
+    if (this.isCompleted) {
+      this.openDialog(obj);
+    } else {
+      this.apiService.markAsComplete(obj).subscribe((res) => {
+        console.log(res);
+        if (res) {
+          this.loadWatchData();
+        }
+      });
+    }
+  }
+  getMaxWatchCount(): number {
+    if (!this.watchData) {
+      return 0;
+    }
+    return this.watchData.length;
+  }
+  getWatchCount() {
+    const data = this.watchData
+      ? this.watchData.filter((res: any) => {
+          return res.comboId === String(this.id);
+        })
+      : [];
+    return data.length;
+  }
+
+  async openDialog(watchData: any) {
+    const modal = await this.modalCtrl.create({
+      component: ConfirmPopupComponent,
+      componentProps: {
+        // Your data goes here
+        title: 'Confirm Action',
+        message: 'Are you sure you want to mark this video as complete again?',
+        confirmText: 'Yes',
+        cancelText: 'No',
+      },
+      cssClass: 'confirm-modal',
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+      console.log('Selected:', data);
+      this.apiService.markAsComplete(watchData).subscribe((res) => {
+        console.log(res);
+        this.loadWatchData();
+      });
+    }
+  }
+  getDayWatchCount(day: any): any {
+    if (this.watchData && this.watchData.length) {
+      const data = this.watchData.filter((res) => {
+        return res.day === day;
+      });
+      return data.length;
+    }
   }
 }

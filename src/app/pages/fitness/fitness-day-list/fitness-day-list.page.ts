@@ -5,33 +5,32 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { VideoPlayerComponent } from 'src/app/shared/video-player/video-player.component';
 import { ModalController } from '@ionic/angular/standalone';
 import { NavController } from '@ionic/angular';
-import {
-  IonSkeletonText,
-} from '@ionic/angular/standalone';
+import { IonSkeletonText } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-fitness-day-list',
   templateUrl: './fitness-day-list.page.html',
   styleUrls: ['./fitness-day-list.page.scss'],
   standalone: true,
-  imports: [SharedModule,IonSkeletonText],
+  imports: [SharedModule, IonSkeletonText],
 })
 export class FitnessDayListPage implements OnInit {
-  fitnessDay: any=[];
-  data:any;
-      imageLoaded:boolean = true;
+  fitnessDay: any = [];
+  data: any;
+  imageLoaded: boolean = true;
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router,private navCtrl: NavController,
-     private modalController: ModalController
+    private router: Router,
+    private navCtrl: NavController,
+    private modalController: ModalController
   ) {
-     const navigation = this.router.getCurrentNavigation();
-  if (navigation?.extras.state) {
-    const data:any = navigation.extras.state;
-    this.data = data.data;
-    console.log(data.data,"ss"); 
-  }
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      const data: any = navigation.extras.state;
+      this.data = data.data;
+      console.log(data.data, 'ss');
+    }
   }
 
   ngOnInit() {
@@ -42,22 +41,21 @@ export class FitnessDayListPage implements OnInit {
 
   loadFitnessList(id: string) {
     this.apiService.getProgramItems(id).subscribe((data: any) => {
-       console.log(data)
-     this.fitnessDay = data.items;
-     this.setFocus()
+      console.log(data);
+      this.fitnessDay = data.items;
+      this.setFocus();
     });
-    
   }
   setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('fitnessday-card-0');
-       console.log(ele,"ele")
+      console.log(ele, 'ele');
       if (ele) {
         ele.focus();
       }
     }, 2000);
   }
- /* async onVideoClick(video: any) {
+  /* async onVideoClick(video: any) {
   if(video.post.type =='Byo'){
     return
   }
@@ -85,12 +83,12 @@ export class FitnessDayListPage implements OnInit {
       }
     } */
 
-      openDetailPage(item:any){
-        this.navCtrl.navigateForward(`/fitness-detail/${item.id}`, {
-    state: {
-      programData: item,
-      fitnessData: this.data
-    }
-  });
-      }
+  openDetailPage(item: any) {
+    this.navCtrl.navigateForward(`/fitness-detail/${item.id}`, {
+      state: {
+        programData: item,
+        fitnessData: this.data,
+      },
+    });
+  }
 }
