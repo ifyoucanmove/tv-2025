@@ -1,16 +1,24 @@
+@if (profileData) {
 <ion-grid>
     <ion-row>
         <ion-col size="8" class="mx-auto">
             <ion-card class="custom-card">
                 <ion-card-content>  
-                    <div class="d-flex justify-content-center align-items-center">
+                    <ion-row>
+                        <ion-col size="4">
+ <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
                         <div class="profile-img">
-                            <img src="assets/images/profile.jpg"  alt="profile">
+                              <img class="img-profile"
+            [src]="profileData?.photoURL"
+            onerror="this.onerror=null;this.src='assets/images/profile.jpg';"
+          />
                           </div>
                     </div>
-                    <ion-item>
+                        </ion-col>
+                          <ion-col size="6">
+<ion-item>
                         <ion-label>Full Name</ion-label>
-                        <ion-text>{{profileData.fullName}}</ion-text>
+                        <ion-text>{{profileData.displayName}}</ion-text>
                     </ion-item>
                     <ion-item>
                         <ion-label>Email</ion-label>
@@ -20,6 +28,11 @@
                         <ion-label>Phone</ion-label>
                         <ion-text>{{profileData.phone}}</ion-text>
                     </ion-item>
+                          </ion-col>
+                    </ion-row>
+                   
+
+                    
                     
                 </ion-card-content>
             </ion-card>
@@ -27,6 +40,7 @@
 
         <ion-col size="8" class="mx-auto">  
             <h2 class="text-white">Subscription Billing</h2>
+            @if ( subscriptionCancellationData?.data?.cancellation_effective_date) {
             <ion-card class="custom-card">
                 <ion-card-header>
                     <ion-card-title  style="height: auto;">
@@ -35,26 +49,127 @@
                 </ion-card-header>
                 <ion-card-content>
                   <ul>
-                    <li>Cancellation will be effective at the end of you current billing period on 05/25/2024</li>
+                    <li>Cancellation will be effective at the end of you current billing period on  
+                        <strong class="cancellation_effective_date">{{
+                          subscriptionCancellationData?.data
+                            ?.cancellation_effective_date | date : "MM/dd/y"
+                        }}</strong></li>
                     <li>Restart Your subscription anytime. We will remember your favourites and viewing preferences.</li>
                   </ul>
-                  <button class="btn btn-primary-custom">
-                    Cancel Subscription
-                </button>
-                <button class="btn btn-primary-custom mx-2">
-                    Restart Subscription
+                  <button class="btn btn-primary-custom" (click)="openManage()"> 
+                    Manage Subscription
                 </button>
                 </ion-card-content>
-            </ion-card>
+            </ion-card>}
 
             <div class="mt-5">
               <p class="text-white">
-                Subscription Status: <span class="tag">Active</span> - set to cancel on 05/25/2024
+                Subscription Status: 
+                @if (status === 'active') {
+                <span class="tag">Active</span> }
+                @if (subscriptionCancellationData) {
+                <span>
+                    - set to cancel on {{subscriptionCancellationData?.data?.cancellation_effective_date | date:'MM/dd/y'}}
+                </span>}
               </p>  
+
+               @if (status !== 'active' && !isPaused) {
               <p class="text-white">
-                Plan: <span class="tag">Basic</span>
-              </p>
+                <span class="tag">Not Active</span>
+              </p>}
+
+                @if (status !== 'active' && isPaused) {
+              <p class="text-white">
+                <span class="tag">Paused</span>
+              </p>}
+
+              @if (status === 'active' || isPaused) {
+              <p class="text-white">
+                Plan: 
+                @if (plan) {<span class="tag">{{plan}}</span>}
+              </p>}
             </div>
+
+             @if (status !== 'active' && !isPaused) { 
+              <div class="d-flex justify-content-center"
+              >
+                <h3 class="text-white" > Subscribe to the
+                  <span class="text-linear-gradient">MOVE Monthly</span>
+                  or
+                  <span class="text-linear-gradient">Annual Online Gym
+                    Membership</span>!
+                </h3>
+            </div>} 
+
+            @if ((status === 'active' || isPaused ) && subscriptionData) {
+             <div class="row justify-content-center" >
+         
+            <table class="table borderless">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <h2 class="text-white">Subscription Details</h2>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Plan</th>
+                  <td>
+                    {{plan}}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Signup Date</th>
+                  <td>{{subscriptionData?.signup_date | date}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Email</th>
+                  <td>{{subscriptionData.user_email}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Status</th>
+                  <td>{{subscriptionData.state}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">Payment Informmation</th>
+                  <td>
+                    <ul class="list-group">
+                      <li class="list-group-item">
+                        <span>Payment Method:</span>
+                        {{subscriptionData.payment_information.payment_method}}
+                      </li>
+                      <div *ngIf="subscriptionData.payment_information.payment_method === 'card'">
+                        <li class="list-group-item">
+                          <span>Card Type:</span> {{subscriptionData.payment_information.card_type}}
+                        </li>
+                        <li class="list-group-item">
+                          <span>Last Four Digits:</span>
+                          {{subscriptionData.payment_information.last_four_digits}}
+                        </li>
+                        <li class="list-group-item">
+                          <span>Expiry Date:</span>
+                          {{subscriptionData.payment_information.expiry_date}}
+                        </li>
+                      </div>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">Next Payment</th>
+                  <td>
+                    <ul class="list-group">
+                      <li class="list-group-item"><span>Amount:</span> {{subscriptionData.next_payment && subscriptionData.next_payment.amount}}</li>
+                      <li class="list-group-item"><span>Currency:</span> {{subscriptionData.next_payment && subscriptionData.next_payment.currency}}
+                      </li>
+                      <li class="list-group-item"><span>Date:</span> {{(subscriptionData.next_payment && subscriptionData.next_payment.date) | date}}</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </div>}
+
         </ion-col>
     </ion-row>
-</ion-grid>
+</ion-grid>}

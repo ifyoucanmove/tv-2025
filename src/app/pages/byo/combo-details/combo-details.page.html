@@ -54,6 +54,10 @@
             ></span
           ></button
         >}
+          @if (checkMoodIconVisible()) {
+         <button class="btn-icon-primary ms-2" tabindex="0"  (click)="openMoodList()">
+  <span>😊</span>
+ </button>}
       </div>
     </ion-col>
   </ion-row>

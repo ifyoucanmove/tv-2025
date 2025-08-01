@@ -9,6 +9,8 @@ import { VideoSectionComponent } from 'src/app/shared/video-section/video-sectio
 import { NavController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
+import { MoodListDialogComponent } from 'src/app/shared/modals/mood-list-dialog/mood-list-dialog.component';
+import { CommonService } from 'src/app/services/common.service';
 @Component({
   selector: 'app-fitness-detail',
   templateUrl: './fitness-detail.page.html',
@@ -34,7 +36,8 @@ export class FitnessDetailPage implements OnInit {
     private navCtrl: NavController,
     public apiService: ApiService,
     public authService: AuthService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public commonService:CommonService
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -47,6 +50,7 @@ export class FitnessDetailPage implements OnInit {
   }
 
   ngOnInit() {
+     this.commonService.loader = true;
     this.route.paramMap.subscribe((params: any) => {
       //  this.programId = params.params.id;
       this.programId = this.programData.programId;
@@ -66,9 +70,13 @@ export class FitnessDetailPage implements OnInit {
         this.watchData = res.filter((ele: any) => ele.day == this.day);
         console.log(this.watchData);
         this.getLastWatched(this.watchData);
+         this.commonService.loader = false;
       } else {
         this.watchData = [];
+         this.commonService.loader = false;
       }
+    },err=>{
+       this.commonService.loader = false;
     });
   }
 
@@ -192,7 +200,6 @@ export class FitnessDetailPage implements OnInit {
     let obj = {
       category: '30day',
       isCompletedEmails: this.authService.customer().isCompletedEmails ?? false,
-      date: new Date(),
       energyData: energyData,
       userId: this.authService.userObjData.email,
       title: this.programData.postTitle,
@@ -254,4 +261,33 @@ export class FitnessDetailPage implements OnInit {
       return data.length;
     }
   }
+
+    checkMoodIconVisible(day: any): any {
+        if (this.watchData && this.watchData.length) {
+          const data = this.watchData.filter((res) => {
+            return res.day === day
+          });
+          if(data.length > 0){
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return false;
+        }
+      }
+      async  openMoodList(item:any){
+          let list = this.watchData.filter(ele => ele.day == item);
+       const modal = await this.modalCtrl.create({
+        component: MoodListDialogComponent,
+   componentProps: {data:list},
+   cssClass: 'mood-list-dialog'
+       })
+       await modal.present();
+  
+      const { data } = await modal.onWillDismiss();
+      if (data) {
+      }
+        
+      }
 }

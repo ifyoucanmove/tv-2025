@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { collection, collectionData, Firestore, limitToLast, orderBy, query, where } from '@angular/fire/firestore';
+import { collection, collectionData, Firestore, limitToLast, onSnapshot, orderBy, query, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,8 @@ export class ApiService {
   http: HttpClient = inject(HttpClient);
   apiBaseUrl = environment.apiBaseUrl;
 firestore: Firestore = inject(Firestore); 
-
+subscriptionData:any;
+constructor(public authService:AuthService){}
 /* jsons */
   getProgrammList() {
     return this.http.get('assets/jsons/list.json');
@@ -107,4 +110,65 @@ firestore: Firestore = inject(Firestore);
    geWatchCompletedDataOfProgram(data:any) {
     return this.http.get(`${this.apiBaseUrl}/challenge-watch-count?programId=${data.programId}&userId=${data.userId}&repeatCount=${data.repeatCount}`);
   }
+
+  /* subscription */
+
+ async getSubscriptionData() {
+  console.log(this.authService.customer())
+    if (this.authService.customer().subscription_id) {
+     let url
+      if (this.authService.customer()._isPaddleBillingV2) {
+        url = "https://us-central1-ifyoucanmove-dev.cloudfunctions.net/paddleUserGetBySubscriptionIdV2";
+      } else {
+        url = "https://us-central1-ifyoucanmove-dev.cloudfunctions.net/paddleUserGetBySubscriptionId";
+      }
+      this.http.post(url, {
+        subscription_id: this.authService.customer().subscription_id
+      }).subscribe({
+        next: (res: any) => {
+          this.subscriptionData = res.response[0];
+        //  this.loading = false;
+        return this.subscriptionData
+        },
+        error: (error) => {
+        //  this.loading = false;
+         
+        }
+      });
+    }
+  }
+
+  getSubscriptionCancellationData(){
+  // Reference the subcollection path
+  const collectionRef = collection(
+    this.firestore, 
+    "functions_webhooks", 
+    "Stripe", 
+    "subscription_cancelled"
+  );
+  
+  // Create query with where conditions
+  const q = query(
+    collectionRef,
+    where("_subscription_id", "==", this.authService.customer().subscription_id),
+    where("_email", "==", this.authService.customer().email)
+  );
+  
+  // Return Observable that emits snapshot changes
+  return new Observable(observer => {
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const data = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      observer.next(data);
+    }, (error:any) => {
+      observer.error(error);
+    });
+    
+    // Return cleanup function
+    return () => unsubscribe();
+  });
+  }
+
 }

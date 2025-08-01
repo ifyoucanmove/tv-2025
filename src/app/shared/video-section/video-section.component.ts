@@ -23,6 +23,7 @@ export class VideoSectionComponent implements OnInit {
   title = input<string>('Videos');
   tabindex = input<number>(0);
   showViewAll = input<boolean>(true);
+  isDetailPage = input<boolean>(false);
   // Output signals
   viewAllClick = output<void>();
   videoClick = output<any>();
@@ -53,8 +54,11 @@ export class VideoSectionComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['videos'] && changes['videos'].currentValue) {
-      // Trigger your function when videos (challenges) are loaded
-      this.setFocus()
+      console.log(this.isDetailPage(),"this.isDetailPage")
+   if(this.isDetailPage() == false){ 
+     this.setFocus()
+     } 
+      
     }
   }
 

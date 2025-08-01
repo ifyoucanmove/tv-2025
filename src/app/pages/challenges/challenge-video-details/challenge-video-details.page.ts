@@ -9,6 +9,8 @@ import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tr
 import { image } from 'ionicons/icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
+import { MoodListDialogComponent } from 'src/app/shared/modals/mood-list-dialog/mood-list-dialog.component';
+import { CommonService } from 'src/app/services/common.service';
 @Component({
   selector: 'app-challenge-video-details',
   templateUrl: './challenge-video-details.page.html',
@@ -26,12 +28,15 @@ export class ChallengeVideoDetailsPage implements OnInit {
   watchData: any[] = [];
   lastWatched: any[] = [];
   isCompleted = false;
+
+  isLoading:boolean = true;
   constructor(
     private route: ActivatedRoute,
     public router: Router,
     public authService: AuthService,
     public apiService: ApiService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    public commonService:CommonService
   ) {
     const navigation = this.router.getCurrentNavigation();
     console.log(navigation, 'navigation');
@@ -45,6 +50,7 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    this.commonService.loader = true;
     if (this.authService.customer().challengeData[this.challengeId]) {
       this.repeatCount =
         this.authService.customer().challengeData[this.challengeId].repeatCount;
@@ -105,6 +111,11 @@ export class ChallengeVideoDetailsPage implements OnInit {
         console.log(res);
         this.watchData = res;
         this.getLastWatched(this.watchData);
+        this.isLoading = false;
+        this.commonService.loader = false;
+      },err=>{
+          this.isLoading = false;
+          this.commonService.loader = false;
       });
   }
   getLastWatched(watched: any[]) {
@@ -148,7 +159,6 @@ export class ChallengeVideoDetailsPage implements OnInit {
     let obj = {
       category: 'challenge',
       isCompletedEmails: this.authService.customer().isCompletedEmails ?? false,
-      date: new Date(),
       energyData: energyData,
       userId: this.authService.userObjData.email,
       title: this.challengeName,
@@ -238,4 +248,33 @@ export class ChallengeVideoDetailsPage implements OnInit {
     });
     return data?.length ?? 0;
   }
+
+  checkMoodIconVisible(day: any): any {
+      if (this.watchData && this.watchData.length) {
+        const data = this.watchData.filter((res) => {
+          return res.day === day
+        });
+        if(data.length > 0){
+          return true;
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }
+    async  openMoodList(item:any){
+        let list = this.watchData.filter(ele => ele.day == item);
+     const modal = await this.modalCtrl.create({
+      component: MoodListDialogComponent,
+ componentProps: {data:list},
+ cssClass: 'mood-list-dialog'
+     })
+     await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+    }
+      
+    }
 }

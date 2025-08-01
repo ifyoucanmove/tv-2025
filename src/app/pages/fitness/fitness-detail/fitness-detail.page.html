@@ -35,7 +35,12 @@
           ></span
         ></button
       >}
-      <button class="btn-icon-primary" tabindex="0">
+
+          @if (checkMoodIconVisible(this.day)) {
+       <button class="btn-icon-primary" tabindex="0"  (click)="openMoodList(this.day)">
+      <span>😊</span>
+ </button>}
+     <!--  <button class="btn-icon-primary" tabindex="0">
         <ion-icon name="heart-outline"></ion-icon>
 
         <span>Add to Favorites</span>
@@ -43,7 +48,7 @@
       <button class="btn-icon-primary" tabindex="0">
         <ion-icon name="heart"></ion-icon>
         <span>Added to Favorites</span>
-      </button>
+      </button> -->
     </div>
   </div>
 </div>
@@ -54,6 +59,7 @@
   <ion-row>
     <ion-col size="12">
       <app-video-section
+            [isDetailPage]="true"
         [videos]="programs"
         [title]="'Top Fitness'"
         (viewAllClick)="onViewAllFitness()"

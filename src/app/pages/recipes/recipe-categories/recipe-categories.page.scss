@@ -1,17 +1,17 @@
 ion-card {
   border-radius: 8px;
-  height: 120px;
+  /* height: 100px; */
 }
 
 .image-container-placeholder{
   background-color: rgb(100 100 100 / 42%);
-  height: 120px;
-  max-height: 120px;
-  min-height: 120px;  
+  height: 100%;
+  /* max-height: 100px;
+  min-height: 100px;  */ 
   ion-img{
-         height: 120px;
-  max-height: 120px;
-  min-height: 120px; 
-  object-fit: cover;
+         height: auto;
+ /*  max-height: 100px;
+  min-height: 100px;  */
+  object-fit: contain;
       }
 }

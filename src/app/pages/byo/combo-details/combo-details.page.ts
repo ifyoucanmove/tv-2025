@@ -14,6 +14,8 @@ import { MoodTrackerComponent } from 'src/app/shared/modals/mood-tracker/mood-tr
 import { ModalController } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
+import { MoodListDialogComponent } from 'src/app/shared/modals/mood-list-dialog/mood-list-dialog.component';
+import { CommonService } from 'src/app/services/common.service';
 @Component({
   selector: 'app-combo-details',
   templateUrl: './combo-details.page.html',
@@ -34,10 +36,12 @@ export class ComboDetailsPage implements OnInit {
     private modalCtrl: ModalController,
     private apiService: ApiService,
     public router: Router,
+        public commonService:CommonService,
     public authService: AuthService
   ) {}
 
   ngOnInit() {
+      this.commonService.loader = true;
     this.route.paramMap.subscribe((params: any) => {
       this.id = params.params['id'];
       console.log(params, this.id);
@@ -63,10 +67,14 @@ export class ComboDetailsPage implements OnInit {
         this.watchData = res;
         this.isCompleted = true;
         this.watchCount = this.getWatchCount();
+        this.commonService.loader = false;
       } else {
         this.isCompleted = false;
         this.watchData = [];
+        this.commonService.loader = false;
       }
+    },err=>{
+      this.commonService.loader = false;
     });
   }
   ngAfterViewInit(): void {
@@ -109,7 +117,6 @@ export class ComboDetailsPage implements OnInit {
       title: this.comboDetails.name,
       durationMinutes: this.comboDetails.durationMinutes,
       watchCount: this.isCompleted ? this.getMaxWatchCount() + 1 : 1,
-      date: new Date(),
       isCompletedEmails: this.authService.customer().isCompletedEmails ?? false,
       isEnergyDataAvailable: energyData ? true : false,
       energyData: energyData,
@@ -173,4 +180,33 @@ export class ComboDetailsPage implements OnInit {
       return data.length;
     }
   }
+
+   checkMoodIconVisible(): any {
+      if (this.watchData && this.watchData.length) {
+        const data = this.watchData/* .filter((res) => {
+          return res.day === day
+        }); */
+        if(data.length > 0){
+          return true;
+        }else{
+          return false;
+        }
+      }else{
+        return false;
+      }
+    }
+    async  openMoodList(){
+    //    let list = this.watchData.filter(ele => ele.day == item);
+     const modal = await this.modalCtrl.create({
+      component: MoodListDialogComponent,
+ componentProps: {data:this.watchData},
+ cssClass: 'mood-list-dialog'
+     })
+     await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    if (data) {
+    }
+      
+    }
 }

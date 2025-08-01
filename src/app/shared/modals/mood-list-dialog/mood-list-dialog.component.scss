@@ -1,0 +1,43 @@
+.card{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  position: relative;
+  padding-bottom: 24px !important;
+  background-color: transparent;
+  .fs-12{
+    font-size: 12px;
+  }
+  .sub-sec{
+    width: 35%;
+  }
+  .fs-14{
+    font-size: 14px;
+  }
+  .datetext{
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+    font-size:12px;
+  }
+}
+@media(max-width:768px){
+  .card{
+    display: block;
+    .fs-12{
+      font-size: 12px;
+    }
+    .sub-sec{
+      width: 100%;
+    }
+    .fs-14{
+      font-size: 14px;
+    }
+  }
+}
+
+.modal-body{
+  max-height: 80vh;
+  overflow-y: auto;
+}

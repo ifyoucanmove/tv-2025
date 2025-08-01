@@ -211,6 +211,20 @@
     }
   }
 }
+.mood-list-dialog{
+--height: auto;
+  --width: 70vw;
+   --border-radius: 0;
+  --backdrop-opacity: 0.8;
+
+  &::part(content) {
+    background: var(--background-secondary);
+  }
+
+  &::part(backdrop) {
+    background: rgba(0, 0, 0, 0.9);
+  }
+}
 .confirm-modal {
   --width: 60vw;
   --height: auto;

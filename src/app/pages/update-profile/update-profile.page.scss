@@ -20,3 +20,40 @@ ion-item {
   border-radius: 5px;
   font-size: 12px;
 }
+
+
+  
+  .text-linear-gradient {
+    background: -webkit-linear-gradient(right #00c0cb, #00e79d);
+    background: -o-linear-gradient(right, #00c0cb, #00e79d);
+    background: -moz-linear-gradient(right, #00c0cb, #00e79d);
+    background: linear-gradient(to right, #00c0cb, #00e79d);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .table thead tr,th{
+background-color: transparent;
+color: white;
+   border-collapse: collapse;
+    border: none;
+    font-weight: 500;
+  }
+   .table tbody tr,td{
+background-color: transparent;
+color: white;
+   border-collapse: collapse;
+    border: none;
+  }
+  .list-group{
+    background-color: transparent;
+color: white;
+.list-group-item{
+  background-color: transparent;
+color: white;
+span{
+  font-weight: 500;
+}
+}
+  }
