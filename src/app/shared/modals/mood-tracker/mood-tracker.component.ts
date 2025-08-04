@@ -21,7 +21,6 @@ export class MoodTrackerComponent implements OnInit {
     { emoji: '😩', label: 'Overwhelmed', value: 'Overwhelmed' },
     { emoji: '🤗', label: 'Excited', value: 'Excited' },
   ];
-  //  @Input() data: any;
   data: any = input<any>({});
   constructor(private fb: FormBuilder, private modalCtrl: ModalController) {
     this.workoutForm = this.fb.group({
@@ -33,10 +32,10 @@ export class MoodTrackerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*  console.log(this.data(), 'fat');
-    if (this.data()) {
-      this.workoutForm.patchValue(this.data().energyData);
-    } */
+    console.log(this.data, 'fat');
+    if (this.data) {
+      this.workoutForm.patchValue(this.data.energyData);
+    } 
     setTimeout(() => {
       let ele = document.getElementById('energyLevels0');
       if (ele) {

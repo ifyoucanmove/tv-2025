@@ -3,7 +3,9 @@ import { IonSkeletonText } from '@ionic/angular/standalone';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
-
+import { AuthService } from 'src/app/services/auth.service';
+import { SubscribeDialogComponent } from 'src/app/shared/modals/subscribe-dialog/subscribe-dialog.component';
+import { ModalController } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-byo-combo',
   templateUrl: './byo-combo.page.html',
@@ -14,9 +16,21 @@ import { ApiService } from 'src/app/services/api.service';
 export class ByoComboPage implements OnInit {
   byoList: any[] = [];
   imageLoaded: boolean = true;
-  constructor(private apiService: ApiService, private router: Router) {}
+   status!: string;
+  constructor(private apiService: ApiService, private modalCtrl: ModalController,
+    public authService:AuthService, private router: Router) {}
 
   ngOnInit() {
+       const customerValue = this.authService.customer();
+      if (customerValue) {
+        this.status = customerValue.status;
+           if (!customerValue) {
+            this.status = "";
+          }
+          if (this.status !== 'active') {
+            this.status = 'inactive';
+          }
+      }
     this.loadByo();
   }
 
@@ -35,6 +49,30 @@ export class ByoComboPage implements OnInit {
     }, 2000);
   }
   navigateTo(route: string) {
+   if(this.status == 'active'){
     this.router.navigate([route]);
   }
+    else{
+    this.openSubscribeDialog()
+    }
+  }
+
+  async openSubscribeDialog() {
+        const modal = await this.modalCtrl.create({
+          component: SubscribeDialogComponent,
+          componentProps: {
+            title: 'Confirm',
+            message: 'You must be subscribed to access this content. Scan to activate your subscription.',
+            type:'plan-select'
+          },
+          cssClass: 'confirm-modal',
+        });
+    
+        await modal.present();
+    
+        const { data } = await modal.onWillDismiss();
+        if (data) {
+        
+        }
+      }
 }

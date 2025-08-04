@@ -1,0 +1,30 @@
+<div class="modal-content p-3" >
+  <div class="modal-header d-flex justify-content-between">
+  <!--   <h5 class="modal-title text-white mt-0">Confirm</h5> -->
+  </div>
+
+  <div class="modal-body">
+    @if (loader) {
+      <div
+      class="d-flex m-5 justify-content-center align-items-center text-white"
+     style="min-height: 200px;">
+    Loading
+    </div>}
+@else {
+   <div class="qrcode d-flex justify-content-center mt-2">
+            <qr-code [value]="qrLink" 
+            size="300"  [margin]="1"  lightColor="#ffff"
+            errorCorrectionLevel="M" />
+          </div>
+    <p class="text-white my-3 text-center">
+ {{message}}
+    </p>
+}
+   
+   
+    </div>
+      <div class="modal-footer">
+ <!--    <button class="btn btn-secondary-custom me-3" id="yesbtn" (click)="onSubmit('yes')">Yes</button> -->
+    <button class="btn btn-secondary-custom" (click)="onCancel()">Close</button>
+  </div>
+</div>

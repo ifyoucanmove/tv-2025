@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent } from '@ionic/angular/standalone';
@@ -79,15 +79,30 @@ export class MainPage implements OnInit {
     },
     settings: { route: 'settings', elements: ['settings-input'] },
   };
-
+ status!: string;
   constructor(
     private authService: AuthService,private apiService: ApiService,
     private modalCtrl: ModalController,
     private router: Router,private navCtrl: NavController
-  ) {}
+  ) {
+     effect(() => {
+   const customerValue = this.authService.customer();
+    console.log(customerValue,"customerValue")
+      if (customerValue) {
+        this.status = customerValue.status;
+           if (!customerValue) {
+            this.status = "";
+          }
+          if (this.status !== 'active') {
+            this.status = 'inactive';
+            this.menuItems[3].isDisabled = true
+          }
+      }
+     })
+  }
 
   ngOnInit(): void {
-  
+ 
 
   }
 

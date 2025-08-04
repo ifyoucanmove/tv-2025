@@ -26,6 +26,15 @@
             (ionImgDidLoad)="imageLoaded = true"
           ></ion-img>
         </div>
+          @if (status !== 'active') {
+      <div class="icon-div">
+          <img
+                  src="assets/images/lock-fill.svg"
+                  class="img-fluid lock-icon "
+                />
+      </div>
+    
+        }
       </ion-card>
     </ion-col>
     } } } @else {

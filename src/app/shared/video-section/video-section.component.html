@@ -12,10 +12,15 @@
       [tabindex]="tabindex()"
       (click)="onVideoClick(video)">
       <img [src]="video.image" alt="video image">
-    <!--   <ion-card-header> -->
-    <!--     <ion-card-title>{{video.title}}</ion-card-title> -->
-    <!--     <ion-card-subtitle>{{video.duration}}</ion-card-subtitle> -->
-     <!--  </ion-card-header> -->
+        @if (status() !== 'active') {
+      <div class="icon-div">
+          <img
+                  src="assets/images/lock-fill.svg"
+                  class="img-fluid lock-icon "
+                />
+      </div>
+    
+        }
     </ion-card>}
     <ion-card class="video-card d-flex justify-content-center align-items-center"  
     [tabindex]="tabindex()" 

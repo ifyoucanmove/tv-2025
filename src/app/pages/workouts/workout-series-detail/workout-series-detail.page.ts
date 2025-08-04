@@ -30,6 +30,7 @@ export class WorkoutSeriesDetailPage implements OnInit {
   isCompleted = false;
   day: any;
   programTitle: any = '';
+  status!: string;
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -51,6 +52,16 @@ export class WorkoutSeriesDetailPage implements OnInit {
   }
 
   ngOnInit() {
+        const customerValue = this.authService.customer();
+      if (customerValue) {
+        this.status = customerValue.status;
+           if (!customerValue) {
+            this.status = "";
+          }
+          if (this.status !== 'active') {
+            this.status = 'inactive';
+          }
+      }
      this.commonService.loader = true;
     this.route.queryParams.subscribe((params: any) => {
       this.loadData();

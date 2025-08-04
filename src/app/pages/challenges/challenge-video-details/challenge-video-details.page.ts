@@ -30,6 +30,7 @@ export class ChallengeVideoDetailsPage implements OnInit {
   isCompleted = false;
 
   isLoading:boolean = true;
+   status!: string;
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -50,6 +51,16 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+    const customerValue = this.authService.customer();
+      if (customerValue) {
+        this.status = customerValue.status;
+           if (!customerValue) {
+            this.status = "";
+          }
+          if (this.status !== 'active') {
+            this.status = 'inactive';
+          }
+      }
     this.commonService.loader = true;
     if (this.authService.customer().challengeData[this.challengeId]) {
       this.repeatCount =
@@ -274,6 +285,7 @@ export class ChallengeVideoDetailsPage implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     if (data) {
+       this.loadWatchData();
     }
       
     }

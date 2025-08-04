@@ -58,6 +58,7 @@ export class HomePage implements OnInit, AfterViewInit {
   lastweekGamifyWeeks: any;
   auth: Auth = inject(Auth);
   @ViewChild('videoSection') videoSection: any;
+ status!: string;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -69,6 +70,13 @@ export class HomePage implements OnInit, AfterViewInit {
       if (customerValue) {
         console.log('Customer changed:', customerValue);
         this.stripeCustomer = customerValue;
+        this.status = this.stripeCustomer.status;
+           if (!this.stripeCustomer) {
+            this.status = "";
+          }
+          if (this.status !== 'active') {
+            this.status = 'inactive';
+          }
       }
     });
   }

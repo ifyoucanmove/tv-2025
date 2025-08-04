@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ApiService } from 'src/app/services/api.service';
 import { HttpClient } from '@angular/common/http';
-
+import { SubscribeDialogComponent } from 'src/app/shared/modals/subscribe-dialog/subscribe-dialog.component';
+import { ModalController } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-update-profile',
   templateUrl: './update-profile.page.html',
@@ -20,7 +21,7 @@ export class UpdateProfilePage implements OnInit {
      plan: string = ''; 
       status: string = '';
   constructor(private router: Router,public authService:AuthService,
-    public apiService:ApiService
+    public apiService:ApiService,private modalCtrl: ModalController
   ) {}
 
   ngOnInit() {
@@ -89,5 +90,24 @@ openManage(){
 /*   let link = 'https://ifyoucanmove.com/update-plan-select?isFromMobile=true'
   this.router.navigate([link]); */
 }
+
+  async openSubscribeDialog() {
+      const modal = await this.modalCtrl.create({
+        component: SubscribeDialogComponent,
+        componentProps: {
+          title: 'Confirm',
+          message: 'Scan QR code to manage your subscriptions.',
+         type:'manage'
+        },
+        cssClass: 'confirm-modal',
+      });
+  
+      await modal.present();
+  
+      const { data } = await modal.onWillDismiss();
+      if (data) {
+      
+      }
+    }
 
 }

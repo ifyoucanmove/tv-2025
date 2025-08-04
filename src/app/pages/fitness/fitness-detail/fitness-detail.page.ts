@@ -30,6 +30,7 @@ export class FitnessDetailPage implements OnInit {
   watchData: any[] = [];
   lastWatched: any[] = [];
   isCompleted = false;
+   status!: string;
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -50,6 +51,16 @@ export class FitnessDetailPage implements OnInit {
   }
 
   ngOnInit() {
+        const customerValue = this.authService.customer();
+      if (customerValue) {
+        this.status = customerValue.status;
+           if (!customerValue) {
+            this.status = "";
+          }
+          if (this.status !== 'active') {
+            this.status = 'inactive';
+          }
+      }
      this.commonService.loader = true;
     this.route.paramMap.subscribe((params: any) => {
       //  this.programId = params.params.id;

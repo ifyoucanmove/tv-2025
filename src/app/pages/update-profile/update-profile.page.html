@@ -28,7 +28,13 @@
                         <ion-label>Phone</ion-label>
                         <ion-text>{{profileData.phone}}</ion-text>
                     </ion-item>
+                       <ion-item>
+                      <button class="btn btn-primary-custom" (click)="openSubscribeDialog()"> 
+                    Manage Subscription
+                </button>
+                </ion-item>
                           </ion-col>
+                          
                     </ion-row>
                    
 
@@ -56,11 +62,10 @@
                         }}</strong></li>
                     <li>Restart Your subscription anytime. We will remember your favourites and viewing preferences.</li>
                   </ul>
-                  <button class="btn btn-primary-custom" (click)="openManage()"> 
-                    Manage Subscription
-                </button>
+                
                 </ion-card-content>
-            </ion-card>}
+            </ion-card>
+          }
 
             <div class="mt-5">
               <p class="text-white">

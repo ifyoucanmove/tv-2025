@@ -9,6 +9,10 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { SharedModule } from '../shared.module';
+import { ConfirmPopupComponent } from '../modals/confirm-popup/confirm-popup.component';
+import { ModalController } from '@ionic/angular/standalone';
+import { SubscribeDialogComponent } from '../modals/subscribe-dialog/subscribe-dialog.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-video-section',
@@ -24,6 +28,7 @@ export class VideoSectionComponent implements OnInit {
   tabindex = input<number>(0);
   showViewAll = input<boolean>(true);
   isDetailPage = input<boolean>(false);
+  status= input<string>('');
   // Output signals
   viewAllClick = output<void>();
   videoClick = output<any>();
@@ -41,8 +46,11 @@ export class VideoSectionComponent implements OnInit {
       this.slidePrevious();
     }
   }
-  constructor() {}
+
+
+  constructor(public authService:AuthService,    private modalCtrl: ModalController) {}
   ngOnInit() {
+const customerValue = this.authService.customer();
    
     setTimeout(() => {
        this.videoContainer = document.getElementById(
@@ -54,7 +62,6 @@ export class VideoSectionComponent implements OnInit {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['videos'] && changes['videos'].currentValue) {
-      console.log(this.isDetailPage(),"this.isDetailPage")
    if(this.isDetailPage() == false){ 
      this.setFocus()
      } 
@@ -91,12 +98,25 @@ export class VideoSectionComponent implements OnInit {
   }
 
   onViewAllClick(): void {
-    this.viewAllClick.emit();
+       if(this.status() == 'active'){
+         this.viewAllClick.emit();
+      
+    }
+    else{ 
+    this.openSubscribeDialog()
+    } 
+ 
   }
 
   async onVideoClick(video: any) {
-    console.log('video click');
-    this.videoClick.emit(video);
+     console.log(this.status(),"this.status()")
+    if(this.status() == 'active'){
+        this.videoClick.emit(video);
+       
+    }
+    else{
+   this.openSubscribeDialog()
+    }
   }
 
   slideNext(): void {
@@ -130,4 +150,23 @@ export class VideoSectionComponent implements OnInit {
       }
     }
   }
+
+   async openSubscribeDialog() {
+      const modal = await this.modalCtrl.create({
+        component: SubscribeDialogComponent,
+        componentProps: {
+          title: 'Confirm',
+          message: 'You must be subscribed to access this content. Scan to activate your subscription.',
+          type:'plan-select'
+        },
+        cssClass: 'confirm-modal',
+      });
+  
+      await modal.present();
+  
+      const { data } = await modal.onWillDismiss();
+      if (data) {
+      
+      }
+    }
 }

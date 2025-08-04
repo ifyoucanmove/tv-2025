@@ -55,6 +55,7 @@
   border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
+  position: relative;
   cursor: pointer;
   position: relative;
 
@@ -75,22 +76,18 @@
     object-fit: cover;
   }
 
-  ion-card-header {
-    padding: 12px;
-
-    ion-card-title {
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--text-primary);
-      margin-bottom: 4px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    ion-card-subtitle {
-      color: var(--text-secondary);
-      font-size: 12px;
-    }
+.icon-div{
+     position: absolute;
+    right: 0px;
+    width: 50%;
+    bottom: 0px;
+    top: 0px;
+    background-color: rgb(255 255 255 / 50%);
+    text-align: center;
+    display: grid;
+    place-content: center;
+  .lock-icon{
+    width: 30px;
   }
+}
 }

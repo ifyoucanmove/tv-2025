@@ -111,6 +111,12 @@ constructor(public authService:AuthService){}
     return this.http.get(`${this.apiBaseUrl}/challenge-watch-count?programId=${data.programId}&userId=${data.userId}&repeatCount=${data.repeatCount}`);
   }
 
+  updateMarkAsComplete(id:any,data:any){
+    return this.http.put(`${this.apiBaseUrl}/mark-as-complete/${id}`,data)
+  }
+  deleteMarkAsComplete(id:any){
+    return this.http.delete(`${this.apiBaseUrl}/mark-as-complete/${id}`)
+  }
   /* subscription */
 
  async getSubscriptionData() {

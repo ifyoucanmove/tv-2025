@@ -59,7 +59,9 @@ import {
   timeOutline,
   volumeHigh,
   volumeMute,
-  apertureOutline
+  apertureOutline,
+  createOutline,
+  trashOutline
 } from 'ionicons/icons';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
@@ -87,7 +89,8 @@ addIcons({
   home,
   timeOutline,
   shareSocialOutline,
-  play,apertureOutline
+  play,apertureOutline,
+  createOutline,trashOutline
 });
 @NgModule({
   declarations: [],

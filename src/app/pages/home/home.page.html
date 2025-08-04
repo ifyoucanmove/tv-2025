@@ -96,6 +96,7 @@
      <ion-row>
       <ion-col size="12">
         <app-video-section #videoSection
+          [status]="status"
           [videos]="challenges"
           [title]="'Top Challenges'"
           [tabindex]="2"
@@ -109,6 +110,7 @@
       <ion-col size="12">
         <app-video-section
           [videos]="fitness"
+          [status]="status"
           [title]="'30 Days Programs'"
           [tabindex]="3"
           (viewAllClick)="onViewAllFitness()"
@@ -120,6 +122,7 @@
           <ion-row>
           <ion-col size="12">
             <app-video-section
+            [status]="status"
               [videos]="workoutSeries"
               [title]="'Workouts Series'"
               [tabindex]="4"
@@ -132,6 +135,7 @@
           <ion-row>
           <ion-col size="12">
             <app-video-section
+            [status]="status"
               [videos]="workouts"
               [title]="'Workouts'"
               [tabindex]="5"
@@ -144,6 +148,7 @@
           <ion-row>
           <ion-col size="12">
             <app-video-section
+            [status]="status"
               [videos]="recipe"
               [title]="'Recipe'"
               [tabindex]="5"

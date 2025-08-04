@@ -1,4 +1,4 @@
-import { httpResource } from '@angular/common/http';
+import { HttpClient, httpResource } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import {
   Auth,
@@ -34,7 +34,7 @@ export class AuthService {
   router: Router = inject(Router);
   userRequestData = signal<any>(null);
   userData = signal<any>(null);
-
+  http = inject(HttpClient)
  // customer$: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   customer = signal<any>(null);
   constructor() {
@@ -184,4 +184,13 @@ getToken(): any {
       
     }
   }
+
+    generateToken(uid:any) {
+      return from(
+        this.http.post(
+          'https://us-central1-ifyoucanmove-dev.cloudfunctions.net/createCustomToken',
+          {uid : uid}
+        )
+      );
+    }
 }

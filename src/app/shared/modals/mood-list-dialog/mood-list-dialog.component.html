@@ -37,8 +37,13 @@
        
           </div>
           <div>
-         <!--  <mat-icon (click)="$event.stopPropagation(); edit(item)" style="cursor: pointer">edit</mat-icon>
-          <mat-icon (click)="$event.stopPropagation();openDeleteConfirmDialog(item)" class="text-danger mx-2">delete</mat-icon> -->
+             <button class="btn-icon-primary ms-2" tabindex="0" (click)="$event.stopPropagation();openMoodTracker(item)">
+            <ion-icon name="create-outline"  [tabindex]="-1"  style="cursor: pointer"></ion-icon>
+            </button>
+              <button class="btn-icon-primary ms-2" tabindex="0" (click)="$event.stopPropagation();openDeleteConfirmDialog(item)">
+            <ion-icon name="trash-outline" [tabindex]="-1"  style="cursor: pointer"></ion-icon>
+              </button>
+
         </div>
         </div>
         @if (item.date) {
