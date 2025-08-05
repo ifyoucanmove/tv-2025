@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-single-recipe',
@@ -12,10 +13,13 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class SingleRecipePage implements OnInit {
   recipeData: any;
+     favList:any=[];
+   favDocid:any;
   constructor(
     public route: ActivatedRoute,
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    public authService:AuthService
   ) {
     const navigation = this.router.getCurrentNavigation();
     if (navigation?.extras.state) {
@@ -26,7 +30,61 @@ export class SingleRecipePage implements OnInit {
   }
 
   ngOnInit() {
+    this.getFavList()
   }
+    getFavList(){
+    this.apiService.getFavorites(this.authService.userObjData.email).subscribe((res:any) =>{
+      console.log(res,"favlist")
+      this.favList = res.favorites;
+      let result = this.favList.find((item: any) => item.postId === this.recipeData.id);
+      if(result){
+ this.favDocid = result.docid;
+      }
+     
+      console.log(this.favDocid ,"this.favDocid ")
+    })
+    }
 
+    addTofav(){
+      let obj=
+      {
+    "id": this.recipeData.id,
+    "postId": this.recipeData.id,
+    "email": this.authService.userObjData.email,
+    "title": this.recipeData.title,
+    "image": this.recipeData.image,
+    "type": this.recipeData.type,
+    "media":this.recipeData.media,
+    "description": this.recipeData.description,
+    "duration": this.recipeData.duration,
+    "categories": this.recipeData.categories,
+    "categoryArray":this.recipeData.categoryArray,
+    "ingredients": this.recipeData.ingredients
+}
+
+this.apiService.addFavorites(obj).subscribe(res =>{
+  console.log(res)
+  this.getFavList()
+})
+
+    }
+
+    removeFromFavList(){
+      console.log(this.favDocid)
+      this.apiService.deleteFavorites(this.favDocid).subscribe(res =>{
+      this.getFavList()
+      })
+    }
+
+    checkFavorites(){
+   // let result = this.favList.find(ele => ele.)
+     const favoriteList =  this.favList;
+     if(!favoriteList ){
+  return
+     }
+    return favoriteList
+      ? favoriteList.filter((item: any) => item.postId === this.recipeData.id).length
+      : favoriteList;
+    }
  
 }

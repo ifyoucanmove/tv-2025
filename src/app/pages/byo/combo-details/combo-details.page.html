@@ -58,6 +58,19 @@
          <button class="btn-icon-primary ms-2" tabindex="0"  (click)="openMoodList()">
   <span>😊</span>
  </button>}
+   @if(!checkFavorites()){
+       <button class="btn-icon-primary ms-2" tabindex="0"
+       (click)="addTofav()"
+       >
+        <ion-icon name="heart-outline"></ion-icon>
+
+        <span>Add to Favorites</span>
+      </button>}
+       @if(checkFavorites()){
+      <button class="btn-icon-primary ms-2"  tabindex="0"  (click)="removeFromFavList()">
+        <ion-icon name="heart"></ion-icon>
+        <span>Added to Favorites</span>
+      </button> }
       </div>
     </ion-col>
   </ion-row>

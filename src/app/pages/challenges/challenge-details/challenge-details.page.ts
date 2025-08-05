@@ -7,6 +7,7 @@ import { ModalController } from '@ionic/angular/standalone';
 import { ApiService } from 'src/app/services/api.service';
 import { NavController } from '@ionic/angular';
 import { IonSkeletonText } from '@ionic/angular/standalone';
+import { ChallengeWarmUpPage } from '../challenge-warm-up/challenge-warm-up.page';
 
 @Component({
   selector: 'app-challenge-details',

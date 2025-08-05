@@ -1,0 +1,9 @@
+      <div class="video-grid"  >
+    @for (video of list; track $index) {
+    <ion-card class="video-card"
+      (click)="onNavigate(video)"
+        [id]="'warmup' + $index"
+        [tabindex]="0">
+      <img [src]="video.image" alt="video image">
+    </ion-card>}
+    </div>

@@ -77,7 +77,7 @@ constructor(public authService:AuthService){}
  return this.http.get(`${this.apiBaseUrl}/admin-byo-combos`);
   }
 
-
+/* dashboardData */
 
   loadCompletedData(userEmail: any, limit: number) {
     let collectionRef = collection(this.firestore, "completed")
@@ -91,9 +91,7 @@ constructor(public authService:AuthService){}
     return this.http.get(`https://us-central1-ifyoucanmove-dev.cloudfunctions.net/mystats?userId=${userEmail}&fromDate=${startDate}&toDate=${endDate}`);
   }
   
-  markAsComplete(data:any){
-    return this.http.post(`${this.apiBaseUrl}/mark-as-complete`,data)
-  }
+/*   watchData */
 
    geCompletetionDataOfSeries(data:any) {
     return this.http.get(`${this.apiBaseUrl}/completion-status?userId=${data.userId}&programId=${data.programId}&repeatCount=${data.repeatCount}`);
@@ -105,17 +103,35 @@ constructor(public authService:AuthService){}
     return this.http.get(`${this.apiBaseUrl}/completion-status?userId=${data.userId}&category=${data.category}&comboId=${data.comboId}`);
   }
    geWatchCompletedDataOfChallenge(data:any) {
-    return this.http.get(`${this.apiBaseUrl}/challenge-watch-count?challengeId=${data.challengeId}&day=${data.day}&userId=${data.userId}&repeatCount=${data.repeatCount}`);
+    return this.http.get(`${this.apiBaseUrl}/completion-status?challengeId=${data.challengeId}&day=${data.day}&userId=${data.userId}&repeatCount=${data.repeatCount}`);
   }
-   geWatchCompletedDataOfProgram(data:any) {
+  /*  geWatchCompletedDataOfProgram(data:any) {
     return this.http.get(`${this.apiBaseUrl}/challenge-watch-count?programId=${data.programId}&userId=${data.userId}&repeatCount=${data.repeatCount}`);
+  } */
+   geWatchCompletedDataOfCoolDownOrWarmUp(data:any) {
+    return this.http.get(`${this.apiBaseUrl}/completion-status?challengeId=${data.challengeId}&userId=${data.userId}&category=${data.category}`);
   }
+/* markAsComplete */
 
+  markAsComplete(data:any){
+    return this.http.post(`${this.apiBaseUrl}/mark-as-complete`,data)
+  }
   updateMarkAsComplete(id:any,data:any){
     return this.http.put(`${this.apiBaseUrl}/mark-as-complete/${id}`,data)
   }
   deleteMarkAsComplete(id:any){
     return this.http.delete(`${this.apiBaseUrl}/mark-as-complete/${id}`)
+  }
+
+  /* favorites */
+addFavorites(data:any){
+    return this.http.post(`${this.apiBaseUrl}/favorites`,data)
+  }
+  deleteFavorites(id:any){
+    return this.http.delete(`${this.apiBaseUrl}/favorites/${id}`)
+  }
+   getFavorites(uid:any){
+    return this.http.get(`${this.apiBaseUrl}/favorites?email=${uid}`)
   }
   /* subscription */
 

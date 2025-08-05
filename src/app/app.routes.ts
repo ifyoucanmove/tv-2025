@@ -221,6 +221,14 @@ export const routes: Routes = [
   }
     ],
   },
+  {
+    path: 'challenge-warm-up',
+    loadComponent: () => import('./pages/challenges/challenge-warm-up/challenge-warm-up.page').then( m => m.ChallengeWarmUpPage)
+  },
+  {
+    path: 'challenge-cool-down',
+    loadComponent: () => import('./pages/challenges/challenge-cool-down/challenge-cool-down.page').then( m => m.ChallengeCoolDownPage)
+  },
  
   
 ];

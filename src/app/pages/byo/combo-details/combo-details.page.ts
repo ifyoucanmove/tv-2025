@@ -31,6 +31,8 @@ export class ComboDetailsPage implements OnInit {
   watchData: any[] = [];
   isCompleted = false;
   watchCount!: number;
+     favList:any=[];
+   favDocid:any;
   constructor(
     private route: ActivatedRoute,
     private modalCtrl: ModalController,
@@ -41,6 +43,7 @@ export class ComboDetailsPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    
       this.commonService.loader = true;
     this.route.paramMap.subscribe((params: any) => {
       this.id = params.params['id'];
@@ -52,7 +55,9 @@ export class ComboDetailsPage implements OnInit {
   loadData() {
     this.apiService.getComboDetails(this.id).subscribe((data: any) => {
       this.comboDetails = data;
+      console.log(this.comboDetails,"this.comboDetails")
       this.loadWatchData();
+      this.getFavList()
     });
   }
   loadWatchData() {
@@ -96,6 +101,7 @@ export class ComboDetailsPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: MoodTrackerComponent,
       cssClass: 'mood-tracker-modal',
+       componentProps: {data:null},
     });
 
     await modal.present();
@@ -208,5 +214,55 @@ export class ComboDetailsPage implements OnInit {
     if (data) {
     }
       
+    }
+
+        getFavList(){
+    this.apiService.getFavorites(this.authService.userObjData.email).subscribe((res:any) =>{
+      console.log(res,"favlist")
+      this.favList = res.favorites;
+      let result = this.favList.find((item: any) => item.postId === this.comboDetails.id);
+      if(result){
+ this.favDocid = result.docid;
+      }
+     
+      console.log(this.favDocid ,"this.favDocid ")
+    })
+    }
+
+    addTofav(){
+      let obj=
+      {
+    "id": this.comboDetails.id,
+    "postId": this.comboDetails.id,
+    "email": this.authService.userObjData.email,
+    "title": this.comboDetails.name,
+    "image": "",
+    "type":  "byo-combo",
+    "media":""
+}
+
+this.apiService.addFavorites(obj).subscribe(res =>{
+  console.log(res)
+  this.getFavList()
+})
+
+    }
+
+    removeFromFavList(){
+      console.log(this.favDocid)
+      this.apiService.deleteFavorites(this.favDocid).subscribe(res =>{
+      this.getFavList()
+      })
+    }
+
+    checkFavorites(){
+   // let result = this.favList.find(ele => ele.)
+     const favoriteList =  this.favList;
+     if(!favoriteList ){
+  return
+     }
+    return favoriteList
+      ? favoriteList.filter((item: any) => item.postId === this.comboDetails.id).length
+      : favoriteList;
     }
 }

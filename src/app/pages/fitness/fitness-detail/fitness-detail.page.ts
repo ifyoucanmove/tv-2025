@@ -31,6 +31,8 @@ export class FitnessDetailPage implements OnInit {
   lastWatched: any[] = [];
   isCompleted = false;
    status!: string;
+     favList:any=[];
+   favDocid:any;
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -51,6 +53,7 @@ export class FitnessDetailPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getFavList()
         const customerValue = this.authService.customer();
       if (customerValue) {
         this.status = customerValue.status;
@@ -195,6 +198,7 @@ export class FitnessDetailPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: MoodTrackerComponent,
       cssClass: 'mood-tracker-modal',
+       componentProps: {data:null},
     });
 
     await modal.present();
@@ -301,4 +305,60 @@ export class FitnessDetailPage implements OnInit {
       }
         
       }
+
+            getFavList(){
+    this.apiService.getFavorites(this.authService.userObjData.email).subscribe((res:any) =>{
+      console.log(res,"favlist")
+      this.favList = res.favorites;
+      let result = this.favList.find((item: any) => item.postId === this.programData.postId);
+      if(result){
+ this.favDocid = result.docid;
+      }
+     
+      console.log(this.favDocid ,"this.favDocid ")
+    })
+    }
+
+    addTofav(){
+      let obj=
+      {
+    "id": this.programData.id,
+    "postId": this.programData.postId,
+    "email": this.authService.userObjData.email,
+    "title": this.programData.postTitle,
+    "image": this.programData.postImage,
+    "type": this.programData.post.type,
+    "media":this.programData.post.media,
+    "description": this.programData.post.description,
+    "duration": this.programData.post.duration,
+    "equipment": this.programData.post.equipment,
+    "categories": this.programData.post.categories,
+    "categoryArray":this.programData.post.categoryArray,
+    "ingredients": this.programData.post.ingredients
+}
+
+this.apiService.addFavorites(obj).subscribe(res =>{
+  console.log(res)
+  this.getFavList()
+})
+
+    }
+
+    removeFromFavList(){
+      console.log(this.favDocid)
+      this.apiService.deleteFavorites(this.favDocid).subscribe(res =>{
+      this.getFavList()
+      })
+    }
+
+    checkFavorites(){
+   // let result = this.favList.find(ele => ele.)
+     const favoriteList =  this.favList;
+     if(!favoriteList ){
+  return
+     }
+    return favoriteList
+      ? favoriteList.filter((item: any) => item.postId === this.programData.postId).length
+      : favoriteList;
+    }
 }

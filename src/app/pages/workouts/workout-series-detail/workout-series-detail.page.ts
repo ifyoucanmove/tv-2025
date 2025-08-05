@@ -31,6 +31,8 @@ export class WorkoutSeriesDetailPage implements OnInit {
   day: any;
   programTitle: any = '';
   status!: string;
+    favList:any=[];
+   favDocid:any;
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -52,6 +54,7 @@ export class WorkoutSeriesDetailPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getFavList();
         const customerValue = this.authService.customer();
       if (customerValue) {
         this.status = customerValue.status;
@@ -191,6 +194,7 @@ export class WorkoutSeriesDetailPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: MoodTrackerComponent,
       cssClass: 'mood-tracker-modal',
+       componentProps: {data:null},
     });
 
     await modal.present();
@@ -297,4 +301,60 @@ export class WorkoutSeriesDetailPage implements OnInit {
       }
         
       }
+
+         getFavList(){
+    this.apiService.getFavorites(this.authService.userObjData.email).subscribe((res:any) =>{
+      console.log(res,"favlist")
+      this.favList = res.favorites;
+      let result = this.favList.find((item: any) => item.postId === this.data.postId);
+      if(result){
+ this.favDocid = result.docid;
+      }
+     
+      console.log(this.favDocid ,"this.favDocid ")
+    })
+    }
+
+    addTofav(){
+      let obj=
+      {
+    "id": this.data.id,
+    "postId": this.data.postId,
+    "email": this.authService.userObjData.email,
+    "title": this.data.postTitle,
+    "image": this.data.postImage,
+    "type": this.data.post.type,
+    "media":this.data.post.media,
+    "description": this.data.post.description,
+    "duration": this.data.post.duration,
+    "equipment": this.data.post.equipment,
+    "categories": this.data.post.categories,
+    "categoryArray":this.data.post.categoryArray,
+    "ingredients": this.data.post.ingredients
+}
+
+this.apiService.addFavorites(obj).subscribe(res =>{
+  console.log(res)
+  this.getFavList()
+})
+
+    }
+
+    removeFromFavList(){
+      console.log(this.favDocid)
+      this.apiService.deleteFavorites(this.favDocid).subscribe(res =>{
+      this.getFavList()
+      })
+    }
+
+    checkFavorites(){
+   // let result = this.favList.find(ele => ele.)
+     const favoriteList =  this.favList;
+     if(!favoriteList ){
+  return
+     }
+    return favoriteList
+      ? favoriteList.filter((item: any) => item.postId === this.data.postId).length
+      : favoriteList;
+    }
 }
