@@ -1,0 +1,77 @@
+.video-grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 0;
+  /*  overflow-x: auto; */
+  scroll-behavior: smooth;
+  // -webkit-overflow-scrolling: touch;
+  // scrollbar-width: none;
+  // -ms-overflow-style: none;
+  width: 100%;
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.video-card {
+  flex: 0 0 calc(25% - 16px);
+  min-width: calc(25% - 16px);
+  margin: 0px;
+  background: var(--background-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  &:focus {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 2px var(--accent-primary), 0 8px 16px rgba(0, 0, 0, 0.3);
+    z-index: 1;
+  }
+
+
+  ion-card-header {
+    padding: 12px;
+
+    ion-card-title {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    ion-card-subtitle {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+  }
+}
+
+
+.image-container-placeholder{
+  background-color: rgb(100 100 100 / 42%);
+  height: 110px;
+  max-height: 110px;
+  min-height: 110px;  
+  ion-img{
+         height: 110px;
+  max-height: 110px;
+  min-height: 110px; 
+  object-fit: cover;
+      }
+}

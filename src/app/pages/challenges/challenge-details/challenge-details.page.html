@@ -4,9 +4,12 @@
       <h1 class="text-white">Challenge Detail</h1>
     </ion-col>
   </ion-row>
-<!--   <app-challenge-warm-up
+  <app-challenge-cool-down  [challengeId]="id"  
+     [challengeName]="data"></app-challenge-cool-down>
+  <app-challenge-warm-up
   [challengeId]="id"
-  ></app-challenge-warm-up> -->
+    [challengeName]="data"
+  ></app-challenge-warm-up> 
   <ion-row>
     <ion-col size="12">
       <h4 class="text-white">Week 1</h4>

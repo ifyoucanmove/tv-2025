@@ -8,13 +8,14 @@ import { ApiService } from 'src/app/services/api.service';
 import { NavController } from '@ionic/angular';
 import { IonSkeletonText } from '@ionic/angular/standalone';
 import { ChallengeWarmUpPage } from '../challenge-warm-up/challenge-warm-up.page';
+import { ChallengeCoolDownPage } from '../challenge-cool-down/challenge-cool-down.page';
 
 @Component({
   selector: 'app-challenge-details',
   templateUrl: './challenge-details.page.html',
   styleUrls: ['./challenge-details.page.scss'],
   standalone: true,
-  imports: [SharedModule, IonSkeletonText],
+  imports: [SharedModule, IonSkeletonText,ChallengeCoolDownPage,ChallengeWarmUpPage],
 })
 export class ChallengeDetailsPage implements OnInit, AfterViewInit {
   challenges: any[] = [];
@@ -48,16 +49,16 @@ export class ChallengeDetailsPage implements OnInit, AfterViewInit {
     });
   }
   ngAfterViewInit(): void {
-    setTimeout(() => {
+  /*   setTimeout(() => {
       let ele = document.getElementById('weekcard0');
       console.log(ele, 'ionViewDidEnter');
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 2000); */
   }
 
-  ionViewDidEnter() {
+  /* ionViewDidEnter() {
     setTimeout(() => {
       console.log('ionViewDidEnter');
       let ele = document.getElementById('weekcard0');
@@ -65,19 +66,19 @@ export class ChallengeDetailsPage implements OnInit, AfterViewInit {
         ele.focus();
       }
     }, 3000);
-  }
+  } */
 
   loadChallengeDetails(id: any) {
     this.apiService.getChallengeDetails(id).subscribe((data: any) => {
       this.challenges = data.days;
       this.challengeDays = this.groupDaysByWeeks(this.challenges);
       console.log(data, 'Challenges:', this.challenges);
-       setTimeout(() => {
+      /*  setTimeout(() => {
       let ele = document.getElementById('weekcard0');
       if (ele) {
         ele.focus();
       }
-    }, 3000);
+    }, 3000); */
     });
   }
   groupDaysByWeeks(daysArray: any) {
@@ -105,4 +106,6 @@ export class ChallengeDetailsPage implements OnInit, AfterViewInit {
       },
     });
   }
+
+    
 }

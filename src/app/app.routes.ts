@@ -53,6 +53,13 @@ export const routes: Routes = [
           ).then((m) => m.ChallengeVideoDetailsPage),
       },
       {
+        path: 'challenge-page-detail/:id',
+        loadComponent: () =>
+          import(
+            './pages/challenges/challenge-warmup-and-cooldown-detail/challenge-warmup-and-cooldown-detail.page'
+          ).then((m) => m.ChallengeWarmupAndCooldownDetailPage),
+      },
+      {
         path: 'favorites',
         loadComponent: () =>
           import('./pages/favourite/favourite.page').then(
@@ -228,6 +235,10 @@ export const routes: Routes = [
   {
     path: 'challenge-cool-down',
     loadComponent: () => import('./pages/challenges/challenge-cool-down/challenge-cool-down.page').then( m => m.ChallengeCoolDownPage)
+  },
+  {
+    path: 'challenge-warmup-and-cooldown-detail',
+    loadComponent: () => import('./pages/challenges/challenge-warmup-and-cooldown-detail/challenge-warmup-and-cooldown-detail.page').then( m => m.ChallengeWarmupAndCooldownDetailPage)
   },
  
   
