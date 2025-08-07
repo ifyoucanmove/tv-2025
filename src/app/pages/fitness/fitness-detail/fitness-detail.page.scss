@@ -1,5 +1,5 @@
 .hero-background {
-  position: absolute;
+  position: fixed !important;
   top: 0;
   left: 0;
   right: 0;
@@ -10,9 +10,9 @@
   filter: brightness(0.4) blur(0px);
   z-index: 1;
 }
-
+ 
 .hero-overlay {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

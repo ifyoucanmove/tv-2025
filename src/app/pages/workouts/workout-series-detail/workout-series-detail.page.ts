@@ -54,7 +54,6 @@ export class WorkoutSeriesDetailPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getFavList();
         const customerValue = this.authService.customer();
       if (customerValue) {
         this.status = customerValue.status;
@@ -66,8 +65,24 @@ export class WorkoutSeriesDetailPage implements OnInit {
           }
       }
      this.commonService.loader = true;
-    this.route.queryParams.subscribe((params: any) => {
+/*     this.route.queryParams.subscribe((params: any) => {
       this.loadData();
+    }); */
+     this.route.paramMap.subscribe((params: any) => {
+      let id = params.params.id;
+      this.loadData();
+         if(!this.data){
+       this.apiService.getPostById(id).subscribe((res:any) =>{
+        console.log(res,'getPostById')
+        this.data = res;
+           this.programId = res.programId;
+      this.day = res.dayNumber;
+      this.programTitle = res.programTitle;
+            this.getFavList()
+      }) }
+      else{
+this.getFavList()
+      } 
     });
   }
   ngAfterViewInit(): void {

@@ -1,14 +1,19 @@
 <ion-grid>
   <ion-row>
     <ion-col size="6">
-      <ion-card>
-        <ion-img [src]="recipeData?.image"></ion-img>
+      <ion-card class="m-0">
+            <div *ngIf="!imageLoaded">
+  <ion-skeleton-text style="width: 100%; height: 115px;" animated></ion-skeleton-text>
+</div>
+@if (recipeData?.image) {
+        <ion-img [src]="recipeData?.image" (ionImgDidLoad)="imageLoaded = true"></ion-img>
+}
       </ion-card>
     </ion-col>
     <ion-col size="6">
-      <h1 class="text-white text-start">{{recipeData?.title}}</h1>
+      <h1 class="text-white text-start mt-0">{{recipeData?.title}}</h1>
         @if(!checkFavorites()){
-       <button class="btn-icon-primary" tabindex="0"
+       <button class="btn-icon-primary" tabindex="0"     id="favbtn"
        (click)="addTofav()"
        >
         <ion-icon name="heart-outline"></ion-icon>
@@ -16,25 +21,28 @@
         <span>Add to Favorites</span>
       </button>}
        @if(checkFavorites()){
-      <button class="btn-icon-primary" tabindex="0"  (click)="removeFromFavList()">
+      <button class="btn-icon-primary" tabindex="0" id="favbtn"  (click)="removeFromFavList()">
         <ion-icon name="heart"></ion-icon>
         <span>Added to Favorites</span>
       </button> }
 
+      @if (recipeData?.description) {
       <div class="mt-3">
         <h5 class="text-white">Description:</h5>
         <p class="text-white">{{recipeData?.description}}</p>
-      </div>
+      </div>}
     </ion-col>
   </ion-row>
   <ion-row>
+     @if (recipeData?.ingredients) {
     <ion-col size="12">
       <h5 class="text-white">Ingredients:</h5>
       <p class="text-white" [innerHTML]="recipeData?.ingredients"></p>
-    </ion-col>
+    </ion-col>}
+     @if (recipeData?.directions) {
     <ion-col size="12">
       <h5 class="text-white">Directions:</h5>
       <p class="text-white" [innerHTML]="recipeData?.directions"></p>
-    </ion-col>
+    </ion-col>}
   </ion-row>
 </ion-grid>

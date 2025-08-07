@@ -3,18 +3,20 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { IonSkeletonText } from '@ionic/angular/standalone';
 @Component({
   selector: 'app-single-recipe',
   templateUrl: './single-recipe.page.html',
   styleUrls: ['./single-recipe.page.scss'],
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule,IonSkeletonText],
 })
 export class SingleRecipePage implements OnInit {
   recipeData: any;
      favList:any=[];
    favDocid:any;
+     imageLoaded: boolean = true;
+   id:any;
   constructor(
     public route: ActivatedRoute,
     private apiService: ApiService,
@@ -30,18 +32,42 @@ export class SingleRecipePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getFavList()
+    this.route.paramMap.subscribe((res:any) =>{
+    
+     this.id = res.params.id;
+       console.log(this.id,"id")
+         if(!this.recipeData){
+       this.apiService.getPostById(this.id).subscribe(res =>{
+        console.log(res,'getPostById')
+        this.recipeData = res;
+            this.getFavList()
+      }) }
+      else{
+this.getFavList()
+      } 
+    })
+   
+   
   }
+
+    setFocus() {
+    setTimeout(() => {
+      let ele = document.getElementById('favbtn');
+       if (ele) {
+        ele.focus();
+      }
+    }, 1000);
+  }
+
     getFavList(){
     this.apiService.getFavorites(this.authService.userObjData.email).subscribe((res:any) =>{
       console.log(res,"favlist")
       this.favList = res.favorites;
       let result = this.favList.find((item: any) => item.postId === this.recipeData.id);
       if(result){
- this.favDocid = result.docid;
+      this.favDocid = result.docid;
       }
-     
-      console.log(this.favDocid ,"this.favDocid ")
+     this.setFocus()
     })
     }
 

@@ -63,6 +63,7 @@ export class SigninPage implements OnInit, OnDestroy {
       .subscribe((res) => {
       //  console.log(res, 'getQrDataById');
         if (res?.token) {
+          this.commonService.showLoader()
           this.loginWithToken(res.token);
           this.tokenSubscription.unsubscribe(); // Unsubscribe after getting the token
         }
@@ -86,8 +87,10 @@ export class SigninPage implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
        this.authService.userData.set(res);
         }
+              this.commonService.hideLoader()
   }
     catch(err:any){
+       this.commonService.hideLoader()
        console.error('Custom token login error:', err);
     }
   }

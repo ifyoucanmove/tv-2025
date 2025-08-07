@@ -33,6 +33,7 @@ export class WorkoutDetailPage implements OnInit {
    status!: string;
    favList:any=[];
    favDocid:any;
+   isFav:boolean = false;
   constructor(
     private route: ActivatedRoute,
     public router: Router,
@@ -61,11 +62,32 @@ export class WorkoutDetailPage implements OnInit {
             this.status = 'inactive';
           }
       }
-      this.commonService.loader = true;
-        this.getFavList()
-    this.route.paramMap.subscribe((params: any) => {
+   /*    this.commonService.loader = true;
+          this.route.queryParams.subscribe((params: any) => {
+         this.isFav = params['isFav'];
+         console.log(this.isFav,"favvv")
+         if(!this.isFav){
+          this.loadData();
+         }
+         else{
+           this.loadWatchData();
+         }
+          }) */
+     this.route.paramMap.subscribe((params: any) => {
+      this.isFav = this.route.snapshot.queryParams['isFav'] || false;
+       console.log(this.isFav ,"this.isFav ")
       this.programId = params.params.id;
+ 
+         if(!this.data){
+       this.apiService.getPostById(this.programId).subscribe(res =>{
+        this.data = res;
+        this.getFavList()
+              this.loadData();
+      }) }
+      else{
+this.getFavList()
       this.loadData();
+      } 
     });
   }
   ngAfterViewInit(): void {
@@ -88,7 +110,6 @@ export class WorkoutDetailPage implements OnInit {
   }
 
   loadData() {
-    console.log(this.authService.customer(), 'customer');
 
     this.apiService.getCategoriesList().subscribe((res: any) => {
       this.workouts = res.categories['workouts'].map((ele: any) => {

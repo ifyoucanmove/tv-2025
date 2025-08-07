@@ -9,6 +9,7 @@
       
       <mat-nav-list> <!-- (click)="navigateTo(item.route)" -->
         @for (item of menuItems; track $index) {
+          @if (!item.isDisabled) {
         <a mat-list-item   (click)="navigateTo(item)" routerLinkActive="active"
           [disabled]="item.isDisabled"
           (keydown)="onSideNavKeyDown($event)"
@@ -16,7 +17,7 @@
           tabindex="0">
           <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
           <span matListItemTitle [class.visible]="!isCollapsed">{{item.label}}</span>
-        </a>}
+        </a>}}
         <a mat-list-item (click)="logout()" class="logout-btn"
           [class.focused]="focusedItem?.label === 'logout'"
           (keydown)="onSideNavKeyDown($event)" tabindex="0">

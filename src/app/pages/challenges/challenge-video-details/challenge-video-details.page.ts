@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ConfirmPopupComponent } from 'src/app/shared/modals/confirm-popup/confirm-popup.component';
 import { MoodListDialogComponent } from 'src/app/shared/modals/mood-list-dialog/mood-list-dialog.component';
 import { CommonService } from 'src/app/services/common.service';
+import { ViewportScroller } from '@angular/common';
 @Component({
   selector: 'app-challenge-video-details',
   templateUrl: './challenge-video-details.page.html',
@@ -33,7 +34,7 @@ export class ChallengeVideoDetailsPage implements OnInit {
    status!: string;
     favList:any=[];
    favDocid:any;
-  constructor(
+  constructor(private viewportScroller: ViewportScroller,
     private route: ActivatedRoute,
     public router: Router,
     public authService: AuthService,
@@ -53,6 +54,8 @@ export class ChallengeVideoDetailsPage implements OnInit {
   }
 
   ngOnInit() {
+       window.scrollTo(0, 0);
+     this.viewportScroller.scrollToPosition([0, 0]);
     this.getFavList()
     const customerValue = this.authService.customer();
       if (customerValue) {

@@ -73,12 +73,7 @@ export class ChallengeDetailsPage implements OnInit, AfterViewInit {
       this.challenges = data.days;
       this.challengeDays = this.groupDaysByWeeks(this.challenges);
       console.log(data, 'Challenges:', this.challenges);
-      /*  setTimeout(() => {
-      let ele = document.getElementById('weekcard0');
-      if (ele) {
-        ele.focus();
-      }
-    }, 3000); */
+   
     });
   }
   groupDaysByWeeks(daysArray: any) {

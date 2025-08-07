@@ -6,6 +6,7 @@ import {
   PreloadAllModules,
   withRouterConfig,
   withInMemoryScrolling,
+  withViewTransitions,
 } from '@angular/router';
 import {
   IonicRouteStrategy,
@@ -29,9 +30,20 @@ bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
-    provideRouter(routes, withInMemoryScrolling({
-      scrollPositionRestoration: 'top'
-    }), withPreloading(PreloadAllModules)),
+    provideRouter(routes, 
+     withInMemoryScrolling({
+        scrollPositionRestoration: 'top',
+        anchorScrolling: 'enabled'
+      }),
+     /* withViewTransitions({
+    onViewTransitionCreated: () => {
+      window.scrollTo(0, 0);
+    }
+  }),
+     withRouterConfig({
+       onSameUrlNavigation: 'reload'
+    }), */
+    withPreloading(PreloadAllModules)),
     provideHttpClient(withInterceptors([logInterceptor])),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),

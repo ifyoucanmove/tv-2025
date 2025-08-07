@@ -49,39 +49,12 @@ export class FitnessDayListPage implements OnInit {
   setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('fitnessday-card-0');
-      console.log(ele, 'ele');
       if (ele) {
         ele.focus();
       }
     }, 2000);
   }
-  /* async onVideoClick(video: any) {
-  if(video.post.type =='Byo'){
-    return
-  }
-      let videoData = {
-        title: video.postTitle,
-        image: video.postImage,
-        videoId: video.id,
-        video: video.post.media,
-        description: '',
-      }
-      try {
-        const modal = await this.modalController.create({
-          component: VideoPlayerComponent,
-          componentProps: {
-            video: videoData,
-          },
-          cssClass: 'video-player-modal',
-          showBackdrop: true,
-          backdropDismiss: true,
-        });
-  
-        await modal.present();
-      } catch (error) {
-        console.error('Error opening video modal:', error);
-      }
-    } */
+
 
   openDetailPage(item: any) {
     this.navCtrl.navigateForward(`/fitness-detail/${item.id}`, {

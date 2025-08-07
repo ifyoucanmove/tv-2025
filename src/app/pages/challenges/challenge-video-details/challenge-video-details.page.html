@@ -1,12 +1,12 @@
 @if(videoData){
 <div
-  class="hero-background"
+  class="hero-background" style="position: fixed;"
   [ngStyle]="{'background-image': 'url(' + videoData.image + ')'}"
 ></div>
 <div class="hero-overlay"></div>
 <div class="hero-content">
   <div class="hero-title">
-    <h1>{{ videoData.title }}</h1>
+    <h1>{{ challengeName }}</h1>
     <div class="hero-description">
       Duration: {{ videoData.durationMinutes }} Mins
     </div>
@@ -76,3 +76,4 @@
     </ion-col>
   </ion-row>
 </ion-grid>
+

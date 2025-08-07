@@ -41,21 +41,19 @@ export class ChallengeCoolDownPage implements OnInit {
 
   ngOnInit() {
   setTimeout(() => {
-      console.log('ionViewDidEnter');
       let ele = document.getElementById('coolcard0');
       if (ele) {
         ele.focus();
       }
-    }, 3000);
+    }, 2000);
   }
  ionViewDidEnter() {
     setTimeout(() => {
-      console.log('ionViewDidEnter');
       let ele = document.getElementById('coolcard0');
       if (ele) {
         ele.focus();
       }
-    }, 3000);
+    }, 2000);
   }
 onNavigate(item:any){
   let category = 'challenge-cool-down';

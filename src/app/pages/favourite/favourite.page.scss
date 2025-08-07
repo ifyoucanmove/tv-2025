@@ -1,0 +1,12 @@
+.image-container-placeholder{
+  background-color: rgb(100 100 100 / 42%);
+  height: 120px;
+  max-height: 120px;
+  min-height: 120px;  
+  ion-img{
+         height: 120px;
+  max-height: 120px;
+  min-height: 120px; 
+  object-fit: cover;
+      }
+}

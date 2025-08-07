@@ -20,9 +20,9 @@ constructor(public authService:AuthService){}
   getProgrammList() {
     return this.http.get('assets/jsons/list.json');
   }
-    getFavList() {
+   /*  getFavList() {
     return this.http.get('assets/jsons/favorite.json');
-  }
+  } */
 
   getByoList() {
     return this.http.get('assets/jsons/byo.json');
@@ -74,7 +74,7 @@ constructor(public authService:AuthService){}
     return this.http.get(`${this.apiBaseUrl}/byo-combos?type=${type}&uid=${uid}`);
   }
   getPreMadeCombo() {
- return this.http.get(`${this.apiBaseUrl}/admin-byo-combos`);
+  return this.http.get(`${this.apiBaseUrl}/admin-byo-combos`);
   }
 
 /* dashboardData */
@@ -193,4 +193,7 @@ addFavorites(data:any){
   });
   }
 
+   getPostById(id:any){
+    return this.http.get(`${this.apiBaseUrl}/post?id=${id}`)
+  }
 }

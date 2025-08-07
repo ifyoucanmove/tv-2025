@@ -4,7 +4,7 @@
       <ion-row class="h-100">
         <ion-col size="12">
           <ion-card class="stats-card">
-            <h1>Today</h1>
+            <h1 class="mt-0">Today</h1>
             @if (stripeCustomer?.todayStats) {
             <h6>{{getDate(stripeCustomer?.todayStats?.date) | date: 'EEEE'}}</h6>
             <h6>{{getDate(stripeCustomer?.todayStats?.date) | date: 'MMMM d, y'}}</h6>}
