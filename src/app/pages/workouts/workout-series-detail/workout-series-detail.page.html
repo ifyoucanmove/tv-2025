@@ -30,10 +30,10 @@
         <ion-icon name="checkmark-done-circle-outline"></ion-icon>
         <span class="me-2"
           >Completed
-          <span *ngIf="getDayWatchCount(day) > 1"
+          @if (getDayWatchCount(day) > 1) {
+          <span 
             >({{getDayWatchCount(day) }})</span
-          ></span
-        ></button
+          >}</span></button
       >}
          @if (checkMoodIconVisible(this.day)) {
          <button class="btn-icon-primary" tabindex="0"  (click)="openMoodList(this.day)">

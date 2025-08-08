@@ -49,9 +49,10 @@
           <ion-icon name="checkmark-done-circle-outline"></ion-icon>
           <span class="me-2"
             >Completed
-            <span *ngIf="getWatchCount() > 1"
+            @if (getWatchCount() > 1) {
+            <span 
               >({{getWatchCount() }})</span
-            ></span
+            >}</span
           ></button
         >}
           @if (checkMoodIconVisible()) {

@@ -1,7 +1,11 @@
 
   <div class="modal-content p-3">
      <div class="modal-header d-flex justify-content-between">
-        <h5 class="modal-title text-white m-0">Mood List day <span *ngIf="data[0].day">: {{ data[0].day }}</span></h5>
+        <h5 class="modal-title text-white m-0">Mood List day 
+            @if(data[0].day){
+          <span >: {{ data[0].day }}</span>
+            }
+        </h5>
   </div>
 
     <div class="modal-body scroll-pen" style="width: 100%">
@@ -10,13 +14,16 @@
         <div>
           <h5>{{ item.title }}</h5>
           <h6>{{ item.programTitle }}</h6>
-          <span class="mt-2 fs-12" *ngIf="item.durationMinutes">
+          @if(item.durationMinutes){
+          <span class="mt-2 fs-12" >
             <i class="fa fa-clock-o color-primary"></i>
             {{ item.durationMinutes || 0 }} Minute{{
               item.durationMinutes > 1 ? "s" : ""
             }}
-          </span>
-          <span class="ml-3 mt-2 fs-12" *ngIf="item?.day">Day: {{item?.day}}</span>
+          </span>}
+          @if(item?.day){
+          <span class="ml-3 mt-2 fs-12" >Day: {{item?.day}}</span>
+          }
         </div>
 
         <div class="d-flex justify-content-between align-items-center sub-sec">

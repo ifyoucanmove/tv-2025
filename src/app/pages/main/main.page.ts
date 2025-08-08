@@ -87,7 +87,6 @@ export class MainPage implements OnInit {
   ) {
      effect(() => {
    const customerValue = this.authService.customer();
-    console.log(customerValue,"customerValue")
       if (customerValue) {
         this.status = customerValue.status;
            if (!customerValue) {
