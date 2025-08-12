@@ -26,6 +26,7 @@ export class PreMadeComboPage implements OnInit {
   loadByo() {
     this.apiService.getPreMadeCombo().subscribe((data: any) => {
       this.preMadeComboList = data.combos;
+      console.log(this.preMadeComboList);
       this.setFocus();
     });
   }

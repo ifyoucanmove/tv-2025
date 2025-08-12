@@ -59,6 +59,9 @@ export class HomePage implements OnInit, AfterViewInit {
   auth: Auth = inject(Auth);
   @ViewChild('videoSection') videoSection: any;
  status!: string;
+
+ userMadeList: any[] = [];
+ preMadeComboList: any[] = [];
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -102,6 +105,7 @@ export class HomePage implements OnInit, AfterViewInit {
       this.programs = res;
     });
     this.apiService.getCategoriesList().subscribe((res: any) => {
+      console.log(res, 'res');
       this.workouts = res.categories['workouts'].map((ele: any) => {
         return {
           id: ele.id,
@@ -147,6 +151,16 @@ export class HomePage implements OnInit, AfterViewInit {
         };
       });
     });
+
+    this.apiService.getPreMadeCombo().subscribe((data: any) => {
+      this.preMadeComboList = data.combos;
+    });
+
+     this.apiService
+      .getUserMadeCombo('user', this.authService.userObjData.uid)
+      .subscribe((data: any) => {
+        this.userMadeList = data.combos;
+      });
 
     this.apiService
       .loadCompletedData(this.authService.userObjData.email, 3)
@@ -351,5 +365,19 @@ export class HomePage implements OnInit, AfterViewInit {
     } catch (err) {
       console.log('error', err);
     }
+  }
+
+  onViewAllUsermade(){
+    this.router.navigate(['/user-made-combo']);
+  }
+   onCardUsermade(video: any){
+    this.router.navigate(['/combo-details/', video.id]);
+  }
+
+   onViewAllPremade(){
+    this.router.navigate(['/pre-made-combo']);
+  }
+   onCardPremade(video: any){
+    this.router.navigate(['/combo-details/', video.id]);
   }
 }

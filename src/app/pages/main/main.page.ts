@@ -42,9 +42,9 @@ export class MainPage implements OnInit {
   menuItems = [
     { icon: 'home', label: 'Home',isDisabled:false, route: '/home' },
     { icon: 'search', label: 'Search',isDisabled:true, route: '/search' },
-    { icon: 'favorite', label: 'Favorites',isDisabled:true, route: '/favorites' },
+    { icon: 'favorite', label: 'Favorites',isDisabled:false, route: '/favorites' },
     { icon: 'fastfood', label: 'Recipe',isDisabled:true, route: '/recipe-category' },
-    { icon: 'donut_small', label: 'Byo Combo',isDisabled:true, route: '/byo-combo' },
+    { icon: 'donut_small', label: 'Byo Combo',isDisabled:false, route: '/byo-combo' },
 /*  { icon: 'donut_small', label: 'Trainers',isDisabled:false, route: '/trainers-list' }, */
     { icon: 'person', label: 'Profile',isDisabled:true, route: '/update-profile' },
     { icon: 'settings', label: 'Settings',isDisabled:true, route: '/settings' },

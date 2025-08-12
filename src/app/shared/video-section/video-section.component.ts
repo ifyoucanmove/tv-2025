@@ -57,7 +57,12 @@ const customerValue = this.authService.customer();
         this.title()
       ) as HTMLElement;
     //  this.setFocus()
+   
     }, 0);
+
+    setTimeout(() => {
+       console.log(this.videos(), "videos",this.title())
+    }, 4000);
   }
 
   ngOnChanges(changes: SimpleChanges) {
