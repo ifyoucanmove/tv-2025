@@ -33,6 +33,7 @@ import {
   IonTabs,
   IonAvatar,
   IonBadge,
+  IonSpinner,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -61,7 +62,15 @@ import {
   volumeMute,
   apertureOutline,
   createOutline,
-  trashOutline
+  trashOutline,
+  search,
+  closeCircle,
+  searchOutline,
+  trophy,
+  barbell,
+  restaurant,
+  layers,
+  chevronForward
 } from 'ionicons/icons';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
@@ -89,8 +98,18 @@ addIcons({
   home,
   timeOutline,
   shareSocialOutline,
-  play,apertureOutline,
-  createOutline,trashOutline
+  play,
+  apertureOutline,
+  createOutline,
+  trashOutline,
+  search,
+  closeCircle,
+  searchOutline,
+  trophy,
+  barbell,
+  restaurant,
+  layers,
+  chevronForward
 });
 @NgModule({
   declarations: [],
@@ -129,6 +148,7 @@ addIcons({
     IonTabs,
     IonAvatar,
     IonBadge,
+    IonSpinner,
     NgxSkeletonLoaderModule
   ],
   exports: [
@@ -165,6 +185,7 @@ addIcons({
     IonTabs,
     IonAvatar,
     IonBadge,
+    IonSpinner,
     NgxSkeletonLoaderModule
   ],
 })

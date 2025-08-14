@@ -1,11 +1,154 @@
-<ion-grid>
-  <ion-row>
-    <ion-col size="8" class="mx-auto">
-      <div class="search-box">
-        <input type="text" class="form-control search-input"> 
-        <button type="button" class="btn search-btn">Search</button>
-      </div>
-    </ion-col>
-  </ion-row>
+<ion-content>
+  <ion-grid>
+    <!-- Search Header -->
+    <ion-row>
+      <ion-col size="12">
+        <div class="search-header">
+          <h1>Search</h1>
+          <p>Find challenges, workouts, recipes, and more</p>
+        </div>
+      </ion-col>
+    </ion-row>
 
+    <!-- Search Input -->
+    <ion-row>
+      <ion-col size="8" class="mx-auto">
+        <div class="search-container">
+          <div class="search-box">
+            <ion-icon name="search" class="search-icon"></ion-icon>
+            <input 
+              #searchInput
+              type="text" 
+              class="search-input" 
+              placeholder="Search for challenges, workouts, recipes..."
+              [value]="searchKeyword"
+              (input)="onSearchInput($event)"
+              (keydown.enter)="performSearch(searchKeyword)"
+              tabindex="1">
+            @if (searchKeyword.length > 0) {
+              <ion-icon 
+                name="close-circle" 
+                class="clear-icon"
+                (click)="clearSearch()"
+                tabindex="2">
+              </ion-icon>
+            }
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- Loading State -->
+    @if (isLoading) {
+      <ion-row>
+        <ion-col size="12" class="text-center">
+          <div class="loading-container">
+            <ion-spinner name="crescent"></ion-spinner>
+            <p>Searching...</p>
+          </div>
+        </ion-col>
+      </ion-row>
+    }
+
+    <!-- Search Results -->
+    @if (showResults && !isLoading) {
+      <ion-row>
+        <ion-col size="12">
+          <div class="results-container">
+            @if (searchResults.length > 0) {
+              <div class="results-header">
+                <h2>Found {{ searchResults.length }} result{{ searchResults.length !== 1 ? 's' : '' }}</h2>
+              </div>
+              
+              <div class="results-grid">
+                @for (result of searchResults; track result.id; let i = $index) {
+                  <div 
+                    class="result-card"
+                    [attr.tabindex]="i + 3"
+                    (click)="onResultClick(result)"
+                    (keydown.enter)="onResultClick(result)"
+                    (keydown.space)="onResultClick(result)">
+                    
+                    <div class="result-image">
+                      @if (result.image) {
+                        <img [src]="result.image" [alt]="result.title" loading="lazy">
+                      } @else {
+                        <div class="placeholder-image">
+                          <ion-icon [name]="getResultIcon(result.type)"></ion-icon>
+                        </div>
+                      }
+                      <div class="result-type-badge" [class]="'badge-' + getResultColor(result.type)">
+                        {{ getResultTypeName(result.type) }}
+                      </div>
+                    </div>
+                    
+                    <div class="result-content">
+                      <h3 class="result-title">{{ result.title }}</h3>
+                      @if (result.description) {
+                        <p class="result-description">{{ result.description }}</p>
+                      }
+                      @if (result.duration) {
+                        <div class="result-meta">
+                          <ion-icon name="time-outline"></ion-icon>
+                          <span>{{ result.duration }} min</span>
+                        </div>
+                      }
+                    </div>
+                    
+                    <div class="result-arrow">
+                      <ion-icon name="chevron-forward"></ion-icon>
+                    </div>
+                  </div>
+                }
+              </div>
+            } @else {
+              <div class="no-results">
+                <ion-icon name="search-outline" class="no-results-icon"></ion-icon>
+                <h3>No results found</h3>
+                <p>Try searching with different keywords</p>
+              </div>
+            }
+          </div>
+        </ion-col>
+      </ion-row>
+    }
+
+    <!-- Initial State -->
+    @if (!showResults && !isLoading) {
+      <ion-row>
+        <ion-col size="12">
+          <div class="initial-state">
+            <ion-icon name="search-outline" class="initial-icon"></ion-icon>
+            <h3>Start searching</h3>
+            <p>Type to find challenges, workouts, recipes, and more</p>
+            
+            <div class="search-suggestions">
+              <h4>Popular searches:</h4>
+              <div class="suggestion-tags">
+                <span class="suggestion-tag" tabindex="3">Cardio</span>
+                <span class="suggestion-tag" tabindex="4">Strength</span>
+                <span class="suggestion-tag" tabindex="5">Yoga</span>
+                <span class="suggestion-tag" tabindex="6">Healthy</span>
+                <span class="suggestion-tag" tabindex="7">Beginner</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    }
+
+    <!-- Fallback State - Always show if nothing else is visible -->
+    @if (!isLoading && !showResults && !isDataLoaded) {
+      <ion-row>
+        <ion-col size="12">
+          <div class="fallback-state">
+            <ion-icon name="search-outline" class="fallback-icon"></ion-icon>
+            <h3>Search Page</h3>
+            <p>Loading search functionality...</p>
+            <button (click)="loadSearchData()" class="retry-button">Retry Loading</button>
+          </div>
+        </ion-col>
+      </ion-row>
+    }
   </ion-grid>
+</ion-content>
