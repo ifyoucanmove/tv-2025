@@ -1,15 +1,13 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'ifyoucan-tv',
+  appId: 'com.ifyoucanmove.tv',
+  appName: 'Ifyoucanmove',
   webDir: 'www',
   server: {
-     url:'https://online-bizz-theme-2024.web.app/', 
-   // url: 'https://ifyoucanmove-tv.web.app/',
-   //  url: 'http://192.168.29.179:8100', 
-    cleartext: true,
-  },
+  "url": "https://online-bizz-theme-2024.web.app/",
+  "cleartext": true
+}
 };
 
 export default config;
