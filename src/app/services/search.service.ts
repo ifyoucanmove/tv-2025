@@ -361,4 +361,65 @@ export class SearchService {
         return 'dark';
     }
   }
+
+  /**
+   * Get popular search terms for quick access
+   */
+  getPopularSearchTerms(): string[] {
+    return [
+      'Cardio',
+      'Strength',
+      'Yoga',
+      'Healthy',
+      'Beginner',
+      'Advanced',
+      'Weight Loss',
+      'Muscle Building',
+      'Flexibility',
+      'Core',
+      'HIIT',
+      'Pilates',
+      'Meditation',
+      'Nutrition',
+      'Recovery'
+    ];
+  }
+
+  /**
+   * Get search suggestions based on partial input
+   */
+  getSearchSuggestions(partial: string): string[] {
+    if (!partial || partial.length < 2) {
+      return this.getPopularSearchTerms().slice(0, 5);
+    }
+
+    const suggestions: string[] = [];
+    const searchTerm = partial.toLowerCase();
+
+    // Add popular terms that match
+    this.getPopularSearchTerms().forEach(term => {
+      if (term.toLowerCase().includes(searchTerm)) {
+        suggestions.push(term);
+      }
+    });
+
+    // Add titles that match
+    const allTitles = [
+      ...this.allData.challenges.map((c: any) => c.dashTitle || c.title),
+      ...this.allData.fitness.map((f: any) => f.title),
+      ...this.allData.workouts.map((w: any) => w.title),
+      ...this.allData.recipes.map((r: any) => r.title),
+      ...this.allData.premadeCombos.map((c: any) => c.title),
+      ...this.allData.userCombos.map((c: any) => c.title),
+      ...this.allData.singleWorkouts.map((w: any) => w.title)
+    ];
+
+    allTitles.forEach(title => {
+      if (title && title.toLowerCase().includes(searchTerm) && !suggestions.includes(title)) {
+        suggestions.push(title);
+      }
+    });
+
+    return suggestions.slice(0, 8); // Limit to 8 suggestions
+  }
 }

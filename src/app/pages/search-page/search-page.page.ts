@@ -154,6 +154,22 @@ export class SearchPagePage implements OnInit {
   }
 
   /**
+   * Quick search from button clicks
+   */
+  quickSearch(keyword: string) {
+    this.searchKeyword = keyword;
+    this.showResults = true;
+    this.performSearch(keyword);
+    
+    // Focus back to search input for further typing
+    setTimeout(() => {
+      if (this.searchInput) {
+        this.searchInput.nativeElement.focus();
+      }
+    }, 100);
+  }
+
+  /**
    * Get result icon
    */
   getResultIcon(type: string): string {
