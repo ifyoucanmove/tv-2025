@@ -1,9 +1,0 @@
-{
-	"appId": "com.movefitness.ifyoucanmovetv",
-	"appName": "Ifyoucanmove TV",
-	"webDir": "www",
-	"server": {
-		"url": "https://online-bizz-theme-2024.web.app/",
-		"cleartext": true
-	}
-}
