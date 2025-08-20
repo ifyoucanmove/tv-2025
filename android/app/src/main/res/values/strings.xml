@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Ifyoucanmove</string>
-    <string name="title_activity_main">Ifyoucanmove</string>
-    <string name="package_name">com.ifyoucanmove.tv</string>
-    <string name="custom_url_scheme">com.ifyoucanmove.tv</string>
-</resources>

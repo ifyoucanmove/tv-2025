@@ -1,0 +1,261 @@
+[
+    {
+        "workoutId": "KCBWkE7R9zST8rPVv1qH",
+        "restTime": 2,
+        "timeOrReps": "reps",
+        "timeOrRepsCount": 2,
+        "postDetails": {
+            "focusArray": [
+                "abs",
+                "arms",
+                "legs"
+            ],
+            "activationDate": {
+                "seconds": 1683522000,
+                "nanoseconds": 0
+            },
+            "categories": "byo-bands",
+            "duration": "0",
+            "active": true,
+            "media": "https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/STRAIGHT+LEG+AB+KICK+WITH+BANDS+INTERMEDIATE.gif",
+            "title": "Straight Leg Ab Kick With Bands",
+            "description": "",
+            "image2": "",
+            "equipment": "",
+            "ingredients": "",
+            "categoryArray": [
+                "byo-bands"
+            ],
+            "id": "KCBWkE7R9zST8rPVv1qH",
+            "dateEdited": {
+                "seconds": 1683578231,
+                "nanoseconds": 550000000
+            },
+            "image": "",
+            "directions": "",
+            "datePublished": {
+                "seconds": 1683578092,
+                "nanoseconds": 502000000
+            },
+            "durationMinutes": 0,
+            "level": "intermediate",
+            "type": "Workout",
+            "isByo": true
+        }
+    },
+    {
+        "timeOrRepsCount": 2,
+        "workoutId": "g14HYMvHX9VaMfSTAdxx",
+        "restTime": 2,
+        "timeOrReps": "reps",
+        "postDetails": {
+            "description": "",
+            "type": "Workout",
+            "durationMinutes": 0,
+            "active": true,
+            "activationDate": {
+                "seconds": 1683522000,
+                "nanoseconds": 0
+            },
+            "isByo": true,
+            "image": "",
+            "ingredients": "",
+            "categoryArray": [
+                "byo-bands"
+            ],
+            "dateEdited": {
+                "seconds": 1683578115,
+                "nanoseconds": 223000000
+            },
+            "title": "Straight Leg Ab Kick With Bands",
+            "media": "https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/STRAIGHT+LEG+AB+KICK+WITH+BANDS+INTERMEDIATE.gif",
+            "level": "intermediate",
+            "equipment": "",
+            "id": "g14HYMvHX9VaMfSTAdxx",
+            "directions": "",
+            "focusArray": [
+                "abs",
+                "arms",
+                "legs"
+            ],
+            "duration": "0",
+            "datePublished": {
+                "seconds": 1683578096,
+                "nanoseconds": 907000000
+            },
+            "categories": "byo-bands",
+            "image2": ""
+        }
+    },
+    {
+        "restTime": 2,
+        "workoutId": "qkHZ1GREepGj3O0g3Vpn",
+        "timeOrRepsCount": 2,
+        "timeOrReps": "reps",
+        "postDetails": {
+            "datePublished": {
+                "seconds": 1683577986,
+                "nanoseconds": 945000000
+            },
+            "image": "",
+            "focusArray": [
+                "abs",
+                "arms",
+                "legs"
+            ],
+            "ingredients": "",
+            "description": "",
+            "type": "Workout",
+            "title": "Rainbow Crunch With Bands",
+            "level": "intermediate",
+            "categories": "byo-bands",
+            "directions": "",
+            "isByo": true,
+            "equipment": "",
+            "categoryArray": [
+                "byo-bands"
+            ],
+            "media": "https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/RAINBOW+CRUNCH+WITH+BANDS+INTERMEDIATE.gif",
+            "duration": "0",
+            "id": "qkHZ1GREepGj3O0g3Vpn",
+            "image2": "",
+            "active": true,
+            "activationDate": {
+                "seconds": 1683522000,
+                "nanoseconds": 0
+            },
+            "dateEdited": {
+                "seconds": 1683578005,
+                "nanoseconds": 7000000
+            },
+            "durationMinutes": 0
+        }
+    },
+    {
+        "workoutId": "UiS1JPZdEJTUR0HaXUMW",
+        "timeOrRepsCount": 2,
+        "timeOrReps": "reps",
+        "restTime": 2,
+        "postDetails": {
+            "focusArray": [
+                "arms"
+            ],
+            "ingredients": "",
+            "active": true,
+            "categoryArray": [
+                "byo-bands"
+            ],
+            "equipment": "",
+            "datePublished": {
+                "seconds": 1682384169,
+                "nanoseconds": 585000000
+            },
+            "description": "",
+            "durationMinutes": 0,
+            "isByo": true,
+            "id": "UiS1JPZdEJTUR0HaXUMW",
+            "categories": "byo-bands",
+            "media": "https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/BANDED+STRAIGHT+ARM+BICEP+CURL+INTERMEDIATE.gif",
+            "title": "Banded Straight Arm Bicep Curl",
+            "level": "intermediate",
+            "duration": "0",
+            "directions": "",
+            "dateEdited": {
+                "seconds": 1682384255,
+                "nanoseconds": 581000000
+            },
+            "type": "Workout",
+            "image2": "",
+            "activationDate": {
+                "seconds": 1682312400,
+                "nanoseconds": 0
+            },
+            "image": ""
+        }
+    },
+    {
+        "workoutId": "ehkpA2uFRxAZ3uB0kaap",
+        "restTime": 2,
+        "timeOrRepsCount": 2,
+        "timeOrReps": "reps",
+        "postDetails": {
+            "activationDate": {
+                "seconds": 1682312400,
+                "nanoseconds": 0
+            },
+            "id": "ehkpA2uFRxAZ3uB0kaap",
+            "description": "",
+            "media": "https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/BANDED+SHOULDER+PRESS+INTERMEDIATE_RIGHT.gif",
+            "categories": "byo-bands",
+            "focusArray": [
+                "arms",
+                "shoulders"
+            ],
+            "equipment": "",
+            "title": "Banded Shoulder Press-right",
+            "dateEdited": {
+                "seconds": 1682382978,
+                "nanoseconds": 634000000
+            },
+            "datePublished": {
+                "seconds": 1682382949,
+                "nanoseconds": 695000000
+            },
+            "categoryArray": [
+                "byo-bands"
+            ],
+            "active": true,
+            "durationMinutes": 0,
+            "directions": "",
+            "image2": "",
+            "level": "intermediate",
+            "type": "Workout",
+            "image": "",
+            "ingredients": "",
+            "isByo": true,
+            "duration": "0"
+        }
+    },
+    {
+        "workoutId": "fFDTSeFjSWE6rRDzv9HZ",
+        "restTime": 2,
+        "timeOrRepsCount": 2,
+        "timeOrReps": "reps",
+        "postDetails": {
+            "type": "Workout",
+            "level": "intermediate",
+            "duration": "0",
+            "image2": "",
+            "focusArray": [
+                "arms"
+            ],
+            "datePublished": {
+                "seconds": 1683578190,
+                "nanoseconds": 605000000
+            },
+            "durationMinutes": 0,
+            "directions": "",
+            "media": "https://s3.amazonaws.com/move_cloudfront/Move+App+gifs/Intermediate+Gifs/Bands/Full+Body/TRICEP+BANDS+KICKBACK+INTERMEDIATE.gif",
+            "categoryArray": [
+                "byo-bands"
+            ],
+            "dateEdited": {
+                "seconds": 1683578211,
+                "nanoseconds": 709000000
+            },
+            "isByo": true,
+            "activationDate": {
+                "seconds": 1683522000,
+                "nanoseconds": 0
+            },
+            "equipment": "",
+            "description": "",
+            "ingredients": "",
+            "id": "fFDTSeFjSWE6rRDzv9HZ",
+            "title": "Tricep Bands Kickback",
+            "categories": "byo-bands",
+            "image": "",
+            "active": true
+        }
+    }
+]
