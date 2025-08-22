@@ -45,7 +45,7 @@ export class ChallengeCoolDownPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
  ionViewDidEnter() {
     setTimeout(() => {
@@ -53,7 +53,7 @@ export class ChallengeCoolDownPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
 onNavigate(item:any){
   let category = 'challenge-cool-down';

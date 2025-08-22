@@ -50,9 +50,9 @@ export class FitnessDayListPage implements OnInit {
     setTimeout(() => {
       let ele = document.getElementById('fitnessday-card-0');
       if (ele) {
-        ele.focus();
+        ele.focus(); 
       }
-    }, 2000);
+    }, 100);
   }
 
 

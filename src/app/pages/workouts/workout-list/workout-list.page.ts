@@ -37,7 +37,7 @@ export class WorkoutListPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   navigateToFitness(item: any) {
     this.router.navigate(['/workout-day/', item.id]);

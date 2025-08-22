@@ -41,7 +41,7 @@ export class RecipeListPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   navigateToSingleRecipe(item: any) {
     this.navCtrl.navigateForward(`/single-recipe/${item.id}`, {

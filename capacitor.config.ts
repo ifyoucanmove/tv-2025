@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'Ifyoucanmove TV',
   webDir: 'www',
   server: {
-  "url": "https://online-bizz-theme-2024.web.app/",
+  "url": "http://192.168.29.179:8100/",
   "cleartext": true
 }
 };

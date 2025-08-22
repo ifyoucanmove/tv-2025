@@ -51,7 +51,7 @@ export class WorkoutDaySeriesListPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
 
   openDetailPage(item: any) {

@@ -1,4 +1,4 @@
-<div class="videos-section" >
+<div class="videos-section" #content >
   <div class="section-header">
     <h2>{{title()}}</h2>
   </div>
@@ -10,9 +10,9 @@
         @for (video of videos().slice(0,3); track $index) {
         <ion-card class="video-card "
         style="display: grid;place-content: center;min-height: 100px;background-color: #028e9d;"
-          (focus)="onCardFocus($index)" [id]="'videocard'+title()+ $index" 
+          (focus)="onCardFocus($index)" [id]="'videocard'+title()+'index'+ $index" 
           (blur)="onCardBlur()"
-          [tabindex]="tabindex()"
+          (keydown)="onKeyDown($event,'ArrowDown')"
           (click)="onVideoClick(video)">
           <h4 class="text-center text-white m-0 p-0 ">{{video.name}}</h4>
             @if (status() !== 'active') {
@@ -32,9 +32,9 @@
     @for (video of videos().slice(0,3); track $index) {
         
        <ion-card class="video-card"
-      (focus)="onCardFocus($index)" [id]="'videocard'+title()+ $index" 
+      (focus)="onCardFocus($index)" [id]="'videocard'+title()+'index'+ $index" 
       (blur)="onCardBlur()"
-      [tabindex]="tabindex()"
+      (keydown)="onKeyDown($event,'ArrowDown')"
       (click)="onVideoClick(video)">
       <img [src]="video.image" alt="video image">
         @if (status() !== 'active') {
@@ -51,9 +51,10 @@
 }
 
     <ion-card class="video-card d-flex justify-content-center align-items-center"  
-    [tabindex]="tabindex()" 
+    [tabindex]="tabindex()"  [id]="'videocard'+title()+'index'" 
     (focus)="onCardFocus(videos.length +1)"
     (blur)="onCardBlur()"
+    (keydown)="onKeyDown($event,'ArrowDown')"
     (click)="onViewAllClick()">
       <h3 class="text-primary-custom m-0">View All</h3 >
     </ion-card>

@@ -92,6 +92,19 @@ export class SearchPagePage implements OnInit {
   }
 
   /**
+   * Handle Enter key press - close keyboard and perform search
+   */
+  onEnterKeyPress() {
+    // Close keyboard by blurring the input
+    if (this.searchInput) {
+      this.searchInput.nativeElement.blur();
+    }
+    
+    // Perform search with current keyword
+    this.performSearch(this.searchKeyword);
+  }
+
+  /**
    * Perform the actual search
    */
   performSearch(keyword: string) {

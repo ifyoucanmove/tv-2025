@@ -36,7 +36,7 @@ export class WorkoutSeriesListPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   navigateToFitness(item: any) {
     this.navCtrl.navigateForward(`/workout-day-series/${item.id}`, {

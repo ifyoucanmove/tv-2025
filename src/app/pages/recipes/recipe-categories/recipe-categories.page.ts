@@ -27,11 +27,10 @@ export class RecipeCategoriesPage implements OnInit {
   setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('recipee-card-0');
-      console.log(ele, 'ele');
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   navigateToRecipe(title: string) {
     this.router.navigate(['/recipes'], { queryParams: { category: title } });

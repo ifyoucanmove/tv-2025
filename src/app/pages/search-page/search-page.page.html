@@ -23,7 +23,8 @@
               placeholder="Type to search..."
               [value]="searchKeyword"
               (input)="onSearchInput($event)"
-              (keydown.enter)="performSearch(searchKeyword)"
+              (keydown.enter)="onEnterKeyPress()"
+              
               tabindex="1">
             @if (searchKeyword.length > 0) {
               <ion-icon 
@@ -36,7 +37,7 @@
           </div>
           
           <!-- Quick Search Buttons -->
-          <div class="quick-search-buttons">
+        <!--   <div class="quick-search-buttons">
             <button 
               class="quick-btn" 
               tabindex="3"
@@ -65,7 +66,7 @@
               (keydown.enter)="quickSearch('Abs')">
               Abs
             </button>
-          </div>
+          </div> -->
         </div>
       </ion-col>
     </ion-row>

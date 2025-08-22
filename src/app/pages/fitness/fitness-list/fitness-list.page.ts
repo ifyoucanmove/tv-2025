@@ -33,11 +33,10 @@ export class FitnessListPage implements OnInit {
   setFocus() {
     setTimeout(() => {
       let ele = document.getElementById('fitness-card-0');
-      console.log(ele, 'ele');
-      if (ele) {
+       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   navigateToFitness(item: any) {
     this.navCtrl.navigateForward(`/program/${item.id}`, {

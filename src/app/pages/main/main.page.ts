@@ -44,14 +44,14 @@ export class MainPage implements OnInit {
     { icon: 'search', label: 'Search',isDisabled:false, route: '/search' },
     { icon: 'favorite', label: 'Favorites',isDisabled:false, route: '/favorites' },
     { icon: 'fastfood', label: 'Recipe',isDisabled:true, route: '/recipe-category' },
-    { icon: 'donut_small', label: 'Byo Combo',isDisabled:false, route: '/byo-combo' },
+    { icon: 'donut_small', label: 'Byo Combo',isDisabled:true, route: '/byo-combo' },
 /*  { icon: 'donut_small', label: 'Trainers',isDisabled:false, route: '/trainers-list' }, */
     { icon: 'person', label: 'Profile',isDisabled:true, route: '/update-profile' },
     { icon: 'settings', label: 'Settings',isDisabled:true, route: '/settings' },
   ];
 
   focusingMap: any = {
-    home: { route: 'home', elements: ['videocard0'] },
+    home: { route: 'home', elements: ['videocardTop Challengesindex0'] },
     search: { route: 'search', elements: ['search-input'] },
     favorites: { route: 'favourite', elements: ['favorite-card-0'] },
     'recipe-category': {

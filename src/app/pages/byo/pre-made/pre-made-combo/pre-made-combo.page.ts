@@ -36,7 +36,7 @@ export class PreMadeComboPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   navigateToComboDetails(item: any) {
     this.router.navigate(['/combo-details', item.id]);

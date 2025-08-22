@@ -28,7 +28,7 @@ export class UserMadeComboPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   loadUserMade() {
     this.apiService

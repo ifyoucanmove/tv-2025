@@ -46,7 +46,7 @@ export class ByoComboPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   navigateTo(route: string) {
    if(this.status == 'active'){

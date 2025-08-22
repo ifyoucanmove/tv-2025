@@ -30,7 +30,7 @@ export class ChallengeListPage implements OnInit {
       if (ele) {
         ele.focus();
       }
-    }, 2000);
+    }, 100);
   }
   loadPrograms() {
     this.apiService.getChallengeList().subscribe((res: any) => {
