@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'Ifyoucanmove TV',
   webDir: 'www',
   server: {
-  "url": "http://192.168.29.179:8100/",
+  "url": "https://tv-2025.netlify.app",
   "cleartext": true
 }
 };
